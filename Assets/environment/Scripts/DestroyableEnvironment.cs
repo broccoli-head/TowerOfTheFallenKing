@@ -5,7 +5,7 @@ using System.Net;
 using UnityEngine;
 using static Potion;
 
-public class DestroyableEnvironment : MonoBehaviour, ReviceDamage
+public class DestroyableEnvironment : MonoBehaviour, ReciveDamage
 {
 
     public float durability;
@@ -74,7 +74,7 @@ public class DestroyableEnvironment : MonoBehaviour, ReviceDamage
 
     }
 
-    void ReviceDamage.Damage(float Damage, Potion.DamageType DamageType, Potion.DamagePlace DamagePlace, bool EnemyOnly)
+    void ReciveDamage.Damage(float Damage, Potion.DamageType DamageType, Potion.DamagePlace DamagePlace, bool EnemyOnly)
     {
         // Mozliwosc ignorowania Biological damage np. trucizna 
         if(!ExcludeBiologicalDamage || (DamageType != Potion.DamageType.Biological && DamageType != Potion.DamageType.MagicBiological))
@@ -83,7 +83,7 @@ public class DestroyableEnvironment : MonoBehaviour, ReviceDamage
         }
     }
 
-    void ReviceDamage.Damage(float DPS, float Time, Potion.DamageType DamageType, Potion.DamagePlace DamagePlace, GameObject EffectObject, bool EnemyOnly)
+    void ReciveDamage.Damage(float DPS, float Time, Potion.DamageType DamageType, Potion.DamagePlace DamagePlace, GameObject EffectObject, bool EnemyOnly)
     {
         if (!ExcludeBiologicalDamage || (DamageType != Potion.DamageType.Biological && DamageType != Potion.DamageType.MagicBiological))
         {
@@ -96,7 +96,13 @@ public class DestroyableEnvironment : MonoBehaviour, ReviceDamage
         }
     }
 
-    void ReviceDamage.AddCleanse()
+    public void Expose(List<ExpositionData> ExpositionOverTime)
+    {
+        // elementy otoczenia nie otrzymoja efektu exposed
+        return;
+    }
+
+    void ReciveDamage.AddCleanse()
     {
         foreach(var damage in OnLeaveDamage)
         {

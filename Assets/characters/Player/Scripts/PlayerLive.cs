@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerLive : MonoBehaviour, ReviceDamage, Saveable 
+public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable 
 {
     public bool load = true;
-
     public float HitPoints;
-    float damage = 0;
+
+    private float damage = 0;
+    private bool isExposed = false;
+    private float Exposition;
 
     List<GameObject> effects = new List<GameObject>();
     bool cleanse = false;
@@ -27,18 +29,18 @@ public class PlayerLive : MonoBehaviour, ReviceDamage, Saveable
     {
         if (damage < 0)
             damage = 0;
-        HitPoints -= damage * Time.deltaTime;
+        Damage(damage * Time.deltaTime);
         if(HitPoints <= 0)
         {
             SceneManager.LoadScene(0);
         }
     }
 
-    public void Damage(float Damage, Potion.DamageType DamageType, Potion.DamagePlace DamagePlace,bool EnemyOnly)
+    public void Damage(float damage, Potion.DamageType DamageType, Potion.DamagePlace DamagePlace,bool EnemyOnly)
     {
         if (DamageType != Potion.DamageType.None && !EnemyOnly) { 
             if (!cleanse)
-                HitPoints -= Damage;
+                Damage(damage);
             else
                 cleanse = false;
         }
@@ -67,6 +69,16 @@ public class PlayerLive : MonoBehaviour, ReviceDamage, Saveable
         
     }
 
+    public void Damage(float dmg)
+    {
+        if (isExposed)
+        {
+            // zmienia damage na (100 + Exposition)% aktualnych obrazen 
+            dmg *= 1 + (Exposition / 100f);
+        }
+        HitPoints -= dmg;
+    }
+
 
     public void AddCleanse()
     {
@@ -75,7 +87,15 @@ public class PlayerLive : MonoBehaviour, ReviceDamage, Saveable
             Destroy(item);
         }
         damage = 0;
+        Exposition = 0f;
+        isExposed = false;
         cleanse = true;
+    }
+
+    public void Expose(List<ExpositionData> ExpositionOverTime)
+    {
+        isExposed = true;
+        StartCoroutine(ChangeExposedForce(ExpositionOverTime));
     }
 
 
@@ -85,6 +105,25 @@ public class PlayerLive : MonoBehaviour, ReviceDamage, Saveable
         this.damage -= damage;
         Destroy(effect);
         yield break;
+    }
+
+    public IEnumerator ChangeExposedForce(List<ExpositionData> oExp)
+    {
+        List<ExpositionData> Exp = new List<ExpositionData>(oExp);
+        if (Exp.Count <= 0)
+        {
+            Exposition = 0f;
+            isExposed = false;
+            yield break;
+        }
+        else
+        {
+            Exposition = Exp[0].exposition;
+            yield return new WaitForSeconds(Exp[0].time);
+            Exp.RemoveAt(0);
+            StartCoroutine(ChangeExposedForce(Exp));
+        }
+
     }
 
     public void Save()

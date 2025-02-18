@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Rigidbody2D))]
 
-public class PlayerMovement : MonoBehaviour, Controller, ReviceSpeedChange
+public class PlayerMovement : MonoBehaviour, Controller, ReciveSpeedChange
 {
 
     [SerializeField] float MovementSpeed;

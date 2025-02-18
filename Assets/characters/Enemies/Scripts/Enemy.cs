@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class Enemy : MonoBehaviour, ReviceDamage, ReviceSpeedChange
+public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
 {
     [Header("Detection")]
     [Min(1.0f)]public float HearingDistance;
@@ -49,14 +49,16 @@ public class Enemy : MonoBehaviour, ReviceDamage, ReviceSpeedChange
 
     [ReadOnly] private bool DamageTaken = false;
     private bool cleanse = false;
+    private float damage = 0;
     private bool speedChanged = false;
-    private bool ChasePlayer = false;
-    private bool isKnockedBack = false;
     private float speedTime;
     private float speedMultiplier;
-    private float damage = 0;
+    private bool ChasePlayer = false;
+    private bool isKnockedBack = false;
     private float knockbackTimer = 0;
     private Vector2 knockbackDirection;
+    private bool isExposed = false;
+    private float Exposition;
 
 
     private void Start()
@@ -80,7 +82,7 @@ public class Enemy : MonoBehaviour, ReviceDamage, ReviceSpeedChange
         if(damage < 0 ) damage = 0;
         if (damage > 0)
         {
-            HP -= (damage * Time.deltaTime);
+            Damage(damage * Time.deltaTime);
         }
         if (HP < 0) 
             Destroy(gameObject);
@@ -137,7 +139,7 @@ public class Enemy : MonoBehaviour, ReviceDamage, ReviceSpeedChange
     }
 
     // Odpowiada za jednorazowe otrzymanie Damage
-    public void Damage(float Damage, Potion.DamageType DamageType, Potion.DamagePlace DamagePlace, bool EnemyOnly)
+    public void Damage(float damage, Potion.DamageType DamageType, Potion.DamagePlace DamagePlace, bool EnemyOnly)
     {
         DamageTaken = true;
         if ( (!Flying || DamagePlace == Potion.DamagePlace.Zone)  &&  DamageType != Potion.DamageType.None)
@@ -151,8 +153,8 @@ public class Enemy : MonoBehaviour, ReviceDamage, ReviceSpeedChange
             {
                 if(DamageType == Modificator.DamageType)
                 {
-                    Damage *= (Modificator.modificator / 100f);
-                    HP -= Damage;
+                    damage *= (Modificator.modificator / 100f);
+                    Damage(damage);
                     break;
                 }
             }
@@ -190,6 +192,10 @@ public class Enemy : MonoBehaviour, ReviceDamage, ReviceSpeedChange
     public void Damage(float Damage)
     {
         DamageTaken = true;
+        if (isExposed) {
+            // zmienia damage na (100 + Exposition)% aktualnych obrazen 
+            Damage *= 1 + (Exposition / 100f);
+        }
         HP -= Damage;
     }
 
@@ -204,6 +210,8 @@ public class Enemy : MonoBehaviour, ReviceDamage, ReviceSpeedChange
         }
         damage = 0;
         cleanse = true;
+        Exposition = 0f;
+        isExposed = false;
     }
 
     public void ChangeSpeed(float speedMultiplier)
@@ -237,6 +245,13 @@ public class Enemy : MonoBehaviour, ReviceDamage, ReviceSpeedChange
         FreezeTime += freezeDuration;
     }
 
+    
+    public void Expose(List<ExpositionData> ExpositionOverTime)
+    {
+        isExposed = true;
+        StartCoroutine(ChangeExposedForce(ExpositionOverTime));
+    }
+
     public bool IsFreezed()
     {
         return FreezeTime > 0;
@@ -250,6 +265,24 @@ public class Enemy : MonoBehaviour, ReviceDamage, ReviceSpeedChange
         this.damage -= damage;
         Destroy(EffectObject);
         yield break;
+    }
+
+    public IEnumerator ChangeExposedForce(List<ExpositionData> Exp)
+    {
+        if(Exp.Count <= 0)
+        {
+            Exposition = 0f;
+            isExposed = false;
+            yield break;
+        }
+        else
+        {
+            Exposition = Exp[0].exposition;
+            yield return new WaitForSeconds(Exp[0].time);
+            Exp.RemoveAt(0);
+            StartCoroutine(ChangeExposedForce(Exp));
+        }
+
     }
 
     public enum EnemyType

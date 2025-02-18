@@ -118,7 +118,7 @@ public class PlayerDagger : MonoBehaviour
 
     public void TriggerEnter(Collider2D collision)
     {
-        var target = ComponentHelper.GetInterfaceComponent<Enemy>(collision.gameObject);
+        Enemy target = ComponentHelper.GetInterfaceComponent<Enemy>(collision.gameObject);
         if (target != null && !target.IsFreezed())
         {  
             daggerCounter++;

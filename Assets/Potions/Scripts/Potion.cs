@@ -25,7 +25,6 @@ public class Potion : Item
     public GameObject potionEffect;
     public Sprite sprite;
 
-    [Header("! If exposed effect, set: time = duration1 + duration2")]
     public float Time;
 
     //zmienne ustalaj¹ce jak ma dzia³aæ efekt
@@ -42,13 +41,8 @@ public class Potion : Item
     public float speedMultiplier;
 
     [Space(10)]
-    public bool exposedEffect;
-    public float exposed1Duration;
-    [Range(0, 100)]
-    public float exposed1Percentage;
-    public float exposed2Duration;
-    [Range(0, 100)]
-    public float exposed2Percentage;
+    public bool ExposedEffect;
+    public List<ExpositionData> ExpositionOverTime;
     
     [Space(10)]
     public Shape shape;
@@ -121,4 +115,11 @@ public class Explosion
     public float Force;
     public GameObject Effect;
     public float EffectTime;
+}
+
+[System.Serializable]
+public class ExpositionData
+{
+    public float time;
+    public int exposition;
 }

@@ -49,8 +49,8 @@ public class AttackHandler : MonoBehaviour
                 if (obj.TryGetComponent<Enemy>(out Enemy en))
                     continue;
 
-            //proboje pobraæ component implemêtuj¹cy ReviceDamage jeœli go znajdzie zadaje obra¿enia
-            var target = ComponentHelper.GetInterfaceComponent<ReviceDamage>(obj.gameObject);
+            //proboje pobraæ component implemêtuj¹cy ReciveDamage jeœli go znajdzie zadaje obra¿enia
+            var target = ComponentHelper.GetInterfaceComponent<ReciveDamage>(obj.gameObject);
             if (target != null)
             {
                 target.Damage(AttackDamage, AttackType, Potion.DamagePlace.Zone, false);

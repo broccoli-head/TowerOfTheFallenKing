@@ -37,7 +37,7 @@ public class PotionEffect : MonoBehaviour
         foreach (Collider2D collider in colliders)
         {
             //On contact damage
-            var Implementing = ComponentHelper.GetInterfaceComponent<ReviceDamage>(collider.gameObject);
+            var Implementing = ComponentHelper.GetInterfaceComponent<ReciveDamage>(collider.gameObject);
             if (Implementing != null)
             {
                 Implementing.Damage(potion.OnContactDamage, potion.damageType, potion.damagePlace, potion.EnemyOnly);
@@ -87,13 +87,13 @@ public class PotionEffect : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, ObjectSize / 2);
         foreach (Collider2D collider in colliders)
         {
-            ReviceDamage target = ComponentHelper.GetInterfaceComponent<ReviceDamage>(collider.gameObject);
+            ReciveDamage target = ComponentHelper.GetInterfaceComponent<ReciveDamage>(collider.gameObject);
             if (target != null)
             {
                 target.Damage(potion.Damage * Time.fixedDeltaTime, potion.damageType, potion.damagePlace, potion.EnemyOnly);
             }
 
-            ReviceSpeedChange speedTarget = ComponentHelper.GetInterfaceComponent<ReviceSpeedChange>(collider.gameObject);
+            ReciveSpeedChange speedTarget = ComponentHelper.GetInterfaceComponent<ReciveSpeedChange>(collider.gameObject);
             if (potion.speedChange && speedTarget != null)
             {
                 speedTarget.ChangeSpeed(potion.speedMultiplier);
@@ -104,47 +104,29 @@ public class PotionEffect : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        var target = ComponentHelper.GetInterfaceComponent<ReviceDamage>(collision.gameObject);
+        var target = ComponentHelper.GetInterfaceComponent<ReciveDamage>(collision.gameObject);
         if (target != null)
         {
+            // naklada speedChange - przeciwnik moze poruszac sie szybciej lub wolniej przez pewien czas
             if (potion.speedChange)
             {
-                ReviceSpeedChange speedTarget = ComponentHelper.GetInterfaceComponent<ReviceSpeedChange>(collision.gameObject);
+                ReciveSpeedChange speedTarget = ComponentHelper.GetInterfaceComponent<ReciveSpeedChange>(collision.gameObject);
                 speedTarget.ChangeSpeedOnExit(potion.speedTime);
             }
             
+            // naklada onLeaveDamage - przeciwnik dostaje obrazenia przez okreslony czas po wyjsciu z obszaru dzialania potki
             if (potion.onLeaveDamage.HaveOnLeaveDamage)
             {
                 OnLeaveDamage Leave = potion.onLeaveDamage;
                 target.Damage(Leave.Damage, Leave.Time, potion.damageType, potion.damagePlace, Leave.Effect, potion.EnemyOnly);
             }
 
-            if (potion.onLeaveDamage.HaveOnLeaveDamage && potion.exposedEffect)
+            // naklada exposedEfect - przeciwnik przez okreslony czas bedzie otrzymywal zwiekszone obrazenia
+            if (potion.ExposedEffect)
             {
-                OnLeaveDamage Leave = potion.onLeaveDamage;
-                ReviceSpeedChange speedTarget = ComponentHelper.GetInterfaceComponent<ReviceSpeedChange>(collision.gameObject);
-                float exposed1dmg = potion.Damage * (1 + potion.exposed1Percentage / 100);
-                float exposed2dmg = potion.Damage * (1 + potion.exposed2Percentage / 100);
-
-                //np. jesli exposed1dur wynosi 3s, a exposed2dur 10s to bedzie tak to wygladalo:
-                //stage 1: classic dmg (np. przez 3 sek)
-                target.Damage(
-                    Leave.Damage, potion.exposed1Duration, potion.damageType,
-                    potion.damagePlace, Leave.Effect, potion.EnemyOnly
-                );
-
-                //stage 2:  (np. dmg +10% przez 10 sek)
-                StartCoroutine(IncreaseDamage(
-                    exposed1dmg, potion.exposed1Duration,
-                    potion.exposed2Duration, Leave, target, speedTarget
-                ));
-
-                //stage 3:  (np. dmg +25% i koniec efektu)
-                StartCoroutine(IncreaseDamage(
-                    exposed2dmg, potion.exposed2Duration, 0,
-                    Leave, target, speedTarget
-                ));
+                target.Expose(potion.ExpositionOverTime);
             }
+
         }
     }
 
@@ -166,22 +148,6 @@ public class PotionEffect : MonoBehaviour
         yield return new WaitForSeconds(time);
         Destroy(effect);
         yield break;
-    }
-
-    private IEnumerator IncreaseDamage(float increase, float delay, float time, OnLeaveDamage Leave, ReviceDamage target, ReviceSpeedChange speedTarget)
-    {
-        yield return new WaitForSeconds(delay);
-
-        if (time == 0)
-        {
-            target.Damage(increase, potion.damageType, potion.damagePlace, potion.EnemyOnly);
-            speedTarget.ChangeSpeed(potion.speedMultiplier, potion.speedTime);
-        }
-        else
-        {
-            target.Damage(increase, time, potion.damageType, potion.damagePlace, Leave.Effect, potion.EnemyOnly);
-        }
-        
     }
 
 
