@@ -23,7 +23,7 @@ public class CommlinkOpener : MonoBehaviour
         {
             isOpen = !isOpen;
 
-            //resetuje wybran¹ potkê w UI
+            //resetuje wybrana potke w UI
             inventory.SelectedItem = null;
         }
         if(isOpen)

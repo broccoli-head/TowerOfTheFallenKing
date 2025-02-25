@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour, Saveable
 {
     public bool LoadFromFile;
 
-    [Header("Dostêpne w grze")]
+    [Header("Dostepne w grze")]
     public Potion[] potions;
     public Resource[] resources;
     public Recipe[] recipes;
@@ -31,7 +31,7 @@ public class Inventory : MonoBehaviour, Saveable
 
     private void Awake()
     {
-        // jeœli na scenie jest ju¿ inventory usuwamy nasz skrypt
+        // jesli na scenie jest juz inventory usuwamy nasz skrypt
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -66,7 +66,7 @@ public class Inventory : MonoBehaviour, Saveable
     private void Update()
     {
         ValidatePotions();
-        //prze³¹czanie pomiêdzy QuickPotions
+        //przelaczanie pomiedzy QuickPotions
         if(Input.GetKeyDown(KeyCode.E))
             index++;
         else if(Input.GetKeyDown(KeyCode.Q))
@@ -237,7 +237,7 @@ public class Inventory : MonoBehaviour, Saveable
     }
 
 
-    //zwraca czy gracz posiada dany item i jeœli tak, ilosc posiadanych itemow
+    //zwraca czy gracz posiada dany item i jesli tak, ilosc posiadanych itemow
     public (bool, int) PlayerHaveItem(Item item)
     {
         if(item == null)
@@ -277,7 +277,7 @@ public class Inventory : MonoBehaviour, Saveable
                 AddPlayerResource(item.GetName(), count);
         }
         else
-            Debug.Log("Do funkcji Inventory::AddPlayerItem() przekazano nieprawid³owe wartoœci: Item: " + item + ", Count: " + count); 
+            Debug.Log("Do funkcji Inventory::AddPlayerItem() przekazano nieprawidlowe wartosci: Item: " + item + ", Count: " + count); 
     }
 
     public Component Interact(string ActivePotion, string OtherPotion)
@@ -336,7 +336,7 @@ public class Inventory : MonoBehaviour, Saveable
             SelectedItem = loadedInventory.SelectedItem;
             PointedItem = loadedInventory.PointedItem;
 
-            Debug.Log("Inventory za³adowano z pliku.");
+            Debug.Log("Inventory zaladowano z pliku.");
         }
         else
         {

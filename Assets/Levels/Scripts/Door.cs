@@ -23,6 +23,7 @@ public class Door : MonoBehaviour
     bool AllEnemiesKilled = false;
     bool AllItemsColected = false;
     bool NoPrevLevel = false;
+    bool Active = false;
     string DestinationName = "Unset";
 
 
@@ -38,10 +39,22 @@ public class Door : MonoBehaviour
         if (Level.ComingFromRoom == DestinationName || (type == Type.PrevLevel && NoPrevLevel))
         {
             var Player = Instantiate(levelLoader.PlayerPrefab, transform.position, Quaternion.identity);
-            
+
             // jesli nie ma poprzedniego levelu wylacza ladowanie Hp z pliku, w przeciwnym wypadku je wlacza
             Player.GetComponent<PlayerLive>().load = !NoPrevLevel;
         }
+        else
+            Debug.Log(gameObject.name + " nie zespawnowano gracza bo: " + DestinationName + " != " + Level.ComingFromRoom);
+
+        var rb = gameObject.AddComponent<Rigidbody2D>();
+        rb.isKinematic = true;
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+
+        if (gameObject.TryGetComponent<Collider2D>(out var T))
+            T.isTrigger = true;
+        else
+            gameObject.AddComponent<BoxCollider2D>().isTrigger = true;
     }
 
 
@@ -49,19 +62,25 @@ public class Door : MonoBehaviour
     {
         inventory = Inventory.Instance;
         
-
-
         if (KillAllEnemies)
         {
             Enemies = new List<Enemy>(FindObjectsOfType<Enemy>());
         }
 
-
     }
+
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.F))
+            Active = true;
+        else
+            Active = false;
+    }
+
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Active)
         {
 
             AllEnemiesKilled = true;

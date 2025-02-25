@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.PackageManager.UI;
 using UnityEditor;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
@@ -24,18 +23,19 @@ public class Spawner : MonoBehaviour
     public float AddSpeedChance = 0f;
 
     [Space(10)]
-    public Potion.DamageType AttackType;
+    public Enemy.AttackMode AttackMode;
     LevelLoader levelLoader;
 
     void Awake()
     {
         levelLoader = LevelLoader.Instance;
 
-        if(!levelLoader.ActualLevel.Cleaned)
+        if (!levelLoader.ActualLevel.Cleaned)
         {
             int randomIndex = Random.Range(0, Enemies.Count);
             Enemy randomEnemy = Instantiate(Enemies[randomIndex], transform.position, Quaternion.identity);
- 
+
+            randomEnemy.gameObject.SetActive(true);
             if (Random.Range(0, 100) < AddDamageChance)
                 randomEnemy.AttackDamage += AddDamage;
 
@@ -45,8 +45,10 @@ public class Spawner : MonoBehaviour
             if (Random.Range(0, 100) < AddSpeedChance)
                 randomEnemy.speed += AddSpeed;
 
-            randomEnemy.AttackType = AttackType;
+            randomEnemy.attackMode = AttackMode;
         }
+        else
+            Debug.Log("Already cleaned");
         
     }
 }

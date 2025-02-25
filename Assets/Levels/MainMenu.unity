@@ -157,8 +157,11 @@ MonoBehaviour:
     LevelName: SampleScene
     SideLevels: []
     NextLevels:
-    - LevelName: New Scene
-      SideLevels: []
+    - LevelName: Room1
+      SideLevels:
+      - Room2
+      - Room3
+      - Room4
       NextLevels: []
       Cleaned: 0
     Cleaned: 0

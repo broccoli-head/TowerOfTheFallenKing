@@ -49,7 +49,7 @@ public class CraftingElement
     public Item.Attribute Attribute;
     public string PotionName;
 
-    //nadpisuje metodê to string, w zale¿noœci od wybranego typy danych zwraca name potki lub atrybut
+    //nadpisuje metode to string, w zaleznosci od wybranego typy danych zwraca name potki lub atrybut
     public override string ToString()
     {
         if (selectedDataType == DataType.Attribute)
@@ -59,7 +59,7 @@ public class CraftingElement
             Inventory inv = GameObject.FindFirstObjectByType<Inventory>();
             if (inv.FindPotionByName(PotionName) == null)
             {
-                Debug.LogError("Nie znaleziono Mikstury: " +  PotionName + "! Receptura craftowania nieprawid³owa");
+                Debug.LogError("Nie znaleziono Mikstury: " +  PotionName + "! Receptura craftowania nieprawidlowa");
             }
             return PotionName;
         }

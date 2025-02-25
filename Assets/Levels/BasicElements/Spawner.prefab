@@ -44,11 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d63ddaeb3e296646831829d79d4abb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemies: []
+  Enemies:
+  - {fileID: 4666820064094462416, guid: aa456007840a4e248b1fe7f249c7f74e, type: 3}
+  - {fileID: 4666820064094462416, guid: aa456007840a4e248b1fe7f249c7f74e, type: 3}
+  - {fileID: 4666820064094462416, guid: aa456007840a4e248b1fe7f249c7f74e, type: 3}
+  - {fileID: 823326667789497398, guid: 1ebc992ffb6f49f42b4651e533b124ad, type: 3}
+  - {fileID: 7888784175788500371, guid: 2340579fecc977b4c9b8f13aa0190525, type: 3}
   AddDamage: 0
   AddDamageChance: 50
   AddHP: 0
   AddHPChance: 50
   AddSpeed: 0
   AddSpeedChance: 50
-  AttackType: 0
+  AttackMode: 0

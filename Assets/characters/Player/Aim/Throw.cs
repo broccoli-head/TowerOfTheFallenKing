@@ -23,7 +23,7 @@ public class Throw : MonoBehaviour
 
     void Update()
     {
-        //Przesuwa pozycje z której wyrzucana jest potka tak ¿eby nie wchodzi³a w kolizje z graczem
+        //Przesuwa pozycje z ktorej wyrzucana jest potka tak zeby nie wchodzila w kolizje z graczem
         transform.localPosition = new Vector3(offset,0,0);
 
         if(inventory.SelectedPotion != null) {

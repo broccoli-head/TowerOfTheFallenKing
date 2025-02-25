@@ -67,12 +67,12 @@ public class NPCMovement : MonoBehaviour, Controller
                 }
                 move = moves[index];
             }
-            //kierunek w którym patrzy przeciwnik, u¿ywane w Detection
+            //kierunek w ktorym patrzy przeciwnik, uzywane w Detection
             enemy.FacingDirection = move.direction.normalized;
         }
         else
         {
-            //kierunek w którym patrzy przeciwnik, u¿ywane w Detection
+            //kierunek w ktorym patrzy przeciwnik, uzywane w Detection
             enemy.FacingDirection = Vector2.down;
 
             enemy.FreezeTime -= Time.fixedDeltaTime;

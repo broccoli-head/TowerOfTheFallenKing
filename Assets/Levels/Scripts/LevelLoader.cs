@@ -109,10 +109,14 @@ public class LevelLoader : MonoBehaviour, Saveable
         // dodawanie levelu do path
         path.Add(i);
         
-        // Ustawianie aktualnego levelu na nastêpny level
+        // Ustawianie aktualnego levelu na nastepny level
         ActualLevel = ActualLevel.NextLevels[i];
-        // ³adowanie nastêpnego levelu
+        // ladowanie nastepnego levelu
         Level.Load(ActualLevel.LevelName);
+
+        //Zapobiega zbyt szybkiej zmianie leveli
+        Level.LevelChangeCoolDown = true;
+        StartCoroutine(LevelCoolDown());
 
     }
 
@@ -128,6 +132,10 @@ public class LevelLoader : MonoBehaviour, Saveable
             // ustawia aktualny level na poprzedni i laduje poprzedni level
             ActualLevel = ActualLevel.PreviousLevel;
             Level.Load(ActualLevel.LevelName);
+
+            //Zapobiega zbyt szybkiej zmianie leveli
+            Level.LevelChangeCoolDown = true;
+            StartCoroutine(LevelCoolDown());
         }
         else return;
     }
@@ -141,18 +149,26 @@ public class LevelLoader : MonoBehaviour, Saveable
             return;
         }
 
-        // gdy index jest nieprawid³owy ustawia go na 0
+        // gdy index jest nieprawidlowy ustawia go na 0
         if (i < 0 || ActualLevel.SideLevels.Length <= i)
             i = 0;
         
         // Laduje poboczny level
         Level.Load(ActualLevel.SideLevels[i]);
+
+        //Zapobiega zbyt szybkiej zmianie leveli
+        Level.LevelChangeCoolDown = true;
+        StartCoroutine(LevelCoolDown());
     }
 
     public void MainLevel()
     {
         // Laduje glowny level
         Level.Load(ActualLevel.LevelName);
+
+        //Zapobiega zbyt szybkiej zmianie leveli
+        Level.LevelChangeCoolDown = true;
+        StartCoroutine(LevelCoolDown());
     }
 
 
@@ -203,6 +219,12 @@ public class LevelLoader : MonoBehaviour, Saveable
         }
     }
 
+    public IEnumerator LevelCoolDown()
+    {
+        yield return new WaitForSeconds(0.1f);
+        Level.LevelChangeCoolDown = false;
+        yield break;
+    }
 
 
 }
@@ -224,9 +246,10 @@ public class Level
 
     public static string ComingFromRoom = "";
     public static string CurrentlyOnRoom = "Defaoult";
+    public static bool LevelChangeCoolDown = false;
 
 
-    // Ustawia Poprzedni level na podany level i poprzedni level w nastêpnych levelach na ten level
+    // Ustawia Poprzedni level na podany level i poprzedni level w nastepnych levelach na ten level
     public void SetPreviousLevel(Level level)
     {
         PreviousLevel = level;
@@ -239,7 +262,11 @@ public class Level
 
     public static void Load(string name)
     {
-        // Zapisuje przed za³adowaniem levelu
+        if (LevelChangeCoolDown)
+            return;
+
+        Debug.Log("£aduje " + name);
+        // Zapisuje przed zaladowaniem levelu
         SaveManager.Save();
         try
         {
@@ -253,4 +280,5 @@ public class Level
         }
 
     }
+
 }

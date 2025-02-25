@@ -40,7 +40,7 @@ public class PickUp : MonoBehaviour
     }
 
 
-    //zwraca obiekt ze skryptem PickUp ktory mo¿na umieœciæ na scenie
+    //zwraca obiekt ze skryptem PickUp ktory mozna umiescic na scenie
     public static GameObject Object(string ItemName)
     {
         GameObject obj = new GameObject(ItemName);

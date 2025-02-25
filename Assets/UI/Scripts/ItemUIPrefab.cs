@@ -47,7 +47,7 @@ public class ItemUIPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////
-    /// Ustawianie Potki wskazywanej przez gracza w UI, u¿ywane przez ItemDescriptionUI.cs
+    /// Ustawianie Potki wskazywanej przez gracza w UI, uzywane przez ItemDescriptionUI.cs
     public void OnPointerEnter(PointerEventData eventData)
     {
         inventory.PointedItem = item;
@@ -62,9 +62,9 @@ public class ItemUIPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerDown(PointerEventData eventData) 
     {
-        // ustawia potkê wybrana przez gracza w inventory, u¿ywane do zmiany quick potions przez QuickPotionsSlot.cs i przy craftingu (tbd)
+        // ustawia potke wybrana przez gracza w inventory, uzywane do zmiany quick potions przez QuickPotionsSlot.cs i przy craftingu (tbd)
         inventory.SelectedItem = item;
-        //potka jest resetowana za ka¿dym otwarciem commlink przez CommlinkOpener.cs
+        //potka jest resetowana za kazdym otwarciem commlink przez CommlinkOpener.cs
     }
 
 }

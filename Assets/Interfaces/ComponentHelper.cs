@@ -26,10 +26,10 @@ public class ComponentHelper : MonoBehaviour
     {
         List<T> results = new List<T>();
 
-        // Znajdü wszystkie komponenty MonoBehaviour w scenie
+        // Znajdz wszystkie komponenty MonoBehaviour w scenie
         MonoBehaviour[] allObjects = GameObject.FindObjectsOfType<MonoBehaviour>();
 
-        // Sprawdü, ktÛre implementujπ interfejs T
+        // Sprawdz, ktore implementuja interfejs T
         foreach (var obj in allObjects)
         {
             if (obj is T t)
@@ -88,7 +88,7 @@ public class ComponentHelper : MonoBehaviour
         }
         catch (System.Exception e)
         {
-            Debug.LogError("B≥πd podczas ekstrakcji tekstury ze sprite'a: " + e.ToString());
+            Debug.LogError("Blad podczas ekstrakcji tekstury ze sprite'a: " + e.ToString());
             return null;
         }
     }

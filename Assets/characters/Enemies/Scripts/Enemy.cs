@@ -188,7 +188,7 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
         }        
     }
 
-    // Odpowiada za jednorazowe otrzymanie Damage, bez parametrów - np. do sztyletu
+    // Odpowiada za jednorazowe otrzymanie Damage, bez parametrow - np. do sztyletu
     public void Damage(float Damage)
     {
         DamageTaken = true;

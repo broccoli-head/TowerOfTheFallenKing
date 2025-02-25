@@ -27,7 +27,7 @@ public class Potion : Item
 
     public float Time;
 
-    //zmienne ustalaj¹ce jak ma dzia³aæ efekt
+    //zmienne ustalajace jak ma dzialac efekt
     [Header("Additional")]
     public bool cleanse;
 

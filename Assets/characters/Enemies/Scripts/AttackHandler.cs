@@ -34,22 +34,22 @@ public class AttackHandler : MonoBehaviour
     public IEnumerator MeleeAttack()
     {
         AttackReady = false;
-        //opóŸnienie ataku
+        //opoznienie ataku
         yield return new WaitForSeconds(AttackDelay);
 
-        //zadawanie obra¿eñ
+        //zadawanie obrazen
         Collider2D[] Attacked = Physics2D.OverlapCircleAll(transform.position, AttackDistance + (GetComponent<Collider2D>().bounds.size.y / 2));
         foreach (Collider2D obj in Attacked)
         {
             //przeciwnik nie atakuje samego siebie
             if (obj.gameObject == gameObject) continue;
 
-            // jeœli frendly fire jest wy³¹czony pomija innych przeciwników
+            // jesli frendly fire jest wylaczony pomija innych przeciwnikow
             if (!enemy.FriendlyFire)
                 if (obj.TryGetComponent<Enemy>(out Enemy en))
                     continue;
 
-            //proboje pobraæ component implemêtuj¹cy ReciveDamage jeœli go znajdzie zadaje obra¿enia
+            //proboje pobrac component implemetujacy ReciveDamage jesli go znajdzie zadaje obrazenia
             var target = ComponentHelper.GetInterfaceComponent<ReciveDamage>(obj.gameObject);
             if (target != null)
             {
@@ -57,7 +57,7 @@ public class AttackHandler : MonoBehaviour
             }
         }
 
-        // nastêpny atak mo¿e byæ wykonany dopiero po pewnym czasie
+        // nastepny atak moze byc wykonany dopiero po pewnym czasie
         yield return new WaitForSeconds(AttackSpeed);
         AttackReady = true;
         yield break;

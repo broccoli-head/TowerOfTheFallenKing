@@ -40,7 +40,7 @@ public class ChaseMovement : MonoBehaviour, Controller
 
     void FixedUpdate()
     {
-        // Je¿eli przeciwnik jest "zamro¿ony" zmniejsza czas pozosta³y do odmro¿enia i przerywa wykonywanie funkcji
+        // Jezeli przeciwnik jest "zamrozony" zmniejsza czas pozostaly do odmrozenia i przerywa wykonywanie funkcji
         if(enemy.FreezeTime > 0)
         {
             enemy.FreezeTime -= Time.fixedDeltaTime;
@@ -55,9 +55,9 @@ public class ChaseMovement : MonoBehaviour, Controller
     }
 
 
-    // Aktualizuje kierunek w którym porusza siê przeciwnik, ruch dodawany w FixedUpdate
-    // Wykonywane co 0.5 sekundy, ¿eby zapobiec dr¿eniu przeciwnika w przypadku, gdy odleg³oœæ
-    //  w osi X i Y, by³a bardzo podobna i kierunek w którym porusza³ siê przeciwnik zmienia³ siê co klatkê
+    // Aktualizuje kierunek w ktorym porusza sie przeciwnik, ruch dodawany w FixedUpdate
+    // Wykonywane co 0.5 sekundy, zeby zapobiec drzeniu przeciwnika w przypadku, gdy odleglosc
+    //  w osi X i Y, byla bardzo podobna i kierunek w ktorym poruszal sie przeciwnik zmienial sie co klatke
     IEnumerator MoveToPlayer()
     {
         playerPos = player.transform.position;
@@ -67,10 +67,10 @@ public class ChaseMovement : MonoBehaviour, Controller
         float distanceY = Mathf.Abs(playerPos.y - mechPos.y);
         float distance = Vector2.Distance(playerPos, mechPos);
 
-        // Gracz jest  dalej na osi X ni¿ na osi Y
+        // Gracz jest  dalej na osi X niz na osi Y
         if (distanceX >= distanceY || YBlocked)
         {
-            // Je¿eli gracz jest poza zasiêgiem przeciwnika, przeciwnik goni gracza
+            // Jezeli gracz jest poza zasiegiem przeciwnika, przeciwnik goni gracza
             if (distance > (AttackDistance + gameObject.GetComponent<Collider2D>().bounds.size.x) )
             {
                 enemy.CanAttack = false;
@@ -88,23 +88,23 @@ public class ChaseMovement : MonoBehaviour, Controller
                     XBlocked= false;
                 }
             }
-            // Gdy gracz jest w zasiêgu ataku przeciwnika:
-            //  przeciwnik zatrzymuje siê a, skrypt Enemy jest powiadamiany o mo¿liwoœci ataku 
+            // Gdy gracz jest w zasiegu ataku przeciwnika:
+            //  przeciwnik zatrzymuje sie a, skrypt Enemy jest powiadamiany o mozliwosci ataku 
             else
             {
                 moveDirection = Vector2.zero;
                 enemy.CanAttack = true;
             }
         }
-        // Gracz jest dalej na osi Y ni¿ na osi X
+        // Gracz jest dalej na osi Y niz na osi X
         if (distanceY >= distanceX || XBlocked)
         {
-            // Je¿eli gracz jest poza zasiêgiem przeciwnika, przeciwnik goni gracza
+            // Jezeli gracz jest poza zasiegiem przeciwnika, przeciwnik goni gracza
             if (distance > (AttackDistance + gameObject.GetComponent<Collider2D>().bounds.size.y))
             {
                 enemy.CanAttack = false;
 
-                // kierunek najpierw przypisywany do temp Direction, jeœli kierunek nie jest zablokowany przypisuje go do moveDirection
+                // kierunek najpierw przypisywany do temp Direction, jesli kierunek nie jest zablokowany przypisuje go do moveDirection
                 Vector2 tempDirection  = (playerPos.y - mechPos.y > 0) ? transform.up : -transform.up;
 
                 Vector2 pos = (Vector2)transform.position + GetComponent<Collider2D>().bounds.size.y * tempDirection;
@@ -120,8 +120,8 @@ public class ChaseMovement : MonoBehaviour, Controller
                     YBlocked = false;
                 }
             }
-            // Gdy gracz jest w zasiêgu ataku przeciwnika:
-            //  przeciwnik zatrzymuje siê a, skrypt Enemy jest powiadamiany o mo¿liwoœci ataku 
+            // Gdy gracz jest w zasiegu ataku przeciwnika:
+            //  przeciwnik zatrzymuje sie a, skrypt Enemy jest powiadamiany o mozliwosci ataku 
             else
             {
                 moveDirection = Vector2.zero;
@@ -130,7 +130,7 @@ public class ChaseMovement : MonoBehaviour, Controller
         }
 
 
-        //kierunek w którym patrzy przeciwnik, u¿ywane w Detection
+        //kierunek w ktorym patrzy przeciwnik, uzywane w Detection
         enemy.FacingDirection = moveDirection == Vector2.zero ? Vector2.down : moveDirection;
 
         

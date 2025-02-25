@@ -99,19 +99,19 @@ public class PlayerDagger : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         if (angle < 0)
         {
-            angle += 360;   //robimy to ¿eby mieæ zakres 0-360
+            angle += 360;   //robimy to zeby miec zakres 0-360
         }
 
-        int segmentIndex = Mathf.FloorToInt(angle / 45.0f);     //obliczamy który segment ma siê podœwietliæ
+        int segmentIndex = Mathf.FloorToInt(angle / 45.0f);     //obliczamy ktory segment ma sie podswietlic
          
         foreach (var segment in segments2)
         {
-            segment.sprite.color = defaultColor;  //resetowanie pozosta³ych segmentów
+            segment.sprite.color = defaultColor;  //resetowanie pozostalych segmentow
             segment.collider.enabled = false;
             
         }
 
-        segments2[segmentIndex].sprite.color = highlightColor;     //podœwietlenie odpowiedniego segmentu
+        segments2[segmentIndex].sprite.color = highlightColor;     //podswietlenie odpowiedniego segmentu
         segments2[segmentIndex].collider.enabled = true;
     }
 
