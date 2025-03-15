@@ -1450,7 +1450,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3790774684407626010}
   - component: {fileID: 6396077839908076791}
-  - component: {fileID: 4273713209227024863}
   m_Layer: 0
   m_Name: Inventory
   m_TagString: Untagged
@@ -1504,11 +1503,8 @@ MonoBehaviour:
     speedChange: 0
     speedTime: 0
     speedMultiplier: 0
-    exposedEffect: 0
-    exposed1Duration: 0
-    exposed1Percentage: 0
-    exposed2Duration: 0
-    exposed2Percentage: 0
+    ExposedEffect: 0
+    ExpositionOverTime: []
     shape: 1
     BeamLength: 5
     BeamSpawnTime: 0.1
@@ -1539,11 +1535,8 @@ MonoBehaviour:
     speedChange: 0
     speedTime: 0
     speedMultiplier: 0
-    exposedEffect: 0
-    exposed1Duration: 0
-    exposed1Percentage: 0
-    exposed2Duration: 0
-    exposed2Percentage: 0
+    ExposedEffect: 0
+    ExpositionOverTime: []
     shape: 0
     BeamLength: 3
     BeamSpawnTime: 0.2
@@ -1574,11 +1567,8 @@ MonoBehaviour:
     speedChange: 0
     speedTime: 0
     speedMultiplier: 0
-    exposedEffect: 0
-    exposed1Duration: 0
-    exposed1Percentage: 0
-    exposed2Duration: 0
-    exposed2Percentage: 0
+    ExposedEffect: 0
+    ExpositionOverTime: []
     shape: 0
     BeamLength: 0
     BeamSpawnTime: 0
@@ -1609,11 +1599,8 @@ MonoBehaviour:
     speedChange: 0
     speedTime: 0
     speedMultiplier: 0
-    exposedEffect: 0
-    exposed1Duration: 0
-    exposed1Percentage: 0
-    exposed2Duration: 0
-    exposed2Percentage: 0
+    ExposedEffect: 0
+    ExpositionOverTime: []
     shape: 1
     BeamLength: 5
     BeamSpawnTime: 0.1
@@ -1644,11 +1631,8 @@ MonoBehaviour:
     speedChange: 1
     speedTime: 5
     speedMultiplier: 2
-    exposedEffect: 0
-    exposed1Duration: 0
-    exposed1Percentage: 0
-    exposed2Duration: 0
-    exposed2Percentage: 0
+    ExposedEffect: 0
+    ExpositionOverTime: []
     shape: 0
     BeamLength: 3
     BeamSpawnTime: 0.2
@@ -1679,11 +1663,8 @@ MonoBehaviour:
     speedChange: 0
     speedTime: 2
     speedMultiplier: 0.5
-    exposedEffect: 1
-    exposed1Duration: 3
-    exposed1Percentage: 10
-    exposed2Duration: 10
-    exposed2Percentage: 25
+    ExposedEffect: 0
+    ExpositionOverTime: []
     shape: 0
     BeamLength: 3
     BeamSpawnTime: 0.2
@@ -1720,7 +1701,7 @@ MonoBehaviour:
   - PotionName: 
     interactions:
     - PotionName: 
-      script: {fileID: 4273713209227024863}
+      script: {fileID: 0}
   PlayerPotions:
   - PotionName: FireBreath
     count: 100
@@ -1755,11 +1736,8 @@ MonoBehaviour:
     speedChange: 0
     speedTime: 0
     speedMultiplier: 0
-    exposedEffect: 0
-    exposed1Duration: 0
-    exposed1Percentage: 0
-    exposed2Duration: 0
-    exposed2Percentage: 0
+    ExposedEffect: 0
+    ExpositionOverTime: []
     shape: 0
     BeamLength: 0
     BeamSpawnTime: 0
@@ -1790,11 +1768,8 @@ MonoBehaviour:
     speedChange: 0
     speedTime: 0
     speedMultiplier: 0
-    exposedEffect: 0
-    exposed1Duration: 0
-    exposed1Percentage: 0
-    exposed2Duration: 0
-    exposed2Percentage: 0
+    ExposedEffect: 0
+    ExpositionOverTime: []
     shape: 0
     BeamLength: 0
     BeamSpawnTime: 0
@@ -1825,11 +1800,8 @@ MonoBehaviour:
     speedChange: 0
     speedTime: 0
     speedMultiplier: 0
-    exposedEffect: 0
-    exposed1Duration: 0
-    exposed1Percentage: 0
-    exposed2Duration: 0
-    exposed2Percentage: 0
+    ExposedEffect: 0
+    ExpositionOverTime: []
     shape: 0
     BeamLength: 0
     BeamSpawnTime: 0
@@ -1861,11 +1833,8 @@ MonoBehaviour:
     speedChange: 0
     speedTime: 0
     speedMultiplier: 0
-    exposedEffect: 0
-    exposed1Duration: 0
-    exposed1Percentage: 0
-    exposed2Duration: 0
-    exposed2Percentage: 0
+    ExposedEffect: 0
+    ExpositionOverTime: []
     shape: 0
     BeamLength: 0
     BeamSpawnTime: 0
@@ -1879,18 +1848,6 @@ MonoBehaviour:
       Damage: 0
       Time: 0
       Effect: {fileID: 0}
---- !u!114 &4273713209227024863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3145928728967265969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 248037846635b60479efd682c4d23458, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3453597928797566141
 GameObject:
   m_ObjectHideFlags: 0
@@ -3366,6 +3323,50 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &7181290853779237165
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6436868706549135456}
+  - component: {fileID: 3618582813757106924}
+  m_Layer: 0
+  m_Name: CleanedCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6436868706549135456
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7181290853779237165}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 807171415769385061}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3618582813757106924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7181290853779237165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24f99cf50f4212f4792c211655d8373b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7561315469164132527
 GameObject:
   m_ObjectHideFlags: 0
@@ -3401,7 +3402,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000029563904, y: 0.00009686877}
+  m_AnchoredPosition: {x: -0.000029563904, y: 0.000041607305}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1382443910206394568
@@ -3914,5 +3915,6 @@ Transform:
   - {fileID: 2694946654108564262}
   - {fileID: 1996868259721934778}
   - {fileID: 4400512365949174349}
+  - {fileID: 6436868706549135456}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -17,8 +17,10 @@ public class LevelLoader : MonoBehaviour, Saveable
 
     private List<int> path = new List<int>();
     private string filePath;
+    public bool LevelChangeCoolDown = false;
 
     public static LevelLoader Instance { get; private set; }
+    public static List<string> CleanedRooms = new List<string>();
 
     private void Awake()
     {
@@ -43,9 +45,6 @@ public class LevelLoader : MonoBehaviour, Saveable
 
         // Ustawia poprzedni level we wszystkich levelach
         LevelZero.SetPreviousLevel(null);
-
-        // Dopuki nie bedzie menu z przyciskiem start
-        StartGame();
     }
 
     // Do wywolania w mainMenu, laduje pierwszy poziom
@@ -88,8 +87,11 @@ public class LevelLoader : MonoBehaviour, Saveable
 
     public void NextLevel(int i = 0)
     {
+        if (LevelChangeCoolDown)
+            return;
+
         // jesli nie ma nastepnych leveli
-        if(ActualLevel.NextLevels == null || ActualLevel.NextLevels.Length == 0)
+        if (ActualLevel.NextLevels == null || ActualLevel.NextLevels.Length == 0)
         {
             // tworzenie obiektu klasy level dla koncowego levelu
             Level lvl = new Level();
@@ -115,13 +117,16 @@ public class LevelLoader : MonoBehaviour, Saveable
         Level.Load(ActualLevel.LevelName);
 
         //Zapobiega zbyt szybkiej zmianie leveli
-        Level.LevelChangeCoolDown = true;
+        LevelChangeCoolDown = true;
         StartCoroutine(LevelCoolDown());
 
     }
 
     public void PrevLevel()
     {
+        if (LevelChangeCoolDown)
+            return;
+
         // jesli poprzedni level istnieje
         if (ActualLevel.PreviousLevel != null)
         {
@@ -134,7 +139,7 @@ public class LevelLoader : MonoBehaviour, Saveable
             Level.Load(ActualLevel.LevelName);
 
             //Zapobiega zbyt szybkiej zmianie leveli
-            Level.LevelChangeCoolDown = true;
+            LevelChangeCoolDown = true;
             StartCoroutine(LevelCoolDown());
         }
         else return;
@@ -142,6 +147,9 @@ public class LevelLoader : MonoBehaviour, Saveable
 
     public void SideLevel(int i = 0)
     {
+        if (LevelChangeCoolDown)
+            return;
+
         // jesli nie ma pobocznych leveli
         if (ActualLevel.SideLevels == null || ActualLevel.SideLevels.Length == 0)
         {
@@ -157,17 +165,20 @@ public class LevelLoader : MonoBehaviour, Saveable
         Level.Load(ActualLevel.SideLevels[i]);
 
         //Zapobiega zbyt szybkiej zmianie leveli
-        Level.LevelChangeCoolDown = true;
+        LevelChangeCoolDown = true;
         StartCoroutine(LevelCoolDown());
     }
 
     public void MainLevel()
     {
+        if (LevelChangeCoolDown)
+            return;
+
         // Laduje glowny level
         Level.Load(ActualLevel.LevelName);
 
         //Zapobiega zbyt szybkiej zmianie leveli
-        Level.LevelChangeCoolDown = true;
+        LevelChangeCoolDown = true;
         StartCoroutine(LevelCoolDown());
     }
 
@@ -222,7 +233,7 @@ public class LevelLoader : MonoBehaviour, Saveable
     public IEnumerator LevelCoolDown()
     {
         yield return new WaitForSeconds(0.1f);
-        Level.LevelChangeCoolDown = false;
+        LevelChangeCoolDown = false;
         yield break;
     }
 
@@ -241,12 +252,8 @@ public class Level
 
     public Level[] NextLevels = { };
 
-    [HideInInspector]
-    public bool Cleaned = false;
-
     public static string ComingFromRoom = "";
-    public static string CurrentlyOnRoom = "Defaoult";
-    public static bool LevelChangeCoolDown = false;
+    public static string CurrentlyOnRoom = "Default";
 
 
     // Ustawia Poprzedni level na podany level i poprzedni level w nastepnych levelach na ten level
@@ -261,9 +268,7 @@ public class Level
     }
 
     public static void Load(string name)
-    {
-        if (LevelChangeCoolDown)
-            return;
+    { 
 
         Debug.Log("£aduje " + name);
         // Zapisuje przed zaladowaniem levelu

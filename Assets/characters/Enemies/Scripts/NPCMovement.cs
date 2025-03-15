@@ -32,7 +32,6 @@ public class NPCMovement : MonoBehaviour, Controller
         }
         catch (IndexOutOfRangeException e)
         {
-            Debug.Log("Brak pierwszego ruchu w " + gameObject.name);
             Destroy(this);
         }
     }

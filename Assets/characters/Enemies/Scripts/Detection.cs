@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -29,6 +30,20 @@ public class Detection : MonoBehaviour
 
     void Update()
     {
+
+        // sprawdzamy czy gracz jest w zasiêgu ataku
+        float distance = Vector2.Distance(enemy.Player.transform.position, transform.position);
+        if (distance > (enemy.MeleeStats.AttackDistance + gameObject.GetComponent<Collider2D>().bounds.size.x))
+        {
+            enemy.MeleeStats.InRange = true;
+        }
+        else
+        {
+            enemy.MeleeStats.InRange = false;
+        }
+
+
+
         // na poczatku klatki przyjmojemy ze przeciwnik nie widzi gracza
         isDetected = false;
 

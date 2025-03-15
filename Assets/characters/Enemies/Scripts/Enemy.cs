@@ -1,13 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
 {
     [Header("Detection")]
-    [Min(1.0f)]public float HearingDistance;
+    [Min(1.0f)] public float HearingDistance;
     public float FieldOfViev;
     public float VievDistance;
     public float MemoryTime;
@@ -19,25 +21,26 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
     public DamageModificator[] DamageModificators;
 
     [Header("Offensive")]
-    public AttackMode attackMode; 
-    public float AttackDamage;
-    public Potion.DamageType AttackType;
-    public float AttackSpeed;
-    public float AttackDistance;
-    public float AttackDelay;
-    public bool FriendlyFire;
+    public AttackMode attackMode;
+    public AttackHandler.MeleeStats MeleeStats;
+    public AttackHandler.ProjectileStats ProjectileStats;
+
 
     [Header("Movement")]
     public bool looping;
     public float speed; //predkosc podczas chodzenia 
     public float chaseSpeed; //predkosc podczas gonienia
     public Move[] moves;
+    public bool Teleportation;
+    public float TeleportAwayDistance;
+    [Range(0,100)] public int TeleportAfterAttackChance;
+
 
 
     [HideInInspector] public float FreezeTime;
-    [HideInInspector] public bool CanAttack = false;
     [HideInInspector] public Vector2 FacingDirection = Vector2.down;
     [HideInInspector] public GameObject Player;
+    [HideInInspector] public bool IsAgresive { get; private set; } = false;
     [ReadOnly] public bool PlayerDetected = false;
 
     private List<GameObject> effects = new();
@@ -53,7 +56,7 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
     private bool speedChanged = false;
     private float speedTime;
     private float speedMultiplier;
-    private bool ChasePlayer = false;
+    
     private bool isKnockedBack = false;
     private float knockbackTimer = 0;
     private Vector2 knockbackDirection;
@@ -65,15 +68,28 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
     {
         gameObject.layer = LayerMask.NameToLayer("Enemy");
         rb = GetComponent<Rigidbody2D>();
+        rb.drag = 0.6f;
 
-        NpcMovement = gameObject.AddComponent<NPCMovement>();
-        Chase = gameObject.AddComponent<ChaseMovement>();
+        if(speed > 0 && moves.Length > 0)
+        {
+            NpcMovement = gameObject.AddComponent<NPCMovement>();
+            NpcMovement.enabled = !IsAgresive;
+        }
+        if(chaseSpeed > 0)
+        {
+            Chase = gameObject.AddComponent<ChaseMovement>();
+            Chase.enabled = IsAgresive;
+        }
+        if (Teleportation)
+        {
+            gameObject.AddComponent<TeleportationMovement>().RunAwayDistance = TeleportAwayDistance;
+
+        }
+
         detection = gameObject.AddComponent<Detection>();
         attackHandler = gameObject.AddComponent<AttackHandler>();
 
         Player = GameObject.FindGameObjectWithTag("Player");
-        Chase.enabled = ChasePlayer;
-        NpcMovement.enabled = !ChasePlayer;
     }
 
     private void Update()
@@ -88,27 +104,30 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
             Destroy(gameObject);
 
 
-        //Sprawdzanie czy przeciwnik powinien gonic gracza
+        //Sprawdzanie czy przeciwnik powinien atakowaæ gracza
         if (attackMode == AttackMode.Always)
-            ChasePlayer = true;
+            IsAgresive = true;
         else if (attackMode == AttackMode.OnSpot)
         {
             if (PlayerDetected)
-                ChasePlayer = true;
-            else ChasePlayer = false;
+                IsAgresive = true;
+            else IsAgresive = false;
         }
         else if(attackMode == AttackMode.OnDamage)
         {
             if (PlayerDetected && DamageTaken)
-                ChasePlayer = true;
-            else ChasePlayer = false;
+                IsAgresive = true;
+            else IsAgresive = false;
         }
 
-        //Ustawienie sposobu poruszania przeciwnika (gonienie / patrolowanie)    
-        Chase.enabled = ChasePlayer;
+        //Ustawienie sposobu poruszania przeciwnika (gonienie / patrolowanie)
+        if(Chase != null)
+            Chase.enabled = IsAgresive;
         if(NpcMovement != null) 
-            NpcMovement.enabled = !ChasePlayer;
+            NpcMovement.enabled = !IsAgresive;
 
+
+        //speed change effect
         if (speedTime > 0.0f)
         {
             speedTime -= Time.deltaTime;
@@ -121,6 +140,7 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
             speedChanged = false;
             speedTime = 0.0f;
         }
+
 
         //knockback do sztyletowania
         if (isKnockedBack)

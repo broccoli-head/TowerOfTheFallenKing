@@ -24,7 +24,7 @@ public class ChaseMovement : MonoBehaviour, Controller
         player = GameObject.FindGameObjectWithTag("Player");
         enemy = GetComponent<Enemy>();
         chaseSpeed = enemy.chaseSpeed;
-        AttackDistance = enemy.AttackDistance;
+        AttackDistance = enemy.MeleeStats.AttackDistance;
 
         if (player != null)
         {
@@ -73,7 +73,6 @@ public class ChaseMovement : MonoBehaviour, Controller
             // Jezeli gracz jest poza zasiegiem przeciwnika, przeciwnik goni gracza
             if (distance > (AttackDistance + gameObject.GetComponent<Collider2D>().bounds.size.x) )
             {
-                enemy.CanAttack = false;
                 moveDirection = (playerPos.x - mechPos.x > 0) ? transform.right : -transform.right;
 
                 Vector2 pos = (Vector2)transform.position + GetComponent<Collider2D>().bounds.size.x * moveDirection;
@@ -88,12 +87,10 @@ public class ChaseMovement : MonoBehaviour, Controller
                     XBlocked= false;
                 }
             }
-            // Gdy gracz jest w zasiegu ataku przeciwnika:
-            //  przeciwnik zatrzymuje sie a, skrypt Enemy jest powiadamiany o mozliwosci ataku 
+            // Gdy gracz jest w zasiegu ataku, przeciwnik zatrzymuje sie 
             else
             {
                 moveDirection = Vector2.zero;
-                enemy.CanAttack = true;
             }
         }
         // Gracz jest dalej na osi Y niz na osi X
@@ -102,7 +99,6 @@ public class ChaseMovement : MonoBehaviour, Controller
             // Jezeli gracz jest poza zasiegiem przeciwnika, przeciwnik goni gracza
             if (distance > (AttackDistance + gameObject.GetComponent<Collider2D>().bounds.size.y))
             {
-                enemy.CanAttack = false;
 
                 // kierunek najpierw przypisywany do temp Direction, jesli kierunek nie jest zablokowany przypisuje go do moveDirection
                 Vector2 tempDirection  = (playerPos.y - mechPos.y > 0) ? transform.up : -transform.up;
@@ -120,12 +116,10 @@ public class ChaseMovement : MonoBehaviour, Controller
                     YBlocked = false;
                 }
             }
-            // Gdy gracz jest w zasiegu ataku przeciwnika:
-            //  przeciwnik zatrzymuje sie a, skrypt Enemy jest powiadamiany o mozliwosci ataku 
+            // Gdy gracz jest w zasiegu ataku, przeciwnik zatrzymuje sie 
             else
             {
                 moveDirection = Vector2.zero;
-                enemy.CanAttack = true;
             }
         }
 

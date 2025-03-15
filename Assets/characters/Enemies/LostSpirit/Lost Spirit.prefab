@@ -120,19 +120,15 @@ MonoBehaviour:
   AttackDistance: 1
   AttackDelay: 1
   FriendlyFire: 0
-  looping: 1
-  speed: 2
-  chaseSpeed: 3
-  moves:
-  - direction: {x: 1, y: 0}
-    time: 3
-  - direction: {x: -1, y: 0}
-    time: 3
+  looping: 0
+  speed: 0
+  chaseSpeed: 0
+  moves: []
   FreezeTime: 0
   CanAttack: 0
-  PlayerDetected: 0
   FacingDirection: {x: 0, y: 0}
   Player: {fileID: 0}
+  PlayerDetected: 0
 --- !u!50 &2439262867996681890
 Rigidbody2D:
   serializedVersion: 4
@@ -205,7 +201,7 @@ Animator:
   m_GameObject: {fileID: 5824849717792568934}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8895b0b3a5f5f654bae26b15e04c48a8, type: 2}
+  m_Controller: {fileID: 9100000, guid: 90bbb64dd08b7754a8bd409ec611845d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

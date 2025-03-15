@@ -13,7 +13,7 @@ public class Potion : Item
 {
     [Header("Basic")]
     public string Name;
-    public string description;
+    [TextArea] public string description;
     public float Damage;
     public float OnContactDamage;
     public DamageType damageType;

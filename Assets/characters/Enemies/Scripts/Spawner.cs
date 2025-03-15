@@ -24,20 +24,18 @@ public class Spawner : MonoBehaviour
 
     [Space(10)]
     public Enemy.AttackMode AttackMode;
-    LevelLoader levelLoader;
 
     void Awake()
     {
-        levelLoader = LevelLoader.Instance;
-
-        if (!levelLoader.ActualLevel.Cleaned)
+        //jesli nasz pokoj nie znajduje siê na liscie "wyczyszczonych", spawnuje przeciwnika
+        if (!LevelLoader.CleanedRooms.Contains(Level.CurrentlyOnRoom))
         {
             int randomIndex = Random.Range(0, Enemies.Count);
             Enemy randomEnemy = Instantiate(Enemies[randomIndex], transform.position, Quaternion.identity);
 
             randomEnemy.gameObject.SetActive(true);
             if (Random.Range(0, 100) < AddDamageChance)
-                randomEnemy.AttackDamage += AddDamage;
+                randomEnemy.MeleeStats.AttackDamage += AddDamage;
 
             if (Random.Range(0, 100) < AddHPChance)
                 randomEnemy.HP += AddHP;
@@ -47,8 +45,6 @@ public class Spawner : MonoBehaviour
 
             randomEnemy.attackMode = AttackMode;
         }
-        else
-            Debug.Log("Already cleaned");
-        
+        Destroy(gameObject);
     }
 }
