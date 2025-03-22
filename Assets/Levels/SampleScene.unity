@@ -123,6 +123,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+<<<<<<< HEAD
 --- !u!1001 &13136567
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -236,6 +237,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ebc992ffb6f49f42b4651e533b124ad, type: 3}
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
 --- !u!1 &21494222
 GameObject:
   m_ObjectHideFlags: 0
@@ -13591,6 +13594,86 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+<<<<<<< HEAD
+=======
+--- !u!1001 &454347153
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 179077196761789746, guid: 93327e342a325b547926907fdc0ad9b9, type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 179077196761789746, guid: 93327e342a325b547926907fdc0ad9b9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6079141074647487591, guid: 93327e342a325b547926907fdc0ad9b9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9304757
+      objectReference: {fileID: 0}
+    - target: {fileID: 6079141074647487591, guid: 93327e342a325b547926907fdc0ad9b9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.000000034300502
+      objectReference: {fileID: 0}
+    - target: {fileID: 6079141074647487591, guid: 93327e342a325b547926907fdc0ad9b9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.00000008711742
+      objectReference: {fileID: 0}
+    - target: {fileID: 6079141074647487591, guid: 93327e342a325b547926907fdc0ad9b9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.36635363
+      objectReference: {fileID: 0}
+    - target: {fileID: 8895062345451772693, guid: 93327e342a325b547926907fdc0ad9b9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.987765
+      objectReference: {fileID: 0}
+    - target: {fileID: 8895062345451772693, guid: 93327e342a325b547926907fdc0ad9b9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.4307134
+      objectReference: {fileID: 0}
+    - target: {fileID: 8895062345451772693, guid: 93327e342a325b547926907fdc0ad9b9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8895062345451772693, guid: 93327e342a325b547926907fdc0ad9b9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8895062345451772693, guid: 93327e342a325b547926907fdc0ad9b9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8895062345451772693, guid: 93327e342a325b547926907fdc0ad9b9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8895062345451772693, guid: 93327e342a325b547926907fdc0ad9b9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8895062345451772693, guid: 93327e342a325b547926907fdc0ad9b9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8895062345451772693, guid: 93327e342a325b547926907fdc0ad9b9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8895062345451772693, guid: 93327e342a325b547926907fdc0ad9b9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 93327e342a325b547926907fdc0ad9b9, type: 3}
+>>>>>>> 0b0c13f (naprawa unity i repo)
 --- !u!1 &458003032
 GameObject:
   m_ObjectHideFlags: 0
@@ -16147,6 +16230,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+<<<<<<< HEAD
 --- !u!1 &988832202
 GameObject:
   m_ObjectHideFlags: 0
@@ -16192,6 +16276,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Taken: 0
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
 --- !u!1 &994851829
 GameObject:
   m_ObjectHideFlags: 0
@@ -17545,7 +17631,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1208351671}
+<<<<<<< HEAD
   - component: {fileID: 1208351672}
+=======
+  - component: {fileID: 1208351670}
+  - component: {fileID: 1208351672}
+  - component: {fileID: 1208351673}
+>>>>>>> 0b0c13f (naprawa unity i repo)
   m_Layer: 0
   m_Name: MusicPlayer
   m_TagString: Untagged
@@ -17553,6 +17645,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD
+=======
+--- !u!114 &1208351670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208351669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 946ad8629a080154988a3434df048cf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlaySound: {fileID: 1208351672}
+  MenuMusic: {fileID: 8300000, guid: d3278976658383649afc9f4deb5fbd22, type: 3}
+  Level1: {fileID: 8300000, guid: 1ba33b693d561c34798c609d495eb2db, type: 3}
+  Boss1: {fileID: 0}
+>>>>>>> 0b0c13f (naprawa unity i repo)
 --- !u!4 &1208351671
 Transform:
   m_ObjectHideFlags: 0
@@ -17578,7 +17689,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
+<<<<<<< HEAD
   m_audioClip: {fileID: 8300000, guid: 651c435b8cc7f664e891ed18ba9ff875, type: 3}
+=======
+  m_audioClip: {fileID: 0}
+>>>>>>> 0b0c13f (naprawa unity i repo)
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -17664,6 +17779,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+<<<<<<< HEAD
 --- !u!1 &1208701736
 GameObject:
   m_ObjectHideFlags: 0
@@ -17697,11 +17813,15 @@ Transform:
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1208701738
+=======
+--- !u!114 &1208351673
+>>>>>>> 0b0c13f (naprawa unity i repo)
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1208701736}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -17709,6 +17829,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Taken: 0
+=======
+  m_GameObject: {fileID: 1208351669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2796bab7eb0003246ba94cc4dcccfe7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeSlider: {fileID: 2553576703134272849}
+>>>>>>> 0b0c13f (naprawa unity i repo)
 --- !u!1 &1212113015
 GameObject:
   m_ObjectHideFlags: 0
@@ -19388,6 +19517,7 @@ Transform:
   - {fileID: 1397303570}
   m_Father: {fileID: 504554753}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 2}
+<<<<<<< HEAD
 --- !u!1001 &1584205147
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19453,6 +19583,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93327e342a325b547926907fdc0ad9b9, type: 3}
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
 --- !u!1 &1611116034
 GameObject:
   m_ObjectHideFlags: 0
@@ -20408,7 +20540,11 @@ GameObject:
   - component: {fileID: 1852235543}
   - component: {fileID: 1852235542}
   m_Layer: 0
+<<<<<<< HEAD
   m_Name: PrevLevel
+=======
+  m_Name: nextlvl (1)
+>>>>>>> 0b0c13f (naprawa unity i repo)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20672,6 +20808,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+<<<<<<< HEAD
 --- !u!1 &1864322316
 GameObject:
   m_ObjectHideFlags: 0
@@ -20717,6 +20854,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Taken: 0
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
 --- !u!1 &1866098456
 GameObject:
   m_ObjectHideFlags: 0
@@ -21917,10 +22056,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dark Crawler
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 620112317387533891, guid: 2340579fecc977b4c9b8f13aa0190525, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
     - target: {fileID: 4631770620879276974, guid: 2340579fecc977b4c9b8f13aa0190525, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.59
@@ -21989,10 +22131,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scrapy Mech
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 4165396049400691516, guid: aa456007840a4e248b1fe7f249c7f74e, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
     - target: {fileID: 4666820064094462416, guid: aa456007840a4e248b1fe7f249c7f74e, type: 3}
       propertyPath: attackMode
       value: 3
@@ -22199,6 +22344,20 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 681417c73f8af904d9dc86929df03c88, type: 3}
+<<<<<<< HEAD
+=======
+--- !u!114 &2553576703134272849 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7886501704205195, guid: 681417c73f8af904d9dc86929df03c88, type: 3}
+  m_PrefabInstance: {fileID: 2553576703134272848}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+>>>>>>> 0b0c13f (naprawa unity i repo)
 --- !u!1001 &3213765759593494604
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22251,10 +22410,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawner
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 3244646664329613858, guid: 41f381a1dea306143872a13cc4afa995, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
     - target: {fileID: 8419152349588987406, guid: 41f381a1dea306143872a13cc4afa995, type: 3}
       propertyPath: AddHP
       value: 30
@@ -22268,10 +22430,13 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8419152349588987406, guid: 41f381a1dea306143872a13cc4afa995, type: 3}
+<<<<<<< HEAD
       propertyPath: AttackMode
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8419152349588987406, guid: 41f381a1dea306143872a13cc4afa995, type: 3}
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
       propertyPath: AttackType
       value: 3
       objectReference: {fileID: 0}
@@ -22360,10 +22525,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lost Spirit
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 5824849717792568934, guid: 1ebc992ffb6f49f42b4651e533b124ad, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
     - target: {fileID: 7114666553544470090, guid: 1ebc992ffb6f49f42b4651e533b124ad, type: 3}
       propertyPath: m_Controller
       value: 
@@ -22391,8 +22559,12 @@ SceneRoots:
   - {fileID: 2036263319}
   - {fileID: 1852235545}
   - {fileID: 3213765759593494604}
+<<<<<<< HEAD
   - {fileID: 13136567}
   - {fileID: 1864322317}
   - {fileID: 1208701737}
   - {fileID: 988832203}
   - {fileID: 1584205147}
+=======
+  - {fileID: 454347153}
+>>>>>>> 0b0c13f (naprawa unity i repo)

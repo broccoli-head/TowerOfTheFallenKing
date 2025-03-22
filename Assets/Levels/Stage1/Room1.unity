@@ -590,7 +590,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2777580118803751273, guid: 681417c73f8af904d9dc86929df03c88, type: 3}
       propertyPath: m_AnchoredPosition.y
+<<<<<<< HEAD
       value: 0.00010742861
+=======
+      value: 0.00006507139
+>>>>>>> 0b0c13f (naprawa unity i repo)
       objectReference: {fileID: 0}
     - target: {fileID: 3643994606414864966, guid: 681417c73f8af904d9dc86929df03c88, type: 3}
       propertyPath: m_Size
@@ -777,6 +781,7 @@ Tilemap:
   m_GameObject: {fileID: 1731201538}
   m_Enabled: 1
   m_Tiles:
+<<<<<<< HEAD
   - first: {x: -13, y: -9, z: 0}
     second:
       serializedVersion: 2
@@ -3297,6 +3302,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: -9, y: -5, z: 0}
     second:
       serializedVersion: 2
@@ -3837,6 +3844,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: -5, z: 0}
     second:
       serializedVersion: 2
@@ -3917,6 +3925,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: -9, y: -4, z: 0}
     second:
       serializedVersion: 2
@@ -4457,6 +4467,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: -4, z: 0}
     second:
       serializedVersion: 2
@@ -4537,6 +4548,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: -9, y: -3, z: 0}
     second:
       serializedVersion: 2
@@ -5077,6 +5090,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: -3, z: 0}
     second:
       serializedVersion: 2
@@ -5157,6 +5171,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: -9, y: -2, z: 0}
     second:
       serializedVersion: 2
@@ -5697,6 +5713,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: -2, z: 0}
     second:
       serializedVersion: 2
@@ -5777,6 +5794,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: -9, y: -1, z: 0}
     second:
       serializedVersion: 2
@@ -6317,6 +6336,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: -1, z: 0}
     second:
       serializedVersion: 2
@@ -6397,6 +6417,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: -9, y: 0, z: 0}
     second:
       serializedVersion: 2
@@ -6487,6 +6509,19 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
+=======
+  - first: {x: 0, y: 0, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: 1, y: 0, z: 0}
     second:
       serializedVersion: 2
@@ -6927,6 +6962,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: 0, z: 0}
     second:
       serializedVersion: 2
@@ -7007,6 +7043,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: -9, y: 1, z: 0}
     second:
       serializedVersion: 2
@@ -7547,6 +7585,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: 1, z: 0}
     second:
       serializedVersion: 2
@@ -7627,6 +7666,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: -9, y: 2, z: 0}
     second:
       serializedVersion: 2
@@ -8167,6 +8208,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: 2, z: 0}
     second:
       serializedVersion: 2
@@ -8247,6 +8289,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: -9, y: 3, z: 0}
     second:
       serializedVersion: 2
@@ -8787,6 +8831,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: 3, z: 0}
     second:
       serializedVersion: 2
@@ -8867,6 +8912,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: -9, y: 4, z: 0}
     second:
       serializedVersion: 2
@@ -9407,6 +9454,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: 4, z: 0}
     second:
       serializedVersion: 2
@@ -9847,6 +9895,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: 27, y: 5, z: 0}
     second:
       serializedVersion: 2
@@ -10027,6 +10077,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: 5, z: 0}
     second:
       serializedVersion: 2
@@ -10467,6 +10518,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: 27, y: 6, z: 0}
     second:
       serializedVersion: 2
@@ -10647,6 +10700,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: 6, z: 0}
     second:
       serializedVersion: 2
@@ -11087,6 +11141,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: 27, y: 7, z: 0}
     second:
       serializedVersion: 2
@@ -11267,6 +11323,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: 7, z: 0}
     second:
       serializedVersion: 2
@@ -11707,6 +11764,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: 27, y: 8, z: 0}
     second:
       serializedVersion: 2
@@ -11887,6 +11946,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: 8, z: 0}
     second:
       serializedVersion: 2
@@ -11967,6 +12027,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: 27, y: 9, z: 0}
     second:
       serializedVersion: 2
@@ -12147,6 +12209,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: 9, z: 0}
     second:
       serializedVersion: 2
@@ -12227,6 +12290,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: 27, y: 10, z: 0}
     second:
       serializedVersion: 2
@@ -12407,6 +12472,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: 10, z: 0}
     second:
       serializedVersion: 2
@@ -12487,6 +12553,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: 27, y: 11, z: 0}
     second:
       serializedVersion: 2
@@ -12667,6 +12735,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: 11, z: 0}
     second:
       serializedVersion: 2
@@ -12747,6 +12816,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: 27, y: 12, z: 0}
     second:
       serializedVersion: 2
@@ -12927,6 +12998,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: 12, z: 0}
     second:
       serializedVersion: 2
@@ -13007,6 +13079,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: 27, y: 13, z: 0}
     second:
       serializedVersion: 2
@@ -13187,6 +13261,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: 13, z: 0}
     second:
       serializedVersion: 2
@@ -13267,6 +13342,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: 27, y: 14, z: 0}
     second:
       serializedVersion: 2
@@ -13447,6 +13524,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: 14, z: 0}
     second:
       serializedVersion: 2
@@ -13527,6 +13605,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: 27, y: 15, z: 0}
     second:
       serializedVersion: 2
@@ -13707,6 +13787,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: 15, z: 0}
     second:
       serializedVersion: 2
@@ -13787,6 +13868,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: 27, y: 16, z: 0}
     second:
       serializedVersion: 2
@@ -13967,6 +14050,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: 16, z: 0}
     second:
       serializedVersion: 2
@@ -14047,6 +14131,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: 27, y: 17, z: 0}
     second:
       serializedVersion: 2
@@ -14227,6 +14313,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: 17, z: 0}
     second:
       serializedVersion: 2
@@ -14307,6 +14394,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: 27, y: 18, z: 0}
     second:
       serializedVersion: 2
@@ -14487,6 +14576,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: 18, z: 0}
     second:
       serializedVersion: 2
@@ -14567,6 +14657,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: 27, y: 19, z: 0}
     second:
       serializedVersion: 2
@@ -14747,6 +14839,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: 19, z: 0}
     second:
       serializedVersion: 2
@@ -14827,6 +14920,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: 27, y: 20, z: 0}
     second:
       serializedVersion: 2
@@ -15007,6 +15102,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: 20, z: 0}
     second:
       serializedVersion: 2
@@ -15087,6 +15183,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: 27, y: 21, z: 0}
     second:
       serializedVersion: 2
@@ -15267,6 +15365,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: 21, z: 0}
     second:
       serializedVersion: 2
@@ -15347,6 +15446,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: 27, y: 22, z: 0}
     second:
       serializedVersion: 2
@@ -15527,6 +15628,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: 22, z: 0}
     second:
       serializedVersion: 2
@@ -15607,6 +15709,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: 27, y: 23, z: 0}
     second:
       serializedVersion: 2
@@ -15787,6 +15891,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: 23, z: 0}
     second:
       serializedVersion: 2
@@ -15867,6 +15972,8 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: 27, y: 24, z: 0}
     second:
       serializedVersion: 2
@@ -16047,6 +16154,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
   - first: {x: 45, y: 24, z: 0}
     second:
       serializedVersion: 2
@@ -17148,6 +17256,29 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: 59c7520db07ece947bedb7dc6417daf3, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 1135
+=======
+  m_AnimatedTiles: {}
+  m_TileAssetArray:
+  - m_RefCount: 900
+    m_Data: {fileID: 11400000, guid: 2a8df045463bd514db2bc7d203adc37b, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  m_TileSpriteArray:
+  - m_RefCount: 900
+    m_Data: {fileID: 21300000, guid: a8395d3041fcfda43bf33d654c6b5587, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  m_TileMatrixArray:
+  - m_RefCount: 900
+>>>>>>> 0b0c13f (naprawa unity i repo)
     m_Data:
       e00: 1
       e01: 0
@@ -17165,6 +17296,7 @@ Tilemap:
       e31: 0
       e32: 0
       e33: 1
+<<<<<<< HEAD
   - m_RefCount: 132
     m_Data:
       e00: 0
@@ -17221,6 +17353,64 @@ Tilemap:
       e33: 1
   m_TileColorArray:
   - m_RefCount: 1635
+=======
+  - m_RefCount: 0
+    m_Data:
+      e00: 2.2e-44
+      e01: 0
+      e02: 1.3959741e+10
+      e03: 1.3959741e+10
+      e10: 0
+      e11: 0
+      e12: 7e-43
+      e13: 7e-43
+      e20: 2.1339667e-19
+      e21: -3.150446e-34
+      e22: -6.795668e-29
+      e23: -4.7491966e-10
+      e30: 4.5904e-41
+      e31: 7.03e-43
+      e32: 7e-43
+      e33: 7.03e-43
+  - m_RefCount: 0
+    m_Data:
+      e00: 0
+      e01: 0
+      e02: 1.395866e+10
+      e03: 1.395866e+10
+      e10: 0
+      e11: 0
+      e12: 7e-43
+      e13: 7e-43
+      e20: 2.1339667e-19
+      e21: -3.150446e-34
+      e22: -6.7382367e-29
+      e23: -4.7491966e-10
+      e30: 4.5904e-41
+      e31: 7.03e-43
+      e32: 7e-43
+      e33: 7.03e-43
+  - m_RefCount: 0
+    m_Data:
+      e00: 3.1392017e+12
+      e01: 0
+      e02: 1.3958955e+10
+      e03: 1.3958955e+10
+      e10: 3.07e-43
+      e11: 0
+      e12: 7e-43
+      e13: 7e-43
+      e20: 2.1339667e-19
+      e21: -3.150446e-34
+      e22: -6.421941e-29
+      e23: -4.7491966e-10
+      e30: 4.5904e-41
+      e31: 7.03e-43
+      e32: 7e-43
+      e33: 7.03e-43
+  m_TileColorArray:
+  - m_RefCount: 900
+>>>>>>> 0b0c13f (naprawa unity i repo)
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1

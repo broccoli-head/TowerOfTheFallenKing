@@ -123,6 +123,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+<<<<<<< HEAD
 --- !u!1 &1889324
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,6 +266,8 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
 --- !u!1 &546789587
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,6 +415,7 @@ MonoBehaviour:
   index: 0
   KillAllEnemies: 0
   RequiredItems: []
+<<<<<<< HEAD
 --- !u!1 &548451480
 GameObject:
   m_ObjectHideFlags: 0
@@ -618,6 +622,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 638945989}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
 --- !u!1 &712685560
 GameObject:
   m_ObjectHideFlags: 0
@@ -1962,6 +1968,7 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+<<<<<<< HEAD
 --- !u!1 &1019022179
 GameObject:
   m_ObjectHideFlags: 0
@@ -2181,6 +2188,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1099564867}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
 --- !u!1001 &1183272023
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2263,7 +2272,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2777580118803751273, guid: 681417c73f8af904d9dc86929df03c88, type: 3}
       propertyPath: m_AnchoredPosition.y
+<<<<<<< HEAD
       value: 0.00024268494
+=======
+      value: 0.0006533809
+>>>>>>> 0b0c13f (naprawa unity i repo)
       objectReference: {fileID: 0}
     - target: {fileID: 3145928728967265969, guid: 681417c73f8af904d9dc86929df03c88, type: 3}
       propertyPath: m_IsActive
@@ -2334,6 +2347,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 681417c73f8af904d9dc86929df03c88, type: 3}
+<<<<<<< HEAD
 --- !u!1 &1248430418
 GameObject:
   m_ObjectHideFlags: 0
@@ -2424,6 +2438,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
 --- !u!1 &1373823197
 GameObject:
   m_ObjectHideFlags: 0
@@ -2469,6 +2485,7 @@ Transform:
   - {fileID: 712685561}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!1 &1486516717
 GameObject:
   m_ObjectHideFlags: 0
@@ -3126,12 +3143,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2145947046}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+<<<<<<< HEAD
   - {fileID: 1523990149}
   - {fileID: 307132628}
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - {fileID: 1183272023}
   - {fileID: 546789589}
   - {fileID: 1373823199}

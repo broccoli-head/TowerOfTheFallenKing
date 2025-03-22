@@ -72,9 +72,14 @@ public class LevelLoader : MonoBehaviour, Saveable
             // jesli zapisany index jest nieprawidlowy
             else
             {
+<<<<<<< HEAD
                 // laduje level zerowy
                 Level.Load(LevelZero.LevelName);
                 Debug.LogError($"The save file at path: {filePath} contains invalid or corrupted data");
+=======
+                Debug.Log($"The save file at path: {filePath} contains invalid or corrupted data");
+                StartGame();
+>>>>>>> 0b0c13f (naprawa unity i repo)
                 //przerywa petle i zwraca funkcje
                 return;
             }

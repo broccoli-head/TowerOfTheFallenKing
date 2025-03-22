@@ -126,7 +126,11 @@ Grid:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4706424418182237512}
   m_Enabled: 1
+<<<<<<< HEAD
   m_CellSize: {x: 1, y: 1, z: 0}
+=======
+  m_CellSize: {x: 0.5, y: 0.5, z: 0}
+>>>>>>> 0b0c13f (naprawa unity i repo)
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
@@ -762,6 +766,29 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
+=======
+  - first: {x: 22, y: 1, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 3
+      m_TileSpriteIndex: 3
+      m_TileMatrixIndex: 3
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 24, y: 1, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 3
+      m_TileSpriteIndex: 3
+      m_TileMatrixIndex: 2
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: -17, y: 2, z: 0}
     second:
       serializedVersion: 2
@@ -1202,6 +1229,19 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+<<<<<<< HEAD
+=======
+  - first: {x: 24, y: 3, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 3
+      m_TileSpriteIndex: 3
+      m_TileMatrixIndex: 1
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - first: {x: -17, y: 4, z: 0}
     second:
       serializedVersion: 2
@@ -2500,7 +2540,11 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: baa1e33280124764699fbbebe8e7b56a, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 1d34294052d8df54d9b77777a64679ae, type: 2}
+<<<<<<< HEAD
   - m_RefCount: 1
+=======
+  - m_RefCount: 4
+>>>>>>> 0b0c13f (naprawa unity i repo)
     m_Data: {fileID: 11400000, guid: bad8b941a1fa7324c90b7495d5ecf17d, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 180
@@ -2509,7 +2553,11 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: 8415543c683b5d94b8a9095463fc3928, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: cee2688cfa526964bb6615c35925d1dd, type: 3}
+<<<<<<< HEAD
   - m_RefCount: 1
+=======
+  - m_RefCount: 4
+>>>>>>> 0b0c13f (naprawa unity i repo)
     m_Data: {fileID: 21300000, guid: 59c7520db07ece947bedb7dc6417daf3, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 192
@@ -2530,6 +2578,7 @@ Tilemap:
       e31: 0
       e32: 0
       e33: 1
+<<<<<<< HEAD
   - m_RefCount: 16
     m_Data:
       e00: 0.000000059604645
@@ -2538,6 +2587,16 @@ Tilemap:
       e03: 0
       e10: -0.99999994
       e11: 0.000000059604645
+=======
+  - m_RefCount: 17
+    m_Data:
+      e00: 0
+      e01: 1
+      e02: 0
+      e03: 0
+      e10: -1
+      e11: 0
+>>>>>>> 0b0c13f (naprawa unity i repo)
       e12: 0
       e13: 0
       e20: 0
@@ -2548,6 +2607,7 @@ Tilemap:
       e31: 0
       e32: 0
       e33: 1
+<<<<<<< HEAD
   - m_RefCount: 10
     m_Data:
       e00: -1
@@ -2555,6 +2615,15 @@ Tilemap:
       e02: 0
       e03: 0
       e10: -0.00000008742278
+=======
+  - m_RefCount: 11
+    m_Data:
+      e00: -1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+>>>>>>> 0b0c13f (naprawa unity i repo)
       e11: -1
       e12: 0
       e13: 0
@@ -2566,6 +2635,7 @@ Tilemap:
       e31: 0
       e32: 0
       e33: 1
+<<<<<<< HEAD
   - m_RefCount: 14
     m_Data:
       e00: 0.000000059604645
@@ -2574,6 +2644,16 @@ Tilemap:
       e03: 0
       e10: 0.99999994
       e11: 0.000000059604645
+=======
+  - m_RefCount: 15
+    m_Data:
+      e00: 0
+      e01: -1
+      e02: 0
+      e03: 0
+      e10: 1
+      e11: 0
+>>>>>>> 0b0c13f (naprawa unity i repo)
       e12: 0
       e13: 0
       e20: 0
@@ -2585,13 +2665,21 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
+<<<<<<< HEAD
   - m_RefCount: 232
+=======
+  - m_RefCount: 235
+>>>>>>> 0b0c13f (naprawa unity i repo)
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -17, y: -1, z: 0}
+<<<<<<< HEAD
   m_Size: {x: 40, y: 11, z: 1}
+=======
+  m_Size: {x: 42, y: 11, z: 1}
+>>>>>>> 0b0c13f (naprawa unity i repo)
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -2660,7 +2748,11 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+<<<<<<< HEAD
 --- !u!114 &813460187709454382
+=======
+--- !u!114 &142602633759569446
+>>>>>>> 0b0c13f (naprawa unity i repo)
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

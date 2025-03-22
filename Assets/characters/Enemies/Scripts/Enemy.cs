@@ -9,7 +9,11 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
 {
     [Header("Detection")]
+<<<<<<< HEAD
     [Min(1.0f)] public float HearingDistance;
+=======
+    public float HearingDistance;
+>>>>>>> 0b0c13f (naprawa unity i repo)
     public float FieldOfViev;
     public float VievDistance;
     public float MemoryTime;
@@ -40,7 +44,11 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
     [HideInInspector] public float FreezeTime;
     [HideInInspector] public Vector2 FacingDirection = Vector2.down;
     [HideInInspector] public GameObject Player;
+<<<<<<< HEAD
     [HideInInspector] public bool IsAgresive { get; private set; } = false;
+=======
+    public bool IsAgresive { get; private set; } = false;
+>>>>>>> 0b0c13f (naprawa unity i repo)
     [ReadOnly] public bool PlayerDetected = false;
 
     private List<GameObject> effects = new();

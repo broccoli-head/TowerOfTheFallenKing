@@ -161,6 +161,66 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 800, y: 1200}
   m_Pivot: {x: 0.5, y: 0.5}
+<<<<<<< HEAD
+=======
+--- !u!1 &88453673
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 88453675}
+  - component: {fileID: 88453674}
+  m_Layer: 0
+  m_Name: LevelLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &88453674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88453673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7864a7b50802d84eaa91a5b6d0d568c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerPrefab: {fileID: 179077196761789746, guid: 93327e342a325b547926907fdc0ad9b9, type: 3}
+  LevelZero:
+    LevelName: SampleScene
+    SideLevels: []
+    NextLevels:
+    - LevelName: Room1
+      SideLevels:
+      - Room2
+      - Room3
+      - Room4
+      NextLevels: []
+  FinalLevel: MainMenu
+  LevelChangeCoolDown: 0
+--- !u!4 &88453675
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88453673}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1565.4832, y: 677.56616, z: -9.1595}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+>>>>>>> 0b0c13f (naprawa unity i repo)
 --- !u!1 &227523740
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,7 +1031,11 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+<<<<<<< HEAD
       - m_Target: {fileID: 1169333757}
+=======
+      - m_Target: {fileID: 88453674}
+>>>>>>> 0b0c13f (naprawa unity i repo)
         m_TargetAssemblyTypeName: LevelLoader, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
@@ -1162,7 +1226,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1169333758}
+<<<<<<< HEAD
   - component: {fileID: 1169333757}
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - component: {fileID: 1169333759}
   m_Layer: 0
   m_Name: MenuManager
@@ -1171,6 +1238,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD
 --- !u!114 &1169333757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1196,6 +1264,8 @@ MonoBehaviour:
       NextLevels: []
   FinalLevel: MainMenu
   LevelChangeCoolDown: 0
+=======
+>>>>>>> 0b0c13f (naprawa unity i repo)
 --- !u!4 &1169333758
 Transform:
   m_ObjectHideFlags: 0
@@ -1816,6 +1886,10 @@ SceneRoots:
   m_Roots:
   - {fileID: 1200434498}
   - {fileID: 1169333758}
+<<<<<<< HEAD
+=======
+  - {fileID: 88453675}
+>>>>>>> 0b0c13f (naprawa unity i repo)
   - {fileID: 1290975445}
   - {fileID: 267445545}
   - {fileID: 1394913611}
