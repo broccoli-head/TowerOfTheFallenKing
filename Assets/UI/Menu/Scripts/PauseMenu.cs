@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
     }
+
     public void QuitGame()
     {
         Application.Quit();

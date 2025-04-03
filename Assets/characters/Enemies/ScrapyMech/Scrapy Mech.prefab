@@ -101,11 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd75382b2b8de254eba6fa919983b010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< HEAD
-  HearingDistance: 0
-=======
   HearingDistance: 3
->>>>>>> 0b0c13f (naprawa unity i repo)
   FieldOfViev: 105
   VievDistance: 10
   MemoryTime: 3
@@ -118,14 +114,6 @@ MonoBehaviour:
   - DamageType: 4
     modificator: 80
   attackMode: 1
-<<<<<<< HEAD
-  AttackDamage: 20
-  AttackType: 2
-  AttackSpeed: 2
-  AttackDistance: 1
-  AttackDelay: 1
-  FriendlyFire: 0
-=======
   MeleeStats:
     MeleAttack: 1
     AttackDamage: 20
@@ -144,7 +132,6 @@ MonoBehaviour:
     Speed: 0
     LiveTime: 0
     Drag: 0
->>>>>>> 0b0c13f (naprawa unity i repo)
   looping: 1
   speed: 2
   chaseSpeed: 3
@@ -153,15 +140,10 @@ MonoBehaviour:
     time: 3
   - direction: {x: -1, y: 0}
     time: 3
-<<<<<<< HEAD
-  FreezeTime: 0
-  CanAttack: 0
-=======
   Teleportation: 0
   TeleportAwayDistance: 0
   TeleportAfterAttackChance: 0
   FreezeTime: 0
->>>>>>> 0b0c13f (naprawa unity i repo)
   FacingDirection: {x: 0, y: 0}
   Player: {fileID: 0}
   PlayerDetected: 0

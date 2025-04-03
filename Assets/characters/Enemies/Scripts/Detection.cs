@@ -33,11 +33,7 @@ public class Detection : MonoBehaviour
 
         // sprawdzamy czy gracz jest w zasiêgu ataku
         float distance = Vector2.Distance(enemy.Player.transform.position, transform.position);
-<<<<<<< HEAD
-        if (distance > (enemy.MeleeStats.AttackDistance + gameObject.GetComponent<Collider2D>().bounds.size.x))
-=======
         if (distance <= enemy.MeleeStats.AttackDistance)
->>>>>>> 0b0c13f (naprawa unity i repo)
         {
             enemy.MeleeStats.InRange = true;
         }

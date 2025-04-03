@@ -10,6 +10,7 @@ public class MusicPlayer : MonoBehaviour
     public AudioClip MenuMusic;
     public AudioClip Level1;
     public AudioClip Boss1;
+    public bool destroy = false;
 
 
     // Start is called before the first frame update
@@ -21,7 +22,9 @@ public class MusicPlayer : MonoBehaviour
 
     void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        //w menu glownym chcemy aby usuwalo, zas w ciagu gry juz nie 
+        if (destroy)
+            DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame

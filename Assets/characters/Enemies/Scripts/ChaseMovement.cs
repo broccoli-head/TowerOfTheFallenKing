@@ -71,11 +71,7 @@ public class ChaseMovement : MonoBehaviour, Controller
         if (distanceX >= distanceY || YBlocked)
         {
             // Jezeli gracz jest poza zasiegiem przeciwnika, przeciwnik goni gracza
-<<<<<<< HEAD
-            if (distance > (AttackDistance + gameObject.GetComponent<Collider2D>().bounds.size.x) )
-=======
             if (distance > AttackDistance)
->>>>>>> 0b0c13f (naprawa unity i repo)
             {
                 moveDirection = (playerPos.x - mechPos.x > 0) ? transform.right : -transform.right;
 

@@ -8,4 +8,9 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void StartGame()
+    {
+        LevelLoader.Instance.StartGame();
+    }
 }

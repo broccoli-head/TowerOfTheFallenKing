@@ -15,11 +15,8 @@ public class CommlinkOpener : MonoBehaviour
         inventory = FindFirstObjectByType<Inventory>();
         InCommlinkVisible = transform.FindChild("InCommlinkVisible").gameObject;
         InGameVisible = transform.FindChild("InGameVisible").gameObject;
-<<<<<<< HEAD
-=======
         InCommlinkVisible.SetActive(isOpen);
         InGameVisible.SetActive(!isOpen);
->>>>>>> 0b0c13f (naprawa unity i repo)
     }
 
     void Update()
@@ -30,15 +27,6 @@ public class CommlinkOpener : MonoBehaviour
 
             //resetuje wybrana potke w UI
             inventory.SelectedItem = null;
-<<<<<<< HEAD
-        }
-        if(isOpen)
-            Time.timeScale = 0f;
-        else 
-            Time.timeScale = 1f;
-        InCommlinkVisible.SetActive(isOpen);
-        InGameVisible.SetActive(!isOpen);
-=======
         
             if(isOpen)
                 Time.timeScale = 0f;
@@ -47,7 +35,6 @@ public class CommlinkOpener : MonoBehaviour
             InCommlinkVisible.SetActive(isOpen);
             InGameVisible.SetActive(!isOpen);
         }
->>>>>>> 0b0c13f (naprawa unity i repo)
         if (isOpen && Input.GetKeyDown(KeyCode.Tab))
         {
             FindFirstObjectByType<ItemsUI>().RefreshItemsList();
