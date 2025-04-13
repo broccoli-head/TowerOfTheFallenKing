@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.Rendering;
 
-public class PauseMenu : MonoBehaviour
+public class PauseMenu : Menu
 {
     [SerializeField] private GameObject menuUI;
     private bool isPaused = false;
@@ -29,10 +28,5 @@ public class PauseMenu : MonoBehaviour
         menuUI.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
     }
 }

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Cinemachine;
+
 
 [RequireComponent(typeof(Rigidbody2D))]
 
@@ -24,13 +26,19 @@ public class PlayerMovement : MonoBehaviour, Controller, ReciveSpeedChange
     bool canMove = true;
     bool speedChanged = false;
 
+    public AudioSource audioSource;
+    public AudioClip footstepsSound;
+    public AudioClip dashSound;
+
     Rigidbody2D rb;
     GameObject cam;
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        cam = Camera.main.gameObject;
+        //cam = Camera.main.gameObject;
+
     }
     public void Disable(float time)
     {
@@ -45,18 +53,45 @@ public class PlayerMovement : MonoBehaviour, Controller, ReciveSpeedChange
             Horizontal = Input.GetAxis("Horizontal");
             Vertical = Input.GetAxis("Vertical");
             Vector3 direction = ((Vector2.right * Horizontal) + (Vector2.up * Vertical));
+            
+            //jezeli postaæ sie rusza, puœæ dŸwiek kroków
+            if (!IsInDash)
+            {
+                if (direction.magnitude > 0.1f)
+                {
+                    if (!audioSource.isPlaying)
+                    {
+                        audioSource.clip = footstepsSound;
+                        audioSource.Play();
+                    }
+                }
+                else
+                {
+                    audioSource.Stop();
+                }
+            }
+            
+
             if(!IsInDash)
                 rb.velocity = direction * MovementSpeed;
-            if ( DashEnabled && Input.GetKeyDown(KeyCode.Space))
+
+            //dashowanie postaci
+            if ( DashEnabled && Input.GetKeyDown(KeyCode.Space) )
             {
+                //dodanie si³y do dashowania
                 rb.AddForce(direction * DashForce,ForceMode2D.Impulse);
                 DashEnabled = false;
                 IsInDash = true;
                 Throw.CanThrow = false;
-                StartCoroutine("DashCooldown");
+
+                //dŸwiek dashowania
+                audioSource.Stop();
+                audioSource.PlayOneShot(dashSound);
+
+                StartCoroutine(DashCooldown());
             }
         }
-        cam.transform.position = new Vector3(transform.position.x, transform.position.y, cam.transform.position.z);
+        //cam.transform.position = new Vector3(transform.position.x, transform.position.y, cam.transform.position.z);
 
         if (speedTime > 0.0f)
         {
@@ -95,7 +130,7 @@ public class PlayerMovement : MonoBehaviour, Controller, ReciveSpeedChange
 
     public IEnumerator DashCooldown()
     {
-        StartCoroutine("dashTime");
+        StartCoroutine(dashTime());
         yield return new WaitForSeconds(DashCooldownTime);
         DashEnabled = true;
         yield break;
