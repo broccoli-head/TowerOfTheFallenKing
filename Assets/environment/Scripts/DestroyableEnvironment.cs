@@ -17,9 +17,19 @@ public class DestroyableEnvironment : MonoBehaviour, ReciveDamage
     [Header("Randomize")]
     public bool random;
     public int ItemCount;
+    private bool itemsGiven = false;
+
+    [Header("Audio")]
+    private AudioSource audioSource;
+    public AudioClip destroySound;
 
     List<OnLeaveDamage> OnLeaveDamage = new List<OnLeaveDamage>();
 
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     void Update()
     {
@@ -36,40 +46,56 @@ public class DestroyableEnvironment : MonoBehaviour, ReciveDamage
         }
         if(durability <= 0)
         {
-            List<GameObject> obj = new List<GameObject>();
-            // Okreslona liczba losowych itemow z listy
-            if (random)
+            if (!itemsGiven)
             {
-                for (int i = 0;i < ItemCount; i++)
+                List<GameObject> obj = new List<GameObject>();
+                // Okreslona liczba losowych itemow z listy
+                if (random)
                 {
-                    string item = Items[Random.Range(0, Items.Length)];
-                    obj.Add(PickUp.Object(item));
+                    for (int i = 0; i < ItemCount; i++)
+                    {
+                        string item = Items[Random.Range(0, Items.Length)];
+                        obj.Add(PickUp.Object(item));
+                    }
                 }
-            }
-            // Wszystkie elementy z listy
-            else
-            {
-                foreach(var item in Items)
+                // Wszystkie elementy z listy
+                else
                 {
-                    obj.Add(PickUp.Object(item));
+                    foreach (var item in Items)
+                    {
+                        obj.Add(PickUp.Object(item));
+                    }
                 }
+
+                for (int i = 0; i < obj.Count; i++)
+                {
+                    float angle = Random.Range(0f, Mathf.PI * 2);
+
+                    float distance = Random.Range(0f, ItemPlacementMaxDistance);
+
+                    Vector2 position = new Vector2(
+                        transform.position.x + distance * Mathf.Cos(angle),
+                        transform.position.y + distance * Mathf.Sin(angle)
+                    );
+
+                    Instantiate(obj[i], position, Quaternion.identity);
+                }
+
+                itemsGiven = true;
             }
 
-            for (int i = 0; i < obj.Count; i++)
+            //puszcza dźwiek rozwalania obiektu
+            if (!audioSource.isPlaying)
             {
-                float angle = Random.Range(0f, Mathf.PI * 2);
+                audioSource.PlayOneShot(destroySound);
 
-                float distance = Random.Range(0f, ItemPlacementMaxDistance);
-
-                Vector2 position = new Vector2(
-                    transform.position.x + distance * Mathf.Cos(angle),
-                    transform.position.y + distance * Mathf.Sin(angle)
-                );
-
-                Instantiate(obj[i], position, Quaternion.identity);
             }
-
-            Destroy(gameObject);
+            //ukrywa obiekt na czas trwania dźwięku
+            GetComponent<Collider2D>().enabled = false;
+            GetComponent<SpriteRenderer>().enabled = false;
+            
+            //usuwa obiekt po skonczeniu dzwieku
+            Destroy(gameObject, destroySound.length);
         }
 
     }
@@ -94,6 +120,11 @@ public class DestroyableEnvironment : MonoBehaviour, ReciveDamage
 
             OnLeaveDamage.Add(damage);
         }
+    }
+
+    void ReciveDamage.Damage(float Damage)
+    {
+        durability -= Damage;
     }
 
     public void Expose(List<ExpositionData> ExpositionOverTime)

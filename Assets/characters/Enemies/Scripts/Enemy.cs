@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Collider2D))]
 public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
@@ -35,6 +36,12 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
     public float TeleportAwayDistance;
     [Range(0,100)] public int TeleportAfterAttackChance;
 
+    [Header("Drop items")]
+    public string[] Items;
+    public float ItemPlacementMaxDistance = 1f;
+    public bool random;
+    public int ItemCount;
+
 
 
     [HideInInspector] public float FreezeTime;
@@ -63,6 +70,9 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
     private bool isExposed = false;
     private float Exposition;
 
+    private SpriteRenderer spriteRenderer;
+    private Color spriteColor;
+
 
     private void Start()
     {
@@ -90,6 +100,9 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
         attackHandler = gameObject.AddComponent<AttackHandler>();
 
         Player = GameObject.FindGameObjectWithTag("Player");
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteColor = spriteRenderer.color;
     }
 
     private void Update()
@@ -100,8 +113,11 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
         {
             Damage(damage * Time.deltaTime);
         }
-        if (HP < 0) 
-            Destroy(gameObject);
+        if (HP <= 0)
+        {
+            StartCoroutine(Die());
+        }
+            
 
 
         //Sprawdzanie czy przeciwnik powinien atakowaæ gracza
@@ -175,6 +191,7 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
                 {
                     damage *= (Modificator.modificator / 100f);
                     Damage(damage);
+                    StartCoroutine(Flash());
                     break;
                 }
             }
@@ -199,6 +216,7 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
                 {
                     DPS *= (Modificator.modificator / 100f);
                     damage += DPS;
+                    StartCoroutine(Flash());
                     break;
                 }
             }
@@ -216,6 +234,7 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
             // zmienia damage na (100 + Exposition)% aktualnych obrazen 
             Damage *= 1 + (Exposition / 100f);
         }
+        StartCoroutine(Flash());
         HP -= Damage;
     }
 
@@ -302,7 +321,60 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
             Exp.RemoveAt(0);
             StartCoroutine(ChangeExposedForce(Exp));
         }
+    }
 
+    public IEnumerator Flash()
+    {       
+        //pobiera obecny kolor, najczesciej jest to #ffffff a nastepnie zmienia na czerwony
+        spriteRenderer.color = new Color(1f, 0.6f, 0.6f);
+        
+        //po 0.5s powraca poprzedni kolor
+        yield return new WaitForSeconds(0.3f);
+        spriteRenderer.color = spriteColor;
+    }
+
+    private IEnumerator Die()
+    {
+        /* Wyrzucanie itemow po smierci */
+        {
+            List<GameObject> obj = new List<GameObject>();
+            // Okreslona liczba losowych itemow z listy
+            if (random)
+            {
+                for (int i = 0; i < ItemCount; i++)
+                {
+                    string item = Items[Random.Range(0, Items.Length)];
+                    obj.Add(PickUp.Object(item));
+                }
+            }
+            // Wszystkie elementy z listy
+            else
+            {
+                foreach (var item in Items)
+                {
+                    obj.Add(PickUp.Object(item));
+                }
+            }
+
+            for (int i = 0; i < obj.Count; i++)
+            {
+                float angle = Random.Range(0f, Mathf.PI * 2);
+
+                float distance = Random.Range(0f, ItemPlacementMaxDistance);
+
+                Vector2 position = new Vector2(
+                    transform.position.x + distance * Mathf.Cos(angle),
+                    transform.position.y + distance * Mathf.Sin(angle)
+                );
+
+                Instantiate(obj[i], position, Quaternion.identity);
+            }
+        }
+
+
+        Destroy(gameObject);
+
+        yield break;
     }
 
     public enum EnemyType

@@ -30,6 +30,9 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
     // Flaga mowiaca, czy gracz jest pod wplywem efektu "cleanse".
     private bool cleanse = false;
 
+    private SpriteRenderer spriteRenderer;
+    private Color spriteColor;
+
 
 
     void Start()
@@ -42,7 +45,10 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
             StartHP = HitPoints; 
 
         // Tworzy nowa instancje do obslugi ExposedEffect.
-        exposed = new ExposedEffect(this); 
+        exposed = new ExposedEffect(this);
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteColor = spriteRenderer.color;
     }
 
 
@@ -58,8 +64,8 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
 
         if (HitPoints <= 0)
         {
-            Debug.Log("Player died :)");
             // laduje scene (np. ekran smierci), gdy punkty zycia osiagna 0.
+            Level.CurrentlyOnRoom = "Default";
             SceneManager.LoadScene(0); 
 
         }
@@ -74,11 +80,16 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
         if (DamageType != Potion.DamageType.None && !EnemyOnly)
         {
             if (!cleanse)
+            {
                 // Jesli gracz nie uzyl "cleanse", zadaje obrazenia.
-                Damage(damage); 
+                Damage(damage);
+                StartCoroutine(Flash());
+            }
             else
+            {
                 // Jesli uzyto "cleanse", resetuje efekt.
-                cleanse = false; 
+                cleanse = false;
+            }
         }
     }
 
@@ -93,7 +104,8 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
             {
                 // Dodaje DPS do otrzymywanych obrazen.
                 damage += DPS;
-                
+                StartCoroutine(Flash());
+
                 // Spawnuje efekt wizualny.
                 var effect = Instantiate(EffectObject, transform);
                 
@@ -125,7 +137,8 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
         if (isExposed)
         {
             // Zwieksza obrazenia, jesli gracz jest "wyeksponowany".
-            dmg *= 1 + (Exposition / 100f); 
+            dmg *= 1 + (Exposition / 100f);
+            StartCoroutine(Flash());
         }
 
         // Odejmowanie obrazen od punktow zycia.
@@ -163,8 +176,17 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
         cleanse = true;
     }
 
+    public IEnumerator Flash()
+    {
+        //pobiera obecny kolor, najczesciej jest to #ffffff a nastepnie zmienia na czerwony
+        spriteRenderer.color = new Color(1f, 0.6f, 0.6f);
 
-    
+        //po 0.5s powraca poprzedni kolor
+        yield return new WaitForSeconds(0.3f);
+        spriteRenderer.color = spriteColor;
+    }
+
+
     // Coroutine usuwajaca efekt LeaveDamage.
     public IEnumerator endDamage(float damage, float time, GameObject effect)
     {

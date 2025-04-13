@@ -8,8 +8,9 @@ public interface ReciveDamage
 
     public void Damage(float DPS, float Time, Potion.DamageType DamageType, Potion.DamagePlace DamagePlace, GameObject EffectObject, bool EnemyOnly);
 
+    public void Damage(float Damage);
+
     public void AddCleanse();
 
     public void Expose(List<ExpositionData> ExpositionOverTime);
-
 }

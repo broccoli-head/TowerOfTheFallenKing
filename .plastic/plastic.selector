@@ -1,3 +1,4 @@
-rep "Tower of Fallen King@GoodGamesStudios@cloud"
+repository "Tower of Fallen King@GoodGamesStudios@cloud"
   path "/"
-    smartbranch "/main"
+    br "/main"
+    co "/main"
