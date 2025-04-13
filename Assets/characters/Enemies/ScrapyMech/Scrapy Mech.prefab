@@ -143,6 +143,11 @@ MonoBehaviour:
   Teleportation: 0
   TeleportAwayDistance: 0
   TeleportAfterAttackChance: 0
+  Items:
+  - Wood
+  ItemPlacementMaxDistance: 1
+  random: 1
+  ItemCount: 3
   FreezeTime: 0
   FacingDirection: {x: 0, y: 0}
   Player: {fileID: 0}

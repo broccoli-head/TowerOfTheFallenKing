@@ -11,12 +11,22 @@ public class BeamPotionEffect : MonoBehaviour
     bool WasSet;
     Potion potion;
 
+
     void Start()
     {
         potion = GetComponent<PotionEffect>().GetPotion();
         size = GetComponent<PotionEffect>().GetSize();
         StartCoroutine(SetLength());
         StartCoroutine(DeployNext());
+
+
+        if (TryGetComponent<Animator>(out Animator anim))
+        {
+            if (Mathf.Abs(direction.normalized.x) > 0.5f)
+                anim.SetBool("Side", true);
+            if (direction.normalized.x < 0)
+                GetComponent<SpriteRenderer>().flipX = true;
+        }
     }
 
     IEnumerator DeployNext()

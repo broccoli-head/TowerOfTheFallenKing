@@ -17,12 +17,19 @@ public class TeleportationMovement : MonoBehaviour
 
     public float RunAwayDistance;
 
+    private void Awake()
+    {
+        var tp = Instantiate(new GameObject(), transform.position, Quaternion.identity);
+        tp.AddComponent<TeleportationPoint>();
+    }
+
     void Start()
     {
         TeleportationPoints = FindObjectsOfType<TeleportationPoint>();
         rand = new System.Random();
         player = FindFirstObjectByType<PlayerLive>();
         enemy = GetComponent<Enemy>();
+
     }
 
     private void Update()

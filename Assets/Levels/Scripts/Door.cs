@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Door : MonoBehaviour
 {
@@ -40,6 +41,11 @@ public class Door : MonoBehaviour
 
             // jesli nie ma poprzedniego levelu wylacza ladowanie Hp z pliku, w przeciwnym wypadku je wlacza
             Player.GetComponent<PlayerLive>().load = !NoPrevLevel;
+
+            CinemachineVirtualCamera cam = FindAnyObjectByType<CinemachineVirtualCamera>();
+            cam.Follow = Player.transform;
+
+
         }
 
 

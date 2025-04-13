@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class TeleportationPoint : MonoBehaviour
 {
-    public bool Taken = false;
+    [HideInInspector] public bool Taken = false;
 }
