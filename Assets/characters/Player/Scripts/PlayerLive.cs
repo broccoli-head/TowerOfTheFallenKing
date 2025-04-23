@@ -33,6 +33,8 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
     private SpriteRenderer spriteRenderer;
     private Color spriteColor;
 
+    public AudioSource audioSource;
+
 
 
     void Start()
@@ -66,6 +68,7 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
         {
             // laduje scene (np. ekran smierci), gdy punkty zycia osiagna 0.
             Level.CurrentlyOnRoom = "Default";
+            LevelLoader.CleanedRooms.Clear();
             SceneManager.LoadScene(0); 
 
         }
@@ -84,6 +87,10 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
                 // Jesli gracz nie uzyl "cleanse", zadaje obrazenia.
                 Damage(damage);
                 StartCoroutine(Flash());
+                
+                // Puszcza dŸwiêk obra¿eñ
+                if (!audioSource.isPlaying)
+                    audioSource.PlayOneShot(audioSource.clip);
             }
             else
             {
@@ -110,8 +117,12 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
                 var effect = Instantiate(EffectObject, transform);
                 
                 // Dodaje efekt do listy.
-                effects.Add(effect); 
-                
+                effects.Add(effect);
+
+                // Puszcza dŸwiêk obra¿eñ
+                if (!audioSource.isPlaying)
+                    audioSource.PlayOneShot(audioSource.clip);
+
                 try
                 {
                     // Uruchamia Coroutine do usuniecia efektu po czasie.
@@ -139,6 +150,10 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
             // Zwieksza obrazenia, jesli gracz jest "wyeksponowany".
             dmg *= 1 + (Exposition / 100f);
             StartCoroutine(Flash());
+
+            // Puszcza dŸwiêk obra¿eñ
+            if (!audioSource.isPlaying)
+                audioSource.PlayOneShot(audioSource.clip);
         }
 
         // Odejmowanie obrazen od punktow zycia.

@@ -36,12 +36,22 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
     public float TeleportAwayDistance;
     [Range(0,100)] public int TeleportAfterAttackChance;
 
+
+    [Header("Enemy SFX")]
+    public AudioClip footstepsSound;
+    public AudioClip teleportationSound;
+    private AudioSource audioSource;
+
+    //potrzebne do dŸwiêku kroków:
+    private GameObject pauseMenu; 
+    private GameObject inventory;
+
+
     [Header("Drop items")]
     public string[] Items;
     public float ItemPlacementMaxDistance = 1f;
     public bool random;
     public int ItemCount;
-
 
 
     [HideInInspector] public float FreezeTime;

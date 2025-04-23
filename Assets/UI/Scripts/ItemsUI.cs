@@ -9,35 +9,44 @@ public class ItemsUI : MonoBehaviour
     Inventory inventory;
 
     public ItemUIPrefab prefab;
+    public GameObject PotionListUI;
+    public GameObject ResourceListUI;
+
 
     void Start()
     {
-        inventory = GameObject.FindFirstObjectByType<Inventory>().GetComponent<Inventory>();
+        inventory = Inventory.Instance;
         RefreshItemsList();
     }
 
     public void RefreshItemsList()
     {
-        foreach (Transform item in transform.GetComponentInChildren<Transform>())
+        // Niszczy wszystkie obiekty potek i zasobow w ui
+        foreach (Transform item in PotionListUI.transform.GetComponentInChildren<Transform>())
+        {
+            Destroy(item.gameObject);
+        }
+        foreach (Transform item in ResourceListUI.transform.GetComponentInChildren<Transform>())
         {
             Destroy(item.gameObject);
         }
 
-        //Potions
+
         try
         {
+            // Tworzy nowe obiekty potek w ui
             foreach (var item in inventory.PlayerPotions)
             {
 
-                GameObject potionUI = Instantiate(prefab.gameObject, transform);
+                GameObject potionUI = Instantiate(prefab.gameObject, PotionListUI.transform);
                 Potion potion = inventory.FindPotionByName(item.PotionName);
                 potionUI.GetComponent<ItemUIPrefab>().SetItem(potion);
             }
 
-            //Resources
+            // Tworzy nowe obiekty zasobow w ui
             foreach (var item in inventory.PlayerResources)
             {
-                GameObject ResourceUI = Instantiate(prefab.gameObject, transform);
+                GameObject ResourceUI = Instantiate(prefab.gameObject, ResourceListUI.transform);
                 Resource resource = inventory.FindResourceByName(item.ResourceName);
                 ResourceUI.GetComponent<ItemUIPrefab>().SetItem(resource);
             }

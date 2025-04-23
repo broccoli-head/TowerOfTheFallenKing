@@ -75,7 +75,7 @@ public class CraftingSlot : MonoBehaviour, IPointerDownHandler
         img.sprite = null;
         item = null;
         BurningTemperature = Item.temperature.Normal;
-        img.color = new Color(1,1,1,0.5f);
+        img.color = new Color(1,1,1,0f);
     }
 
     void Reset()

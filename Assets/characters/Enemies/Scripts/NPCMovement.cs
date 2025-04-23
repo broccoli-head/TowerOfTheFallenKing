@@ -17,6 +17,12 @@ public class NPCMovement : MonoBehaviour, Controller
     int index = 0;
     float time = 0;
 
+    AudioSource audioSource;
+    AudioClip footstepsSound;
+    GameObject pauseMenu;
+    GameObject inventory;
+
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -25,6 +31,12 @@ public class NPCMovement : MonoBehaviour, Controller
         moves = enemy.moves;
         speed = enemy.speed;
         looping = enemy.looping;
+
+        audioSource = GetComponent<AudioSource>();
+        footstepsSound = enemy.footstepsSound;
+
+        pauseMenu = ObjectsFinder.FindInactiveObjects("Menu");
+        inventory = ObjectsFinder.FindInactiveObjects("Inventory");
 
         try
         {
@@ -35,6 +47,30 @@ public class NPCMovement : MonoBehaviour, Controller
             Destroy(this);
         }
     }
+
+    void Update()
+    {
+        speed = enemy.speed;
+
+        if (audioSource != null)
+        {
+            //puœæ dŸwiêk chodzenia, je¿eli przeciwnik siê porusza
+            if (rb.velocity.magnitude > 0.1f && !pauseMenu.activeSelf && !inventory.activeSelf)
+            {
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.clip = footstepsSound;
+                    audioSource.Play();
+                }
+            }
+            else
+            {
+                audioSource.Stop();
+            }
+        }
+    }
+
+
     void FixedUpdate()
     {
         if(enemy.FreezeTime <= 0)
@@ -43,6 +79,7 @@ public class NPCMovement : MonoBehaviour, Controller
             {
                 rb.velocity = move.direction.normalized * speed;
             }
+
             catch (Exception e) {
                 Destroy(this);
                 return;
@@ -85,10 +122,6 @@ public class NPCMovement : MonoBehaviour, Controller
         enemy.FreezeTime += time;
     }
 
-    private void Update()
-    {
-        speed = enemy.speed;
-    }
 }
 
 [System.Serializable]

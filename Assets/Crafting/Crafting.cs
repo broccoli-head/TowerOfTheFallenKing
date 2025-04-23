@@ -22,7 +22,7 @@ public class Crafting : MonoBehaviour
     void Start()
     {
         inventory = Inventory.Instance;
-        slots = GetComponentsInChildren<CraftingSlot>();
+        slots = FindObjectsByType<CraftingSlot>(FindObjectsSortMode.None);
         ResultSlot = FindAnyObjectByType<CraftingResult>();
 
         CraftingRecipes = new Dictionary<Tuple<HashSet<string>, HashSet<string>, Item.temperature>, Item>(new RecipeComparer());

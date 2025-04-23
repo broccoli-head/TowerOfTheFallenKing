@@ -10,8 +10,13 @@ public class QuickPotionsUI : MonoBehaviour
     Inventory inventory;
     GameObject[] slots;
 
+
+    public static QuickPotionsUI Instance;
+
+
     void Start()
     {
+        Instance = this;
         inventory = Inventory.Instance;
         slots = new GameObject[transform.childCount];
         for (int i = 0; i < transform.childCount; i++)
@@ -19,6 +24,7 @@ public class QuickPotionsUI : MonoBehaviour
             slots[i] = transform.GetChild(i).gameObject;
         }
     }
+
 
     void Update()
     {

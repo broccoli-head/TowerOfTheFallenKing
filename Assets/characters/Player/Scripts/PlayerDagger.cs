@@ -4,30 +4,39 @@ using UnityEngine;
 
 public class PlayerDagger : MonoBehaviour
 {
-  
+
+    [Header("Dagger Settings")]
     public float daggerDamage;
     public float daggerCombo;
     public float daggerCooldown;
-    private float daggerTimer = 0;
-    private float daggerCounter = 0;
-    private bool daggerOverloaded = false;
-
     public float knockbackForce;
     public float knockbackDuration;
     public float freezeDuration;
 
-
+    [Header("Circle Settings")]
+    
     public GameObject aimCircle;
-
     public GameObject circle;
-    private bool circleVisible = false;
     public List<GameObject> segments;
-    private List<Segment> segments2;
     public Color defaultColor;
     public Color highlightColor;
 
+
+    [Header("Dagger Sounds")]
+    public AudioClip stabSound;
+    public AudioClip swingSound;
+
+
+    private AudioSource audioSource;
     private Animator anim;
-   
+
+    private float daggerTimer = 0;
+    private float daggerCounter = 0;
+    private bool daggerOverloaded = false;
+
+    private bool circleVisible = false;
+    private List<Segment> segments2;
+
 
     void Start()
     {
@@ -36,6 +45,7 @@ public class PlayerDagger : MonoBehaviour
         circle.SetActive(false);
         segments2 = new List<Segment>();
 
+        audioSource = GetComponent<AudioSource>();
 
         foreach (var segment in segments)
         { 
@@ -51,8 +61,6 @@ public class PlayerDagger : MonoBehaviour
 
     void Update()
     {
-
-
         if (!daggerOverloaded)
         {
             if (Input.GetMouseButton(1))
@@ -119,6 +127,33 @@ public class PlayerDagger : MonoBehaviour
     public void TriggerEnter(Collider2D collision)
     {
         Enemy target = ComponentHelper.GetInterfaceComponent<Enemy>(collision.gameObject);
+
+        //sztyletowanie obiektów z DestroyableEnvironment
+        if (target == null)
+        {
+            if (collision.TryGetComponent<DestroyableEnvironment>(out var env))
+            {
+                anim.SetTrigger("Attack");
+
+                if (daggerCounter != daggerCombo)
+                {
+                    env.Damage(daggerDamage);
+                    audioSource.PlayOneShot(stabSound);
+                }
+                else
+                {
+                    env.Damage(daggerDamage * 2);
+                    audioSource.PlayOneShot(swingSound);
+
+                    daggerTimer = daggerCooldown;
+                    daggerOverloaded = true;
+                    aimCircle.SetActive(true);
+                }
+                circle.SetActive(false);
+            }
+        }
+
+        //sztyletowanie przeciwników
         if (target != null && !target.IsFreezed())
         {  
             daggerCounter++;
@@ -134,11 +169,14 @@ public class PlayerDagger : MonoBehaviour
                 {
                     target.Damage(daggerDamage);
                     target.ApplyKnockback(knockbackDirection, knockbackForce, knockbackDuration, freezeDuration);
+                    audioSource.PlayOneShot(stabSound);
                 }
                 else
                 {
                     target.Damage(daggerDamage * 2);
                     target.ApplyKnockback(knockbackDirection, knockbackForce * 3, knockbackDuration, freezeDuration);
+                    audioSource.PlayOneShot(swingSound);
+
                     daggerTimer = daggerCooldown;
                     daggerOverloaded = true;
                     aimCircle.SetActive(true);
