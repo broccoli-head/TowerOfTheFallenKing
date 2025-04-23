@@ -14,13 +14,15 @@ public class TeleportationMovement : MonoBehaviour
     int TepCount;
     PlayerLive player;
     Enemy enemy;
+    AudioSource audioSource;
+    AudioClip teleportationSound;
 
     public float RunAwayDistance;
 
     private void Awake()
     {
         var tp = Instantiate(new GameObject(), transform.position, Quaternion.identity);
-        tp.AddComponent<TeleportationPoint>();
+        tp.AddComponent<TeleportationPoint>().Taken = true;
     }
 
     void Start()
@@ -29,7 +31,8 @@ public class TeleportationMovement : MonoBehaviour
         rand = new System.Random();
         player = FindFirstObjectByType<PlayerLive>();
         enemy = GetComponent<Enemy>();
-
+        audioSource = GetComponent<AudioSource>();
+        teleportationSound = enemy.teleportationSound;
     }
 
     private void Update()
@@ -67,11 +70,20 @@ public class TeleportationMovement : MonoBehaviour
             else
                 return;
         }
+
         TepCount = 0;
+
         if(CurrentPoint != null) 
             CurrentPoint.Taken = false;
+
         CurrentPoint = TeleportationPoints[index];
         CurrentPoint.Taken = true;
         transform.position = CurrentPoint.transform.position;
+
+        if (audioSource != null)
+        {
+            audioSource.clip = teleportationSound;
+            audioSource.Play();
+        }
     }
 }

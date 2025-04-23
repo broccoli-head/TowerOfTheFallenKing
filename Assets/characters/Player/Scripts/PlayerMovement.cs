@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Cinemachine;
+using System.Linq;
 
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -30,6 +31,9 @@ public class PlayerMovement : MonoBehaviour, Controller, ReciveSpeedChange
     public AudioClip footstepsSound;
     public AudioClip dashSound;
 
+    private GameObject pauseMenu;
+    private GameObject inventory;
+
     Rigidbody2D rb;
     GameObject cam;
 
@@ -37,9 +41,13 @@ public class PlayerMovement : MonoBehaviour, Controller, ReciveSpeedChange
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        //cam = Camera.main.gameObject;
 
+        pauseMenu = ObjectsFinder.FindInactiveObjects("Menu");
+        inventory = ObjectsFinder.FindInactiveObjects("Inventory");
+
+        //cam = Camera.main.gameObject;
     }
+
     public void Disable(float time)
     {
         canMove = false;
@@ -54,10 +62,13 @@ public class PlayerMovement : MonoBehaviour, Controller, ReciveSpeedChange
             Vertical = Input.GetAxis("Vertical");
             Vector3 direction = ((Vector2.right * Horizontal) + (Vector2.up * Vertical));
             
-            //jezeli postaæ sie rusza, puœæ dŸwiek kroków
+            //puszczanie dŸwiêku kroków
             if (!IsInDash)
             {
-                if (direction.magnitude > 0.1f)
+                rb.velocity = direction * MovementSpeed;
+
+                //puœæ tylko je¿eli postaæ siê porusza oraz menu i ekwipunek s¹ wy³¹czone
+                if (direction.magnitude > 0.1f && !pauseMenu.activeSelf && !inventory.activeSelf)
                 {
                     if (!audioSource.isPlaying)
                     {
@@ -71,9 +82,6 @@ public class PlayerMovement : MonoBehaviour, Controller, ReciveSpeedChange
                 }
             }
             
-
-            if(!IsInDash)
-                rb.velocity = direction * MovementSpeed;
 
             //dashowanie postaci
             if ( DashEnabled && Input.GetKeyDown(KeyCode.Space) )
@@ -126,7 +134,6 @@ public class PlayerMovement : MonoBehaviour, Controller, ReciveSpeedChange
     {
         this.speedTime = speedTime;
     }
-
 
     public IEnumerator DashCooldown()
     {

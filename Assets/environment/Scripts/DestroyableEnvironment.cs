@@ -122,7 +122,7 @@ public class DestroyableEnvironment : MonoBehaviour, ReciveDamage
         }
     }
 
-    void ReciveDamage.Damage(float Damage)
+    public void Damage(float Damage)
     {
         durability -= Damage;
     }

@@ -13,7 +13,7 @@ public class CommlinkOpener : MonoBehaviour
     void Start()
     {
         inventory = FindFirstObjectByType<Inventory>();
-        InCommlinkVisible = transform.FindChild("InCommlinkVisible").gameObject;
+        InCommlinkVisible = transform.FindChild("Inventory").gameObject;
         InGameVisible = transform.FindChild("InGameVisible").gameObject;
         InCommlinkVisible.SetActive(isOpen);
         InGameVisible.SetActive(!isOpen);

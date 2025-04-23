@@ -16,7 +16,10 @@ public class ChaseMovement : MonoBehaviour, Controller
     private float chaseSpeed;
     private float AttackDistance = 0;
     private bool XBlocked = false;
-    private bool YBlocked = false;
+    [ReadOnly] public bool YBlocked = false;
+
+    [ReadOnly] public byte XCounter = 0;
+    private byte MaxMovesInOneAxis = 3;
 
     void Start()
     {
@@ -68,11 +71,13 @@ public class ChaseMovement : MonoBehaviour, Controller
         float distance = Vector2.Distance(playerPos, mechPos);
 
         // Gracz jest  dalej na osi X niz na osi Y
-        if (distanceX >= distanceY || YBlocked)
+        if ((distanceX >= distanceY && XCounter <= MaxMovesInOneAxis) || YBlocked)
         {
             // Jezeli gracz jest poza zasiegiem przeciwnika, przeciwnik goni gracza
             if (distance > AttackDistance)
             {
+                XCounter++;
+
                 moveDirection = (playerPos.x - mechPos.x > 0) ? transform.right : -transform.right;
 
                 Vector2 pos = (Vector2)transform.position + GetComponent<Collider2D>().bounds.size.x * moveDirection;
@@ -94,11 +99,12 @@ public class ChaseMovement : MonoBehaviour, Controller
             }
         }
         // Gracz jest dalej na osi Y niz na osi X
-        if (distanceY >= distanceX || XBlocked)
+        if (distanceY >= distanceX || XBlocked || XCounter > MaxMovesInOneAxis)
         {
             // Jezeli gracz jest poza zasiegiem przeciwnika, przeciwnik goni gracza
             if (distance > (AttackDistance + gameObject.GetComponent<Collider2D>().bounds.size.y))
             {
+                XCounter = 0;
 
                 // kierunek najpierw przypisywany do temp Direction, jesli kierunek nie jest zablokowany przypisuje go do moveDirection
                 Vector2 tempDirection  = (playerPos.y - mechPos.y > 0) ? transform.up : -transform.up;
@@ -106,7 +112,7 @@ public class ChaseMovement : MonoBehaviour, Controller
                 Vector2 pos = (Vector2)transform.position + GetComponent<Collider2D>().bounds.size.y * tempDirection;
                 Vector2 Size = new Vector2(GetComponent<Collider2D>().bounds.size.x * 0.99f, GetComponent<Collider2D>().bounds.size.y / 2.1f);
                 Collider2D col = Physics2D.OverlapCapsule(pos, Size, CapsuleDirection2D.Vertical, 0f);
-                if (col != null && !col.isTrigger)
+                if (col != null && !col.isTrigger && col.gameObject != this.gameObject)
                 {
                     YBlocked = true;
                 }

@@ -11,7 +11,7 @@ public class ItemDescriptionUI : MonoBehaviour
     void Start()
     {
         tmp = GetComponent<TextMeshProUGUI>();
-        inventory = FindObjectOfType<Inventory>();
+        inventory = Inventory.Instance;
     }
  
     void Update()

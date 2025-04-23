@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: 672e9601f231d784e919b2feae308cf9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d8515bafab9e4ac48a649e66709e1e2e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,12 +101,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd75382b2b8de254eba6fa919983b010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HearingDistance: 0
+  HearingDistance: 3
   FieldOfViev: 105
   VievDistance: 10
   MemoryTime: 3
   HP: 25
-  Type: 0
+  Type: 4
   Flying: 0
   DamageModificators:
   - DamageType: 2
@@ -114,12 +114,24 @@ MonoBehaviour:
   - DamageType: 4
     modificator: 80
   attackMode: 2
-  AttackDamage: 20
-  AttackType: 2
-  AttackSpeed: 2
-  AttackDistance: 1
-  AttackDelay: 1
-  FriendlyFire: 0
+  MeleeStats:
+    MeleAttack: 1
+    AttackDamage: 5
+    DamageType: 3
+    AttackFrequency: 1
+    AttackDistance: 1.2
+    InRange: 0
+    AttackDelay: 0.05
+    FriendlyFire: 0
+  ProjectileStats:
+    ProjectileAttack: 0
+    Projectile: {fileID: 0}
+    AttackDamage: 0
+    DamageType: 0
+    AttackFrequency: 0
+    Speed: 0
+    LiveTime: 0
+    Drag: 0
   looping: 1
   speed: 2
   chaseSpeed: 3
@@ -128,8 +140,16 @@ MonoBehaviour:
     time: 3
   - direction: {x: -1, y: 0}
     time: 3
+  Teleportation: 0
+  TeleportAwayDistance: 0
+  TeleportAfterAttackChance: 0
+  footstepsSound: {fileID: 0}
+  teleportationSound: {fileID: 0}
+  Items: []
+  ItemPlacementMaxDistance: 1
+  random: 0
+  ItemCount: 0
   FreezeTime: 0
-  CanAttack: 0
   FacingDirection: {x: 0, y: 0}
   Player: {fileID: 0}
   PlayerDetected: 0
