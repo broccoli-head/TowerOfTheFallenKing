@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ee9aa42ec490bb42877643488036ddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Cleanse
+  Name: Cleanse Potion
 --- !u!95 &-1786940146227598200
 Animator:
   serializedVersion: 5

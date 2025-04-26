@@ -9,14 +9,12 @@ using UnityEngine.UIElements;
 
 public class ItemUIPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
-    Inventory inventory;
     UnityEngine.UI.Image image;
     TextMeshProUGUI count;
     [HideInInspector] public Item item;
 
     private void Awake()
     {
-        inventory = FindFirstObjectByType<Inventory>();
         foreach(var item in GetComponentsInChildren<UnityEngine.UI.Image>())
         {
             if (item.gameObject.name == "Image")
@@ -33,16 +31,12 @@ public class ItemUIPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         this.item = item;
         image.sprite = item.GetSprite();
-        if (item.IsPotion())
-        {
-            var name = ((Potion)item).Name;
-            count.text = inventory.FindPlayerPotionByName(name).count.ToString();
-        }
+        count.font = Inventory.Instance.font;
+
+        if (item.type == Item.ItemType.Potion)
+            count.text = Inventory.Instance.FindPlayerPotionByName(item.Name).count.ToString();
         else
-        {
-            var name = ((Resource)item).Name;
-            count.text = inventory.FindPlayerResourceByName(name).count.ToString();
-        }
+            count.text = Inventory.Instance.FindPlayerResourceByName(item.Name).count.ToString();
         
     }
 
@@ -50,11 +44,11 @@ public class ItemUIPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     /// Ustawianie Potki wskazywanej przez gracza w UI, uzywane przez ItemDescriptionUI.cs
     public void OnPointerEnter(PointerEventData eventData)
     {
-        inventory.PointedItem = item;
+        Inventory.Instance.PointedItem = item;
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        inventory.PointedItem = null;
+        Inventory.Instance.PointedItem = null;
     }
     /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -62,8 +56,8 @@ public class ItemUIPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerDown(PointerEventData eventData) 
     {
-        // ustawia potke wybrana przez gracza w inventory, uzywane do zmiany quick potions przez QuickPotionsSlot.cs i przy craftingu (tbd)
-        inventory.SelectedItem = item;
+        // ustawia potke wybrana przez gracza w Inventory.Instance, uzywane do zmiany quick potions przez QuickPotionsSlot.cs i przy craftingu (tbd)
+        Inventory.Instance.SelectedItem = item;
         //potka jest resetowana za kazdym otwarciem commlink przez CommlinkOpener.cs
     }
 

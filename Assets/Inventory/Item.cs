@@ -2,21 +2,55 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Item
+[System.Serializable]
+public class Item
 {
-    public abstract Sprite GetSprite();
-    public abstract bool IsPotion();
-    public abstract string GetDescription();
-    public abstract string GetName();
-    public abstract string GetAttributeStr();
+    public string Name;
+    [TextArea] public string Description;
+    public Sprite sprite;
+    public bool IsFuel;
+    public Item.temperature BurningTemperature;
+    public float Price;
+
+    public virtual ItemType type => ItemType.Item;
+
+    public Sprite GetSprite()
+    {
+        return sprite;
+    }
+
+    public virtual List<RequiredAttributes> GetAttributes()
+    {
+        return new();
+    }
+
+    public virtual StateOfMatter GetStateOfMatter()
+    {
+        return StateOfMatter.None;
+    }
 
     public enum Attribute
     {
+        Holy,
+        Corrosive,
+        Diluent,
+        Flammable,
+        Transparent,
+        Sharp,
+        Icy,
         Explosive,
-        Toxic,
-        flammable,
-        Healing
+        Energizing
+
     }
+
+    public enum StateOfMatter
+    {
+        Solid,
+        Dusty,
+        Liquid,
+        None
+    }
+
 
     public enum temperature
     {
@@ -25,5 +59,12 @@ public abstract class Item
         Normal,
         High,
         VeryHigh
+    }
+
+    public enum ItemType
+    {
+        Item,
+        Potion,
+        Resource
     }
 }

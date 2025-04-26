@@ -7,13 +7,14 @@ using System.Xml;
 using Unity.Mathematics;
 using UnityEngine;
 using Newtonsoft.Json;
+using static Item;
 
 [System.Serializable]
 public class Potion : Item
 {
+    public List<RequiredAttributes> Attributes;
+
     [Header("Basic")]
-    public string Name;
-    [TextArea] public string description;
     public float Damage;
     public float OnContactDamage;
     public DamageType damageType;
@@ -23,7 +24,6 @@ public class Potion : Item
 
     public PotionObject potion;
     public GameObject potionEffect;
-    public Sprite sprite;
 
     public float Time;
 
@@ -43,7 +43,7 @@ public class Potion : Item
     [Space(10)]
     public bool ExposedEffect;
     public List<ExpositionData> ExpositionOverTime;
-    
+
     [Space(10)]
     public Shape shape;
     public int BeamLength;
@@ -51,6 +51,7 @@ public class Potion : Item
     public Explosion explosion;
     public OnLeaveDamage onLeaveDamage;
 
+    public override ItemType type => ItemType.Potion;
 
     public enum DamageType
     {
@@ -73,26 +74,14 @@ public class Potion : Item
         Zone
     }
 
-    override public bool IsPotion()
+    public override StateOfMatter GetStateOfMatter()
     {
-        return true;
-    }
-    public override Sprite GetSprite()
-    {
-        return sprite;
+        return StateOfMatter.Liquid;
     }
 
-    public override string GetDescription()
+    public override List<RequiredAttributes> GetAttributes()
     {
-        return description;
-    }
-    public override string GetName()
-    {
-        return Name;
-    }
-    public override string GetAttributeStr()
-    {
-        return Name;
+        return Attributes;
     }
 
 }

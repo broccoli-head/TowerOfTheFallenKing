@@ -93,5 +93,29 @@ public class ComponentHelper : MonoBehaviour
         }
     }
 
+    public static Texture2D ResizeTexture(Texture2D source, int newWidth, int newHeight)
+    {
+        source.filterMode = FilterMode.Point;
+        RenderTexture rt = RenderTexture.GetTemporary(newWidth, newHeight);
+        rt.filterMode = FilterMode.Point;
+
+        Graphics.Blit(source, rt);
+        RenderTexture previous = RenderTexture.active;
+        RenderTexture.active = rt;
+
+        Texture2D result = new Texture2D(newWidth, newHeight);
+        result.ReadPixels(new Rect(0, 0, newWidth, newHeight), 0, 0);
+        result.Apply();
+
+        RenderTexture.active = previous;
+        RenderTexture.ReleaseTemporary(rt);
+
+        result.filterMode = FilterMode.Point;
+        result.wrapMode = TextureWrapMode.Clamp;
+
+        return result;
+    }
+
+
 
 }

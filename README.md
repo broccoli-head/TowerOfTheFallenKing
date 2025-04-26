@@ -24,7 +24,7 @@ The game features a variety of potions with effects that synergize with each oth
 
 
 ## Team members:
-- 🧠 Team leader and Level Designer: Łukasz Trybek
+- 🧠 Team leader and Game Designer: Łukasz Trybek
 - 💻 Programmers: Łukasz Rudowski, Jakub Stawicki
 - 🖼️ Graphic Designers: Michał Szubiński, Remigiusz Witkowski
-- 🎶 Music & SFX Designer: Hubert Byzdra
+- 🎶 Music, SFX & Level Designer: Hubert Byzdra

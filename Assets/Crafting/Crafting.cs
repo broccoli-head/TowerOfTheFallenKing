@@ -8,9 +8,12 @@ public class Crafting : MonoBehaviour
 {
     Inventory inventory;
     CraftingSlot[] slots;
-    Dictionary<Tuple<HashSet<string>, HashSet<string>, Item.temperature>, Item> CraftingRecipes;
     Item result;
     CraftingResult ResultSlot;
+
+    public static string CraftingError;
+    private AudioSource audioSource;
+    public AudioClip craftingSound;
 
     public enum ComponentType
     {
@@ -25,69 +28,45 @@ public class Crafting : MonoBehaviour
         slots = FindObjectsByType<CraftingSlot>(FindObjectsSortMode.None);
         ResultSlot = FindAnyObjectByType<CraftingResult>();
 
-        CraftingRecipes = new Dictionary<Tuple<HashSet<string>, HashSet<string>, Item.temperature>, Item>(new RecipeComparer());
-
-        // Dodawanie receptur
-        foreach (var recipe in inventory.recipes)
-        {
-            var recipeKey = new Tuple<HashSet<string>, HashSet<string>, Item.temperature>(
-                new HashSet<string>(recipe.GetComponents()),
-                new HashSet<string>(recipe.GetFillers()),
-                recipe.FuelTemperature
-            );
-
-            if(inventory.FindItemByName(recipe.ItemName) == null)
-                Debug.LogError("Item: " +  recipe.ItemName + " nie istnieje. Receptura craftowania nieprzwidlowa!");
-
-            CraftingRecipes.Add(
-                recipeKey,
-                inventory.FindItemByName(recipe.ItemName)
-            ); 
-        }
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
     {
-        List<string> Components = new List<string>();
-        List<string> Fillers = new List<string>();
         Item.temperature temperature = Item.temperature.Normal;
+        List<Item> items = new();
+        result = null;
 
-        foreach (var slot in slots)
-        {
+        foreach (var slot in slots) {
+
             if (slot.IsSet)
             {
-                if (slot.type == ComponentType.Component)
+                var item = slot.item;
+                if (slot.type == ComponentType.Fuel) 
                 {
-                    Components.Add(slot.item.GetAttributeStr());
+                    temperature = item.BurningTemperature;
+                    continue;
                 }
-                if (slot.type == ComponentType.Filling)
-                {
-                    Fillers.Add("Filling" + slot.item.GetAttributeStr());
-                }
-                if (slot.type == ComponentType.Fuel)
-                {
-                    temperature = slot.BurningTemperature;
-                }
+                else
+                    items.Add(item);
             }
         }
 
-        var recipeKey = new Tuple<HashSet<string>, HashSet<string>, Item.temperature>(
-            new HashSet<string>(Components),
-            new HashSet<string>(Fillers),
-            temperature
-        );
+        Recipe provided = new Recipe(items, temperature);
 
-        if (CraftingRecipes.ContainsKey(recipeKey))
+        foreach(var recipe in Inventory.Instance.recipes)
         {
-            result = CraftingRecipes[recipeKey];
-        }
-        else
-        {
-            result = null;
+            if (recipe.IsValid(provided))
+            {
+                if(!audioSource.isPlaying)
+                    audioSource.PlayOneShot(craftingSound);
+
+                result = inventory.FindItemByName(recipe.ItemName);
+            }
         }
 
-        //Powiadamia CraftingResult o rezultacie craftowania (Item/null)
-        ResultSlot.SetPotion(result);
+
+        ResultSlot.SetItem(result);
 
     }
 
@@ -95,41 +74,17 @@ public class Crafting : MonoBehaviour
     {
         if(result != null)
         {
-            if (result.IsPotion())
-                inventory.AddPlayerPotion(result.GetName());
+            if (result.type == Item.ItemType.Potion)
+                inventory.AddPlayerPotion(result.Name);
             else
-                inventory.AddPlayerResource(result.GetName());
+                inventory.AddPlayerResource(result.Name);
 
-            foreach(var slot in slots)
+
+            foreach (var slot in slots)
             {
                 slot.EmptySlot();
             }
         }
     }
 
-
-    private class RecipeComparer : IEqualityComparer<Tuple<HashSet<string>, HashSet<string>, Item.temperature>>
-    {
-        public bool Equals(Tuple<HashSet<string>, HashSet<string>, Item.temperature> x, Tuple<HashSet<string>, HashSet<string>, Item.temperature> y)
-        {
-            if (x == null || y == null)
-                return false;
-
-            return x.Item1.SetEquals(y.Item1) && x.Item2.SetEquals(y.Item2) && x.Item3 == y.Item3;
-        }
-
-        public int GetHashCode(Tuple<HashSet<string>, HashSet<string>, Item.temperature> obj)
-        {
-            if (obj == null)
-                return 0;
-
-            int hash = 17;
-
-            hash = hash * 31 + obj.Item1.Aggregate(0, (acc, item) => acc + item.GetHashCode());
-            hash = hash * 31 + obj.Item2.Aggregate(0, (acc, item) => acc + item.GetHashCode());
-            hash = hash * 31 + obj.Item3.GetHashCode();
-
-            return hash;
-        }
-    }
 }
