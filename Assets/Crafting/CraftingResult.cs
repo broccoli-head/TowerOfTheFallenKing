@@ -9,7 +9,7 @@ public class CraftingResult : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     Inventory inventory;
     Image img;
     Color color;
-    Item result;
+    public Item result;
     Crafting crafting;
 
     void Start()
@@ -20,7 +20,7 @@ public class CraftingResult : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         crafting = FindAnyObjectByType<Crafting>();
     }
 
-    public void SetPotion(Item result)
+    public void SetItem(Item result)
     {
         this.result = result;
 

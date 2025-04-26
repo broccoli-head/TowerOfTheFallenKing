@@ -19,7 +19,7 @@ public class QuickPotionSlot : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if(inventory.SelectedItem != null && inventory.SelectedItem.IsPotion())  // sprawdzic czy wybrany item to potion!
+        if(inventory.SelectedItem != null && inventory.SelectedItem.type == Item.ItemType.Potion)  // sprawdzic czy wybrany item to potion!
         {
             for(int i = 0;i < inventory.QuickPotions.Length;i++)
             {

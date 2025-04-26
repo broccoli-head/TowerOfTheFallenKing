@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0}
-  Name: HealthPotion
+  Name: Health Potion
 --- !u!58 &895789240185549123
 CircleCollider2D:
   m_ObjectHideFlags: 0

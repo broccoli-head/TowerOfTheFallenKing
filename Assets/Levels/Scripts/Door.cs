@@ -65,7 +65,6 @@ public class Door : MonoBehaviour
     private void Start()
     {
         inventory = Inventory.Instance;
-
     }
 
     private void Update()

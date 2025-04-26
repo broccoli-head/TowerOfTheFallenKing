@@ -8,9 +8,15 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
     // Zmienna okreslajaca, czy stan postaci ma byc zaladowany przy starcie.
     public bool load = true; 
     // Aktualne punkty zycia gracza.
-    public float HitPoints; 
+    public float HitPoints;
+    // czas po któoym zaczyna siê regeneracja hp
+    public float HealthRegenerationDelay = 10;
+    // predkosc regeneracji hp
+    public float HealthRegenerationSpeed = 5;
+    [ReadOnly] public float NoDamageTakenTimer;
+
     // Poczatkowe punkty zycia gracza.
-    [HideInInspector][Min(1.0f)] public float StartHP;
+    [ReadOnly] public float StartHP;
 
 
     // Zmienna przechowujaca obrazenia zadawane przez okreslony czas.
@@ -24,7 +30,8 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
     // Mnoznik obrazen spowodowany efektem "exposed".
     private float Exposition;
     // Przechowuje instancje klasy odpowiedzialnej za zarzadzanie efektem "exposed".
-    ExposedEffect exposed; 
+    ExposedEffect exposed;
+    
 
 
     // Flaga mowiaca, czy gracz jest pod wplywem efektu "cleanse".
@@ -34,6 +41,8 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
     private Color spriteColor;
 
     public AudioSource audioSource;
+
+
 
 
 
@@ -57,12 +66,16 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
 
     void Update()
     {
+        if(HitPoints < StartHP)
+            NoDamageTakenTimer += Time.deltaTime;
+
         // Zapobiega, by obrazenia nie byly ujemne.
         if (damage < 0)
             damage = 0;
 
         // Stosuje obrazenia w czasie (DPS).
-        Damage(damage * Time.deltaTime); 
+        if(damage > 0)
+            Damage(damage * Time.deltaTime); 
 
         if (HitPoints <= 0)
         {
@@ -71,6 +84,13 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
             LevelLoader.CleanedRooms.Clear();
             SceneManager.LoadScene(0); 
 
+        }
+
+        if(NoDamageTakenTimer >= HealthRegenerationDelay && HitPoints < StartHP)
+        {
+            HitPoints += HealthRegenerationSpeed * Time.deltaTime;
+            if(HitPoints > StartHP)
+                HitPoints = StartHP;
         }
     }
 
@@ -155,7 +175,7 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
             if (!audioSource.isPlaying)
                 audioSource.PlayOneShot(audioSource.clip);
         }
-
+        NoDamageTakenTimer = 0;
         // Odejmowanie obrazen od punktow zycia.
         HitPoints -= dmg; 
     }

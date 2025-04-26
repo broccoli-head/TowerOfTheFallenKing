@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/Stage1/Room4.unity
     guid: 33cbaac116b98274f8a1fd8b55df0eb8
+  - enabled: 1
+    path: Assets/other/Grzyb/GrzybSecretRoom.unity
+    guid: 1689e7c46c2547140b6e65b8bdea5b19
   m_configObjects: {}

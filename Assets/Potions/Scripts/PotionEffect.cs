@@ -54,13 +54,16 @@ public class PotionEffect : MonoBehaviour
             {        
                 if (controller != null)
                     controller.Disable(0.5f);
+
                 Vector2 direction;
                 if (potion.shape != Potion.Shape.Beam)
                     direction = (rb.position - (Vector2)transform.position).normalized;
                 else
                     direction = beamPotionEffect.direction;
+
                 rb.AddForce(direction * potion.explosion.Force, ForceMode2D.Impulse);
-                StartCoroutine( ExplosionEffect( potion.explosion.EffectTime, Instantiate(potion.explosion.Effect, transform) ));
+                if(potion.explosion.Effect != null)
+                    StartCoroutine( ExplosionEffect( potion.explosion.EffectTime * 1.5f, Instantiate(potion.explosion.Effect, transform) ));
             }
         }
     }

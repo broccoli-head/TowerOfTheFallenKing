@@ -8,61 +8,110 @@ using UnityEngine;
 [System.Serializable]
 public class Recipe
 {
-    public string ItemName;
 
-    public List<CraftingElement> Components;
-    public List<CraftingElement> Fillers;
+    public string ItemName;
+    public List<RequiredAttributes> Attributes;
+    public List<RequiredStatesOfMatter> StatesOfMatter;
+    public List<string> Potions;
     public Item.temperature FuelTemperature;
 
-    public List<string> GetComponents()
+
+    public Recipe(List<Item> items, Item.temperature temperature)
     {
-        List<string> components = new List<string>();
-        foreach (var component in Components)
+        FuelTemperature = temperature;
+
+        // inicjacja obiektów
+        Potions = new();
+        Attributes = new();
+        StatesOfMatter = new();
+
+        foreach (Item item in items)
         {
-            components.Add(component.ToString());
+            if (item.type == Item.ItemType.Potion)
+                Potions.Add(item.Name);
+
+            foreach (RequiredAttributes attribute in item.GetAttributes())
+            {
+                var existingAttribute = Attributes.Find(a => a.attribute == attribute.attribute);
+
+                if (existingAttribute != null)
+                {
+                    existingAttribute.value += attribute.value;
+                }
+                else
+                {
+                    Attributes.Add(new RequiredAttributes
+                    {
+                        attribute = attribute.attribute,
+                        value = attribute.value
+                    });
+                }
+            }
+
+            var state = item.GetStateOfMatter();
+            var existingState = StatesOfMatter.Find(s => s.stateOfMatter == state);
+
+            if (existingState != null)
+            {
+                existingState.amount += 1;
+            }
+            else
+            {
+                StatesOfMatter.Add(new RequiredStatesOfMatter
+                {
+                    stateOfMatter = state,
+                    amount = 1 
+                });
+            }
         }
-        return components;
     }
 
-    public List<string> GetFillers()
+    public bool IsValid(Recipe other)
     {
-        List<string> fillers = new List<string>();
-        foreach (var filler in Fillers)
+        // Sprawdzenie temperatury
+        if (this.FuelTemperature != other.FuelTemperature)
+            return false;
+
+        // Sprawdzenie atrybutów
+        foreach (var requiredAttr in this.Attributes)
         {
-            fillers.Add(filler.ToString());
+            var attrInOther = other.Attributes.Find(a => a.attribute == requiredAttr.attribute);
+            if (attrInOther == null || attrInOther.value < requiredAttr.value)
+                return false;
         }
-        return fillers;
+
+        // Sprawdzenie stanów skupienia
+        foreach (var requiredState in this.StatesOfMatter)
+        {
+            var stateInOther = other.StatesOfMatter.Find(s => s.stateOfMatter == requiredState.stateOfMatter);
+            if (stateInOther == null || stateInOther.amount < requiredState.amount)
+                return false;
+        }
+
+        // Sprawdzenie mikstur (czy zawiera wszystkie wymagane mikstury)
+        foreach (var potion in this.Potions)
+        {
+            if (!other.Potions.Contains(potion))
+                return false;
+        }
+
+        return true;
     }
+
+
+
 }
 
 [System.Serializable]
-public class CraftingElement
+public class RequiredAttributes
 {
-    public enum DataType
-    {
-        Attribute,
-        Potion
-    }
+    public Item.Attribute attribute;
+    public int value;
+}
 
-    public DataType selectedDataType;
-
-    public Item.Attribute Attribute;
-    public string PotionName;
-
-    //nadpisuje metode to string, w zaleznosci od wybranego typy danych zwraca name potki lub atrybut
-    public override string ToString()
-    {
-        if (selectedDataType == DataType.Attribute)
-            return Attribute.ToString();
-        else
-        {
-            Inventory inv = GameObject.FindFirstObjectByType<Inventory>();
-            if (inv.FindPotionByName(PotionName) == null)
-            {
-                Debug.LogError("Nie znaleziono Mikstury: " +  PotionName + "! Receptura craftowania nieprawidlowa");
-            }
-            return PotionName;
-        }
-            
-    }
+[System.Serializable]
+public class RequiredStatesOfMatter
+{
+    public Item.StateOfMatter stateOfMatter;
+    public int amount;
 }

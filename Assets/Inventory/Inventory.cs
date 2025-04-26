@@ -4,10 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using TMPro;
 
 public class Inventory : MonoBehaviour, Saveable 
 {
     public bool LoadFromFile;
+    public TMP_FontAsset font;
 
     [Header("Dostepne w grze")]
     public Potion[] potions;
@@ -25,7 +27,9 @@ public class Inventory : MonoBehaviour, Saveable
     [HideInInspector] public Potion SelectedPotion;
     [HideInInspector] public Item SelectedItem;
     [HideInInspector] public Item PointedItem;
+
     private int index = 1;
+
 
     public static Inventory Instance { get; private set; }
 
@@ -83,7 +87,14 @@ public class Inventory : MonoBehaviour, Saveable
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         else
         {
+            float dpi = Screen.dpi;
+            if (dpi == 0) dpi = 96f;    //jezeli nie mozna odczytac dpi ustawiamy 96
+            float screenScale = dpi / 96f;
+            int cursorSize = Mathf.RoundToInt(64 * screenScale);  //wielkosc kursora zalezna od dpi ekranu
+
             Texture2D cursorTexture = ComponentHelper.TextureFromSprite( SelectedItem.GetSprite() );
+            cursorTexture = ComponentHelper.ResizeTexture(cursorTexture, cursorSize, cursorSize);
+
             Vector2 cursorHotSpot = new Vector2(cursorTexture.width / 2, cursorTexture.height / 2);
             Cursor.SetCursor(cursorTexture, cursorHotSpot, CursorMode.ForceSoftware);
         }
@@ -184,8 +195,12 @@ public class Inventory : MonoBehaviour, Saveable
     }
     public void AddPlayerResource(string name, int count)
     {
+        //nie ma takiego zasobu
+        if (FindResourceByName(name) == null)
+            return;
+
         bool ResourceWasInPlayerResources = false;
-        for (int i = 0; i < PlayerPotions.Count; i++)
+        for (int i = 0; i < PlayerResources.Count; i++)
         {
             if (PlayerResources[i].ResourceName.Equals(name, StringComparison.OrdinalIgnoreCase))
             {
@@ -244,9 +259,9 @@ public class Inventory : MonoBehaviour, Saveable
             return (false, 0);
 
         int count;
-        if (item.IsPotion())
+        if (item.type == Item.ItemType.Potion)
         {
-            count = FindPlayerPotionByName(item.GetName()) != null ? FindPlayerPotionByName(item.GetName()).count : 0;
+            count = FindPlayerPotionByName(item.Name) != null ? FindPlayerPotionByName(item.Name).count : 0;
             if(count <= 0)
                 return (false, 0);
             else
@@ -254,7 +269,7 @@ public class Inventory : MonoBehaviour, Saveable
         }
         else
         {
-            count = FindPlayerResourceByName(item.GetName()) != null ? FindPlayerResourceByName(item.GetName()).count : 0;
+            count = FindPlayerResourceByName(item.Name) != null ? FindPlayerResourceByName(item.Name).count : 0;
             if (count <= 0)
                 return (false, 0);
             else
@@ -271,10 +286,10 @@ public class Inventory : MonoBehaviour, Saveable
     {
         if (item != null && count > 0)
         {
-            if (item.IsPotion())
-                AddPlayerPotion(item.GetName(), count);
+            if (item.type == Item.ItemType.Potion)
+                AddPlayerPotion(item.Name, count);
             else
-                AddPlayerResource(item.GetName(), count);
+                AddPlayerResource(item.Name, count);
         }
         else
             Debug.Log("Do funkcji Inventory::AddPlayerItem() przekazano nieprawidlowe wartosci: Item: " + item + ", Count: " + count); 

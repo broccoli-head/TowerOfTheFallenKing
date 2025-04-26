@@ -14,7 +14,7 @@ public class Projectile : MonoBehaviour
         StartCoroutine(die());
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
@@ -25,7 +25,8 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    IEnumerator die()
+
+    protected virtual IEnumerator die()
     {
         yield return new WaitForSeconds(stats.LiveTime);
         Destroy(this.gameObject);

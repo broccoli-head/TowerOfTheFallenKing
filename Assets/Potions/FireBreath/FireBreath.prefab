@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ee9aa42ec490bb42877643488036ddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: FireBreath
+  Name: Fire Breath
 --- !u!58 &832511741434572880
 CircleCollider2D:
   m_ObjectHideFlags: 0
