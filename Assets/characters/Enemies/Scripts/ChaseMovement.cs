@@ -4,6 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Enemy))]
+
 public class ChaseMovement : MonoBehaviour, Controller
 {
     private Enemy enemy;
@@ -11,7 +12,6 @@ public class ChaseMovement : MonoBehaviour, Controller
     private Rigidbody2D rb;
     private GameObject player;
     private Vector2 moveDirection;
-
 
     private float chaseSpeed;
     private float AttackDistance = 0;
@@ -21,6 +21,12 @@ public class ChaseMovement : MonoBehaviour, Controller
     [ReadOnly] public byte XCounter = 0;
     private byte MaxMovesInOneAxis = 3;
 
+    AudioSource audioSource;
+    AudioClip footstepsSound;
+    GameObject pauseMenu;
+    GameObject inventory;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -28,6 +34,12 @@ public class ChaseMovement : MonoBehaviour, Controller
         enemy = GetComponent<Enemy>();
         chaseSpeed = enemy.chaseSpeed;
         AttackDistance = enemy.MeleeStats.AttackDistance;
+
+        audioSource = GetComponent<AudioSource>();
+        footstepsSound = enemy.footstepsSound;
+        pauseMenu = ObjectsFinder.FindInactiveObjects("Menu");
+        inventory = ObjectsFinder.FindInactiveObjects("Inventory");
+
 
         if (player != null)
         {
@@ -54,7 +66,23 @@ public class ChaseMovement : MonoBehaviour, Controller
 
         // Porusza przeciwnika w kierunku ustalonym w MoveToPlayer
         rb.velocity = moveDirection * chaseSpeed;
-        
+
+        if (audioSource != null)
+        {
+            //puœæ dŸwiêk chodzenia, je¿eli przeciwnik siê porusza
+            if (rb.velocity.magnitude > 0.1f && !pauseMenu.activeSelf && !inventory.activeSelf)
+            {
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.clip = footstepsSound;
+                    audioSource.Play();
+                }
+            }
+            else
+            {
+                audioSource.Stop();
+            }
+        }
     }
 
 

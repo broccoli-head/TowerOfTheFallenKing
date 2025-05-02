@@ -50,7 +50,7 @@ public class Throw : MonoBehaviour
                     BPE.direction = direction;
                 }    
                 newPotion.transform.parent = null;
-                inventory.RemovePlayerPotion(inventory.SelectedPotion.Name);
+                inventory.RemovePlayerItem(inventory.SelectedPotion.Name);
                 inventory.ValidatePotions();
             }
         }

@@ -30,12 +30,9 @@ Dodawanie Receptur:
 - w obiekcie Inventory -> skrypt inventory -> lista Recipes
 - dodac elemet listy
 - ItemName - nazwa itemu ktory jest rezultatem craftowania
-- listy Fillers i components - listy skladnikow i wypelniaczy do mikstury:
-	- wybierasz czy skladnik jest zasobem z danym atrybutem czy konkretna mikstura
-	  (Zasoby maja wlasciwosci, mikstury nie, przy craftowaniu uzywana jest wlasciwosc zasobu lub name potki)
-	- wpisujesz Name mikstury lub wybierasz wlasciwosc
-	- wybierasz temperature
-- Wlasciwosci (Attributes) i temperatury mozesz dodawac w Item.cs
+- Atrybuty - wybierasz atrybut i wpisujesz jego wymagan¹ sile
+- Stany skupienia - wybierasz stan (NIE None!) i wpisujesz wymagana ilosc
+- Potions - wpisujesz nazwe potki potrzebnej do stworzenia itemu
 
 Dodawanie interakcji:
 - nie sprawdzone, na razie nie ruszaj

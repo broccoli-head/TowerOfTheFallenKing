@@ -23,7 +23,7 @@ public class QuickPotionSlot : MonoBehaviour, IPointerDownHandler
         {
             for(int i = 0;i < inventory.QuickPotions.Length;i++)
             {
-                // Jesli w Quick Potions znajduje sie juz potka ktora chcemy tam umiescic
+                // Jesli w Quick Items znajduje sie juz potka ktora chcemy tam umiescic
                 // - przesuwamy na jej miejsce potke z pola na ktore kliknal gracz
                 // - ustawiamy ja na miejscu wybranym przez gracza
                 // powoduje to zamiane miejscami potek

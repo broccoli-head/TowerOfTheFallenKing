@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting.FullSerializer;
 
 public class LevelLoader : MonoBehaviour, Saveable
 {
@@ -21,6 +22,7 @@ public class LevelLoader : MonoBehaviour, Saveable
 
     public static LevelLoader Instance { get; private set; }
     public static List<string> CleanedRooms = new List<string>();
+
 
     private void Awake()
     {
@@ -50,6 +52,11 @@ public class LevelLoader : MonoBehaviour, Saveable
     // Do wywolania w mainMenu, laduje pierwszy poziom
     public void StartGame()
     {
+        if (LevelChangeCoolDown)
+            return;
+
+        LevelChangeCoolDown = true;
+        StartCoroutine(LevelCoolDown());
         ActualLevel = LevelZero;
         Level.Load(ActualLevel.LevelName);
     }
@@ -231,7 +238,7 @@ public class LevelLoader : MonoBehaviour, Saveable
 
     public IEnumerator LevelCoolDown()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(1.2f);
         LevelChangeCoolDown = false;
         yield break;
     }
@@ -239,7 +246,9 @@ public class LevelLoader : MonoBehaviour, Saveable
 
 }
 
+
 [System.Serializable]
+
 public class Level
 {
     public string LevelName;
@@ -267,8 +276,7 @@ public class Level
     }
 
     public static void Load(string name)
-    { 
-
+    {
         Debug.Log("£aduje " + name);
         // Zapisuje przed zaladowaniem levelu
         SaveManager.Save();
@@ -276,7 +284,12 @@ public class Level
         {
             ComingFromRoom = CurrentlyOnRoom;
             CurrentlyOnRoom = name;
-            SceneManager.LoadScene(name);
+
+            SceneTransition sceneTransition = GameObject.FindObjectOfType<SceneTransition>();
+            if (sceneTransition != null)
+                sceneTransition.StartCoroutine(sceneTransition.SwitchScenes(name));
+            else
+                SceneManager.LoadScene(name);
         }
         catch (Exception e)
         {

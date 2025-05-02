@@ -10,9 +10,10 @@ public class Recipe
 {
 
     public string ItemName;
+    [Min(1)]public int ItemCount = 1;
     public List<RequiredAttributes> Attributes;
     public List<RequiredStatesOfMatter> StatesOfMatter;
-    public List<string> Potions;
+    public List<string> Items;
     public Item.temperature FuelTemperature;
 
 
@@ -21,14 +22,13 @@ public class Recipe
         FuelTemperature = temperature;
 
         // inicjacja obiektów
-        Potions = new();
+        Items = new();
         Attributes = new();
         StatesOfMatter = new();
 
         foreach (Item item in items)
         {
-            if (item.type == Item.ItemType.Potion)
-                Potions.Add(item.Name);
+            Items.Add(item.Name);
 
             foreach (RequiredAttributes attribute in item.GetAttributes())
             {
@@ -88,10 +88,10 @@ public class Recipe
                 return false;
         }
 
-        // Sprawdzenie mikstur (czy zawiera wszystkie wymagane mikstury)
-        foreach (var potion in this.Potions)
+        // Sprawdzenie konkretnych itemow (czy zawiera wszystkie wymagane itemy)
+        foreach (var item in this.Items)
         {
-            if (!other.Potions.Contains(potion))
+            if (!other.Items.Contains(item))
                 return false;
         }
 
