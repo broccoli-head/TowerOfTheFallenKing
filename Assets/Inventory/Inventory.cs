@@ -14,13 +14,13 @@ public class Inventory : MonoBehaviour, Saveable
     [Header("Dostepne w grze")]
     public Potion[] potions;
     public Resource[] resources;
+    public List<Item> OtherItems;
     public Recipe[] recipes;
     public Interaction[] interactions;
 
 
     [Header("Inventory gracza")]
-    public List<PlayerPotion> PlayerPotions;
-    public List<PlayerResource> PlayerResources = new List<PlayerResource>();
+    public List<PlayerItem> PlayerItems;
 
 
     [HideInInspector] public Potion[] QuickPotions = new Potion[3];
@@ -51,11 +51,23 @@ public class Inventory : MonoBehaviour, Saveable
 
     private void Start()
     {
+        int j = 0;
         for (int i = 0;i < QuickPotions.Length;i++)
         {
             try
             {
-                QuickPotions[i] = FindPotionByName(PlayerPotions[i].PotionName);
+                Potion potion = null;
+                while(potion == null)
+                {
+                    if (j >= PlayerItems.Count)
+                        break;
+
+                    potion = FindPotionByName(PlayerItems[j].Name);
+
+                    j++;
+                }
+
+                QuickPotions[i] = potion;
             }
             catch(Exception e)
             {
@@ -131,48 +143,27 @@ public class Inventory : MonoBehaviour, Saveable
         return null;
     }
 
-    public void AddPlayerPotion(string name)
-    {
-        AddPlayerPotion(name, 1);
-    }
-  
-    public void AddPlayerPotion(string name, int count)
-    {
-        bool PotionWasInPlayerPotions = false;
-        for (int i = 0; i < PlayerPotions.Count; i++)
-        {
-            if (PlayerPotions[i].PotionName.Equals(name, StringComparison.OrdinalIgnoreCase))
-            {
-                PlayerPotions[i].count+= count;
-                PotionWasInPlayerPotions = true;
-                break;
-            }
-        }
-        if (!PotionWasInPlayerPotions)
-            PlayerPotions.Add(new PlayerPotion(name,count));
-    }
 
-
-    public void RemovePlayerPotion(string name)
+    public void RemovePlayerItem(string name)
     {
-        for (int i = 0; i < PlayerPotions.Count; i++)
+        for (int i = 0; i < PlayerItems.Count; i++)
         {
-            if (PlayerPotions[i].PotionName.Equals(name, StringComparison.OrdinalIgnoreCase))
+            if (PlayerItems[i].Name.Equals(name, StringComparison.OrdinalIgnoreCase))
             {
-                PlayerPotions[i].count--;
-                if(PlayerPotions[i].count <= 0) 
-                    PlayerPotions.RemoveAt(i);
+                PlayerItems[i].count--;
+                if(PlayerItems[i].count <= 0) 
+                    PlayerItems.RemoveAt(i);
                 break;
             }
         }
     }
 
-    public PlayerPotion FindPlayerPotionByName(string name)
+    public PlayerItem FindPlayerItemByName(string name)
     {
-        for (int i = 0; i < PlayerPotions.Count; i++)
+        for (int i = 0; i < PlayerItems.Count; i++)
         {
-            if (PlayerPotions[i].PotionName.Equals(name, StringComparison.OrdinalIgnoreCase))
-                return PlayerPotions[i];
+            if (PlayerItems[i].Name.Equals(name, StringComparison.OrdinalIgnoreCase))
+                return PlayerItems[i];
         }
         return null;
     }
@@ -189,68 +180,51 @@ public class Inventory : MonoBehaviour, Saveable
     }
 
 
-    public void AddPlayerResource(string name)
-    {
-        AddPlayerResource(name, 1);
-    }
-    public void AddPlayerResource(string name, int count)
-    {
-        //nie ma takiego zasobu
-        if (FindResourceByName(name) == null)
-            return;
-
-        bool ResourceWasInPlayerResources = false;
-        for (int i = 0; i < PlayerResources.Count; i++)
-        {
-            if (PlayerResources[i].ResourceName.Equals(name, StringComparison.OrdinalIgnoreCase))
-            {
-                PlayerResources[i].count += count;
-                ResourceWasInPlayerResources = true;
-                break;
-            }
-        }
-        if (!ResourceWasInPlayerResources)
-            PlayerResources.Add(new PlayerResource(name, count));
-    }
-
-
-    public void RemovePlayerResource(string name)
-    {
-        for (int i = 0; i < PlayerResources.Count; i++)
-        {
-            if (PlayerResources[i].ResourceName.Equals(name, StringComparison.OrdinalIgnoreCase))
-            {
-                PlayerResources[i].count--;
-                if (PlayerResources[i].count <= 0)
-                    PlayerResources.RemoveAt(i);
-                break;
-            }
-        }
-    }
-
-    public PlayerResource FindPlayerResourceByName(string name)
-    {
-        for (int i = 0; i < PlayerResources.Count; i++)
-        {
-            if (PlayerResources[i].ResourceName.Equals(name, StringComparison.OrdinalIgnoreCase))
-                return PlayerResources[i];
-        }
-        return null;
-    }
-
-
-    //zwraca potion lub resource, jesli nie ma ani mikstury ani zasobu o takiej nazwie zwraca null
+    //zwraca item, jesli nie ma itemu o takiej nazwie zwraca null
     public Item FindItemByName(string name)
     {
         Item item = FindPotionByName(name);
+
+        if (item == null)
+            item = FindResourceByName(name);
+
         if (item == null)
         {
-            item = FindResourceByName(name);
-            return item;
+            foreach (var i in OtherItems)
+            {
+                if (i.Name == name)
+                {
+                    item = i;
+                    break;
+                }
+            }       
         }
-        else return item;
+
+        return item;
     }
 
+    public void AddPlayerItem(string name)
+    {
+        AddPlayerItem(name, 1);
+    }
+  
+    public void AddPlayerItem(string name, int count)
+    {
+        bool Alreadyexist = false;
+        foreach(var item in PlayerItems)
+        {
+            if (item.Name.Equals(name, StringComparison.OrdinalIgnoreCase))
+            {
+                item.count += count;
+                Alreadyexist = true;
+            }      
+        }
+
+        if(!Alreadyexist)
+        {
+            PlayerItems.Add(new PlayerItem(name, count));
+        }
+    }
 
     //zwraca czy gracz posiada dany item i jesli tak, ilosc posiadanych itemow
     public (bool, int) PlayerHaveItem(Item item)
@@ -258,38 +232,19 @@ public class Inventory : MonoBehaviour, Saveable
         if(item == null)
             return (false, 0);
 
-        int count;
-        if (item.type == Item.ItemType.Potion)
-        {
-            count = FindPlayerPotionByName(item.Name) != null ? FindPlayerPotionByName(item.Name).count : 0;
-            if(count <= 0)
-                return (false, 0);
-            else
-                return (true, count);
+        foreach (var i in PlayerItems) {
+            if (i.Name.Equals(item.Name, StringComparison.OrdinalIgnoreCase))
+                return(true, i.count);
         }
-        else
-        {
-            count = FindPlayerResourceByName(item.Name) != null ? FindPlayerResourceByName(item.Name).count : 0;
-            if (count <= 0)
-                return (false, 0);
-            else
-                return (true, count);
-        }
-    }
 
-    public void AddPlayerItem(string name,int count = 1)
-    {
-        AddPlayerItem(FindItemByName(name), count);
+        return (false, 0);
     }
 
     public void AddPlayerItem(Item item, int count = 1)
     {
         if (item != null && count > 0)
         {
-            if (item.type == Item.ItemType.Potion)
-                AddPlayerPotion(item.Name, count);
-            else
-                AddPlayerResource(item.Name, count);
+            AddPlayerItem(item.Name, count);
         }
         else
             Debug.Log("Do funkcji Inventory::AddPlayerItem() przekazano nieprawidlowe wartosci: Item: " + item + ", Count: " + count); 
@@ -316,10 +271,10 @@ public class Inventory : MonoBehaviour, Saveable
             resources = this.resources,
             recipes = this.recipes,
             interactions = this.interactions,
-            PlayerPotions = this.PlayerPotions,
-            PlayerResources = this.PlayerResources,
+            PlayerItems = this.PlayerItems,
             QuickPotions = this.QuickPotions,
             SelectedPotion = this.SelectedPotion,
+            index = this.index
         };
 
         string json = JsonUtility.ToJson(invData);
@@ -344,8 +299,7 @@ public class Inventory : MonoBehaviour, Saveable
             resources = loadedInventory.resources;
             recipes = loadedInventory.recipes;
             interactions = loadedInventory.interactions;
-            PlayerPotions = new List<PlayerPotion>(loadedInventory.PlayerPotions);
-            PlayerResources = new List<PlayerResource>(loadedInventory.PlayerResources);
+            PlayerItems = new List<PlayerItem>(loadedInventory.PlayerItems);
             QuickPotions = loadedInventory.QuickPotions;
             SelectedPotion = loadedInventory.SelectedPotion;
             SelectedItem = loadedInventory.SelectedItem;
@@ -368,8 +322,7 @@ public class Inventory : MonoBehaviour, Saveable
         public Recipe[] recipes;
         public Interaction[] interactions;
         public bool LoadFromFile;
-        public List<PlayerPotion> PlayerPotions;
-        public List<PlayerResource> PlayerResources = new List<PlayerResource>();
+        public List<PlayerItem> PlayerItems;
         public Potion[] QuickPotions = new Potion[3];
         public Potion SelectedPotion;
         public Item SelectedItem;
@@ -381,26 +334,14 @@ public class Inventory : MonoBehaviour, Saveable
 
 
 [System.Serializable]
-public class PlayerPotion
+public class PlayerItem
 {
-    public string PotionName;
+    public string Name;
     public int count;
 
-    public PlayerPotion(string name, int count ) {
-        PotionName = name;
+    public PlayerItem(string name, int count ) {
+        Name = name;
         this.count = count;
     }
 }
 
-
-[System.Serializable]
-public class PlayerResource
-{
-    public string ResourceName;
-    public int count;
-
-    public PlayerResource(string name, int count ) {
-        ResourceName = name;
-        this.count = count;
-    }
-}

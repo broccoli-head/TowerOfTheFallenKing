@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CommlinkOpener : MonoBehaviour
 {
-    bool isOpen = false;
+    [HideInInspector] public bool IsOpen { get; private set; }
     GameObject InGameVisible;
     GameObject InCommlinkVisible;
     Inventory inventory;
@@ -12,33 +12,39 @@ public class CommlinkOpener : MonoBehaviour
     [System.Obsolete]
     void Start()
     {
-        inventory = FindFirstObjectByType<Inventory>();
+        IsOpen = false;
+        inventory = Inventory.Instance;
         InCommlinkVisible = transform.FindChild("Inventory").gameObject;
         InGameVisible = transform.FindChild("InGameVisible").gameObject;
-        InCommlinkVisible.SetActive(isOpen);
-        InGameVisible.SetActive(!isOpen);
+        InCommlinkVisible.SetActive(IsOpen);
+        InGameVisible.SetActive(!IsOpen);
     }
 
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Tab)) 
         {
-            isOpen = !isOpen;
-
-            //resetuje wybrana potke w UI
-            inventory.SelectedItem = null;
-        
-            if(isOpen)
-                Time.timeScale = 0f;
-            else 
-                Time.timeScale = 1f;
-            InCommlinkVisible.SetActive(isOpen);
-            InGameVisible.SetActive(!isOpen);
+            ToggleCommlink();
         }
-        if (isOpen && Input.GetKeyDown(KeyCode.Tab))
+        if (IsOpen && Input.GetKeyDown(KeyCode.Tab))
         {
             FindFirstObjectByType<ItemsUI>().RefreshItemsList();
         }
             
+    }
+
+    public void ToggleCommlink()
+    {
+        IsOpen = !IsOpen;
+
+        //resetuje wybrana potke w UI
+        inventory.SelectedItem = null;
+
+        if (IsOpen)
+            Time.timeScale = 0f;
+        else
+            Time.timeScale = 1f;
+        InCommlinkVisible.SetActive(IsOpen);
+        InGameVisible.SetActive(!IsOpen);
     }
 }

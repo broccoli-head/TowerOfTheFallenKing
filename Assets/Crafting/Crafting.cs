@@ -9,11 +9,14 @@ public class Crafting : MonoBehaviour
     Inventory inventory;
     CraftingSlot[] slots;
     Item result;
+    int ResultCount;
     CraftingResult ResultSlot;
 
     public static string CraftingError;
     private AudioSource audioSource;
     public AudioClip craftingSound;
+    private bool soundPlayed = false;
+
 
     public enum ComponentType
     {
@@ -36,6 +39,7 @@ public class Crafting : MonoBehaviour
         Item.temperature temperature = Item.temperature.Normal;
         List<Item> items = new();
         result = null;
+        ResultCount = 1;
 
         foreach (var slot in slots) {
 
@@ -58,15 +62,20 @@ public class Crafting : MonoBehaviour
         {
             if (recipe.IsValid(provided))
             {
-                if(!audioSource.isPlaying)
+                if (!audioSource.isPlaying && !soundPlayed)
+                {
                     audioSource.PlayOneShot(craftingSound);
+                    soundPlayed = true;
+                }
 
                 result = inventory.FindItemByName(recipe.ItemName);
+                ResultCount = recipe.ItemCount;
             }
         }
 
 
         ResultSlot.SetItem(result);
+        ResultSlot.ItemCount = ResultCount;
 
     }
 
@@ -74,11 +83,8 @@ public class Crafting : MonoBehaviour
     {
         if(result != null)
         {
-            if (result.type == Item.ItemType.Potion)
-                inventory.AddPlayerPotion(result.Name);
-            else
-                inventory.AddPlayerResource(result.Name);
-
+            inventory.AddPlayerItem(result.Name,ResultCount);
+            soundPlayed = false;
 
             foreach (var slot in slots)
             {

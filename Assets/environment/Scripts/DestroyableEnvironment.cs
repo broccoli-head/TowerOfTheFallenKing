@@ -84,18 +84,20 @@ public class DestroyableEnvironment : MonoBehaviour, ReciveDamage
                 itemsGiven = true;
             }
 
-            //puszcza dźwiek rozwalania obiektu
-            if (!audioSource.isPlaying)
-            {
-                audioSource.PlayOneShot(destroySound);
+            //puszcza dźwiek niszczenia obiektu
+            if(audioSource != null)
+                if (!audioSource.isPlaying)
+                    audioSource.PlayOneShot(destroySound);
 
-            }
             //ukrywa obiekt na czas trwania dźwięku
             GetComponent<Collider2D>().enabled = false;
             GetComponent<SpriteRenderer>().enabled = false;
             
             //usuwa obiekt po skonczeniu dzwieku
-            Destroy(gameObject, destroySound.length);
+            if(destroySound != null)
+                Destroy(gameObject, destroySound.length);
+            else
+                Destroy(gameObject);
         }
 
     }

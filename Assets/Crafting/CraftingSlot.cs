@@ -38,10 +38,7 @@ public class CraftingSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHan
             IsSet = true;
             BurningTemperature = item.BurningTemperature;
 
-            if (item.type == Item.ItemType.Potion)
-                inventory.RemovePlayerPotion(item.Name);
-            else
-                inventory.RemovePlayerResource(item.Name);
+            inventory.RemovePlayerItem(item.Name);
                 
 
             img.sprite = item.GetSprite();
@@ -108,11 +105,7 @@ public class CraftingSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHan
     {
         if (item != null)
         {
-            if(item.type == Item.ItemType.Potion)
-            {
-                inventory.AddPlayerPotion(item.Name);
-            }else
-                inventory.AddPlayerResource(item.Name);
+            inventory.AddPlayerItem(item.Name);
         }
         inventory.RefreshPlayerInventory();
 

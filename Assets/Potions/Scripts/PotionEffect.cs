@@ -36,17 +36,27 @@ public class PotionEffect : MonoBehaviour
         foreach (Collider2D collider in colliders)
         {
             //On contact damage
-            var Implementing = ComponentHelper.GetInterfaceComponent<ReciveDamage>(collider.gameObject);
-            if (Implementing != null)
+            var DmgReciver = ComponentHelper.GetInterfaceComponent<ReciveDamage>(collider.gameObject);
+            if (DmgReciver != null)
             {
-                Implementing.Damage(potion.OnContactDamage, potion.damageType, potion.damagePlace, potion.EnemyOnly);
+                DmgReciver.Damage(potion.OnContactDamage, potion.damageType, potion.damagePlace, potion.EnemyOnly);
             }
 
             var controller = ComponentHelper.GetInterfaceComponent<Controller>(collider.gameObject);
 
             //freeze
             if(controller != null && potion.freeze)
+            {
                 controller.Disable(potion.freezeTime);
+
+                if(DmgReciver != null)
+                {
+                    OnLeaveDamage Leave = potion.onLeaveDamage;
+                    DmgReciver.Damage(Leave.Damage, Leave.Time, potion.damageType, potion.damagePlace, Leave.Effect, potion.EnemyOnly);
+                }
+               
+            }
+                
 
             //Explosion
             Rigidbody2D rb;

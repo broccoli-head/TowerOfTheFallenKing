@@ -1125,7 +1125,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4294159376175389519
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1228,7 +1228,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1046532811321259323}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.36670047
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2223,11 +2223,10 @@ Transform:
   m_GameObject: {fileID: 2982871309966265779}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -896.78235, y: -542.696, z: -63.127945}
+  m_LocalPosition: {x: -897.3638, y: -539.2531, z: -86.95659}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1808085547606786420}
+  m_Children: []
   m_Father: {fileID: 807171415769385061}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &2092935984514797559
@@ -2595,16 +2594,20 @@ MonoBehaviour:
   font: {fileID: 11400000, guid: 34317e8bae1812243a78fc1934086d47, type: 2}
   potions:
   - Name: Fire Breath
-    Description: 
+    Description: 'After using this mixture, trail of fire starting at your feet will
+      shoot out in a straight line burning any foes it encounters. Can be used as
+      very high temperature fuel.
+
+      Highly Flammable, Lightly Explosive'
     sprite: {fileID: 21300000, guid: 7f2d44b6de864344e904bc8dbf7d839c, type: 3}
     IsFuel: 1
     BurningTemperature: 4
     Price: 0
     Attributes:
     - attribute: 3
+      value: 4
+    - attribute: 7
       value: 1
-    - attribute: 3
-      value: 7
     Damage: 0
     OnContactDamage: 15
     damageType: 2
@@ -2635,12 +2638,19 @@ MonoBehaviour:
       Time: 0
       Effect: {fileID: 0}
   - Name: Napalm
-    Description: 
+    Description: 'Throwing this mixture, causes burst of flames in area it lands.
+      Can be used as high temperature fuel
+
+      Explosive, Flammable'
     sprite: {fileID: 21300000, guid: 69559f007de61074f8e0a4947d638a79, type: 3}
     IsFuel: 1
     BurningTemperature: 3
     Price: 0
-    Attributes: []
+    Attributes:
+    - attribute: 7
+      value: 2
+    - attribute: 3
+      value: 2
     Damage: 10
     OnContactDamage: 10
     damageType: 2
@@ -2671,12 +2681,19 @@ MonoBehaviour:
       Time: 10
       Effect: {fileID: 4417973398847505624, guid: f97c751e071898f4b85df6f807ba0e33, type: 3}
   - Name: Cleanse Potion
-    Description: 
+    Description: 'This special potion can get rid of any effect bothering you in
+      a blink of an eye.
+
+      Highly Holy, Diluent'
     sprite: {fileID: 21300000, guid: 594c810cfa6dfb746baeae6b691e7c9d, type: 3}
     IsFuel: 0
     BurningTemperature: 0
     Price: 0
-    Attributes: []
+    Attributes:
+    - attribute: 0
+      value: 4
+    - attribute: 2
+      value: 2
     Damage: 0
     OnContactDamage: 0
     damageType: 0
@@ -2707,12 +2724,20 @@ MonoBehaviour:
       Time: 2
       Effect: {fileID: 4417973398847505624, guid: f97c751e071898f4b85df6f807ba0e33, type: 3}
   - Name: Ice Spikes
-    Description: 
+    Description: 'From the place where this potion lands, sharp icicles will erupt
+      from the ground, damaging and freezing any foe they pierce.
+
+      Highly Icy,
+      Sharp'
     sprite: {fileID: 21300000, guid: e5534c396eeb4084e8815caa78baca33, type: 3}
     IsFuel: 0
     BurningTemperature: 0
     Price: 0
-    Attributes: []
+    Attributes:
+    - attribute: 6
+      value: 4
+    - attribute: 5
+      value: 2
     Damage: 0
     OnContactDamage: 0
     damageType: 0
@@ -2722,8 +2747,8 @@ MonoBehaviour:
     potionEffect: {fileID: 8314591781683771955, guid: cadcb41d293aadc41bc9dfabe4b248ec, type: 3}
     Time: 8
     cleanse: 0
-    freeze: 0
-    freezeTime: 0
+    freeze: 1
+    freezeTime: 4
     speedChange: 0
     speedTime: 0
     speedMultiplier: 0
@@ -2738,17 +2763,25 @@ MonoBehaviour:
       Effect: {fileID: 0}
       EffectTime: 0.2
     onLeaveDamage:
-      HaveOnLeaveDamage: 0
-      Damage: 5
-      Time: 2
-      Effect: {fileID: 4417973398847505624, guid: f97c751e071898f4b85df6f807ba0e33, type: 3}
+      HaveOnLeaveDamage: 1
+      Damage: 0
+      Time: 4
+      Effect: {fileID: 8905292606808257308, guid: 997f7c7d3785f2c4eb49e29fb5e0de5d, type: 3}
   - Name: Speed Potion
-    Description: 
+    Description: 'Upon drinking this potion, your body becomes light as air. For
+      a short time, your movements blur with incredible speed, leaving enemies struggling
+      to react.
+
+      Highly Energizing, Diluent'
     sprite: {fileID: 21300000, guid: e94d09cc8528e2344849ece2990f9046, type: 3}
     IsFuel: 0
     BurningTemperature: 0
     Price: 0
-    Attributes: []
+    Attributes:
+    - attribute: 8
+      value: 4
+    - attribute: 2
+      value: 2
     Damage: 1
     OnContactDamage: 0
     damageType: 0
@@ -2779,12 +2812,17 @@ MonoBehaviour:
       Time: 3
       Effect: {fileID: 4417973398847505624, guid: f97c751e071898f4b85df6f807ba0e33, type: 3}
   - Name: Acid Potion
-    Description: 
+    Description: 'When hurled, this potion shatters on impact, releasing a searing
+      pool of acid that burns through anything caught within.
+
+      Highly Corrosive'
     sprite: {fileID: 21300000, guid: 70540400fb70169409dd52623bf338d2, type: 3}
     IsFuel: 0
     BurningTemperature: 0
     Price: 0
-    Attributes: []
+    Attributes:
+    - attribute: 1
+      value: 4
     Damage: 5
     OnContactDamage: 20
     damageType: 2
@@ -2817,12 +2855,19 @@ MonoBehaviour:
       Time: 0
       Effect: {fileID: 0}
   - Name: Health Potion
-    Description: 
+    Description: 'Just one sip of this potion, and you''ll feel as good as new.
+
+      Energizing,
+      Diluent'
     sprite: {fileID: 21300000, guid: 3b7443a709f4881499a661720bdbda82, type: 3}
     IsFuel: 0
     BurningTemperature: 0
     Price: 0
-    Attributes: []
+    Attributes:
+    - attribute: 8
+      value: 2
+    - attribute: 0
+      value: 2
     Damage: 0
     OnContactDamage: 0
     damageType: 0
@@ -2853,12 +2898,19 @@ MonoBehaviour:
       Time: 0
       Effect: {fileID: 4417973398847505624, guid: f97c751e071898f4b85df6f807ba0e33, type: 3}
   - Name: Explosive
-    Description: Makes a big boom!
+    Description: 'Upon breaking, this potion detonates in a powerful burst of flame
+      and force.
+
+      Highly Explosive, Lightly Flammable'
     sprite: {fileID: 21300000, guid: a4113c6838eae8b4c8156a430d543495, type: 3}
     IsFuel: 1
     BurningTemperature: 2
     Price: 0
-    Attributes: []
+    Attributes:
+    - attribute: 7
+      value: 4
+    - attribute: 3
+      value: 1
     Damage: 10
     OnContactDamage: 5
     damageType: 2
@@ -2884,23 +2936,28 @@ MonoBehaviour:
       Effect: {fileID: 8106518682388410395, guid: cbd9d196b417aee45bbc42bf48ec6e65, type: 3}
       EffectTime: 2
     onLeaveDamage:
-      HaveOnLeaveDamage: 0
+      HaveOnLeaveDamage: 1
       Damage: 0
-      Time: 0
-      Effect: {fileID: 4417973398847505624, guid: f97c751e071898f4b85df6f807ba0e33, type: 3}
+      Time: 2
+      Effect: {fileID: 2787084343152778923, guid: 416326913fbc4614e9aa4db37032af9c, type: 3}
   resources:
   - Name: Wood
-    Description: A fuel used in the cauldron
+    Description: 'Basic Fuel used in cauldron. Can also be use as ingredient.
+
+      Lightly
+      Flammable'
     sprite: {fileID: 21300000, guid: 41d369399c4ed8e43be733ac353bb655, type: 3}
     IsFuel: 1
-    BurningTemperature: 3
+    BurningTemperature: 4
     Price: 10
     Attributes:
     - attribute: 3
       value: 1
     stateOfMatter: 0
   - Name: Dead Mans Ashes
-    Description: An item that might be used in the crafting
+    Description: 'All that remains from the poor soul that once wandered those halls.
+
+      Holy'
     sprite: {fileID: 21300000, guid: 7081118dfebee854cb3f0e5ef38d8ecb, type: 3}
     IsFuel: 0
     BurningTemperature: 2
@@ -2908,9 +2965,11 @@ MonoBehaviour:
     Attributes:
     - attribute: 0
       value: 2
-    stateOfMatter: 0
+    stateOfMatter: 1
   - Name: Corrupted Soil
-    Description: An item that might be used in the crafting
+    Description: 'A handful of soil that has been tainted by blood of unholy creatures.
+
+      Corrosive'
     sprite: {fileID: 21300000, guid: b35ebf133ae135c4ea5e41f08a274a97, type: 3}
     IsFuel: 0
     BurningTemperature: 2
@@ -2920,7 +2979,9 @@ MonoBehaviour:
       value: 2
     stateOfMatter: 0
   - Name: Water
-    Description: An item that might be used in the crafting
+    Description: 'Bottle of clean water (hopefully)
+
+      Diluent'
     sprite: {fileID: 21300000, guid: c238e950c88965148b7c22a51d12b8f3, type: 3}
     IsFuel: 0
     BurningTemperature: 2
@@ -2929,10 +2990,12 @@ MonoBehaviour:
     - attribute: 2
       value: 2
     - attribute: 3
-      value: -1
+      value: -10
     stateOfMatter: 2
   - Name: Oil
-    Description: An item that might be used in the crafting
+    Description: 'Oily substance, that can be easily set on fire
+
+      Flammable'
     sprite: {fileID: 21300000, guid: d0b173ceeb662384c834a75d189fbac2, type: 3}
     IsFuel: 0
     BurningTemperature: 2
@@ -2942,8 +3005,11 @@ MonoBehaviour:
       value: 2
     stateOfMatter: 2
   - Name: Strains of Dry Grass
-    Description: An item that might be used in the crafting
-    sprite: {fileID: 21300000, guid: cf5c383dd37a1c140814a3ac96ee13bf, type: 3}
+    Description: 'Little pack of dry grass. Can easily and fast spread through air.
+      (Even faster when burned). Can be used as fuel to produce little heat.
+
+      Flammable'
+    sprite: {fileID: 21300000, guid: 1265ebb29f0098e49bf367dbed851694, type: 3}
     IsFuel: 1
     BurningTemperature: 3
     Price: 10
@@ -2952,8 +3018,11 @@ MonoBehaviour:
       value: 2
     stateOfMatter: 1
   - Name: Acid pouches
-    Description: An item that might be used in the crafting
-    sprite: {fileID: 21300000, guid: cf5e576c322cf8148a0b9de4ee19b022, type: 3}
+    Description: 'Kidney like containers, holding unhealthy amount of acid. You should
+      be careful with opening this ones.
+
+      Corrosive'
+    sprite: {fileID: 21300000, guid: e88176ed44d60da488112e01369409e1, type: 3}
     IsFuel: 0
     BurningTemperature: 3
     Price: 10
@@ -2962,7 +3031,12 @@ MonoBehaviour:
       value: 2
     stateOfMatter: 2
   - Name: Glass
-    Description: An item that might be used in the crafting
+    Description: 'Just regular glass bottle. What? Did you really expect insightful
+      descriptions to every ingredient?
+
+      Transparent
+
+'
     sprite: {fileID: 21300000, guid: c7effdad40287364a8c7776abe1958f7, type: 3}
     IsFuel: 0
     BurningTemperature: 3
@@ -2972,7 +3046,10 @@ MonoBehaviour:
       value: 2
     stateOfMatter: 0
   - Name: Glass Shard
-    Description: An item that might be used in the crafting
+    Description: 'You should be cautious with those little things. You could cut
+      yourself... or impale something.
+
+      Sharp'
     sprite: {fileID: 21300000, guid: 7836ad999a5f509469ec493ad385270c, type: 3}
     IsFuel: 0
     BurningTemperature: 2
@@ -2982,9 +3059,12 @@ MonoBehaviour:
       value: 2
     stateOfMatter: 0
   - Name: Ice Core
-    Description: An item that might be used in the crafting
-    sprite: {fileID: 21300000, guid: 7a6d80c2dff7fad4a99bd0920edb2a13, type: 3}
-    IsFuel: 1
+    Description: 'Brrrrr, this thing is really cold, using it all at once would be
+      wasteful, Am I right?
+
+      Very Icy'
+    sprite: {fileID: 21300000, guid: b08b0983bd1f65143b5b1af916f7a8b8, type: 3}
+    IsFuel: 0
     BurningTemperature: 0
     Price: 10
     Attributes:
@@ -2992,7 +3072,10 @@ MonoBehaviour:
       value: 4
     stateOfMatter: 0
   - Name: Ice Shard
-    Description: An item that might be used in the crafting
+    Description: 'Small piece of big orb, still freezing but now you can use it and
+      get full value out of this thing.
+
+      Icy'
     sprite: {fileID: 21300000, guid: 7a6d80c2dff7fad4a99bd0920edb2a13, type: 3}
     IsFuel: 1
     BurningTemperature: 1
@@ -3002,7 +3085,10 @@ MonoBehaviour:
       value: 2
     stateOfMatter: 0
   - Name: Gunpowder
-    Description: An item that might be used in the crafting
+    Description: 'This pile of gunpowder is too weak to make big explosion by itself,
+      but will still burn pretty well.
+
+      Explosive'
     sprite: {fileID: 21300000, guid: a80b55bb62edd1b4fb58ef3e1d6c0ed6, type: 3}
     IsFuel: 0
     BurningTemperature: 2
@@ -3011,9 +3097,10 @@ MonoBehaviour:
     - attribute: 7
       value: 2
     stateOfMatter: 0
-  - Name: Spark root
-    Description: An item that might be used in the crafting
-    sprite: {fileID: 21300000, guid: 41d369399c4ed8e43be733ac353bb655, type: 3}
+  - Name: Spark Root
+    Description: WAS THAT A SPARK?? Jeez, this little dusty thing is full of energy.
+      Wonder what would happen if i ate it?
+    sprite: {fileID: 21300000, guid: ed4c8db57ea067f4cbda0b88d9ddc6e1, type: 3}
     IsFuel: 0
     BurningTemperature: 2
     Price: 10
@@ -3021,8 +3108,43 @@ MonoBehaviour:
     - attribute: 8
       value: 2
     stateOfMatter: 1
+  - Name: Dust
+    Description: 'Just some leftovers after grinding down a log. Sprays easily in
+      the air, and can catch on fire quickly.
+
+      Flammable'
+    sprite: {fileID: 21300000, guid: 41d369399c4ed8e43be733ac353bb655, type: 3}
+    IsFuel: 0
+    BurningTemperature: 2
+    Price: 10
+    Attributes:
+    - attribute: 3
+      value: 2
+    stateOfMatter: 1
+  - Name: Combustive Vials
+    Description: 'Unstable solution used as fuel and weapon by those mad robots.
+      Little bit more and maybe you could return a favor.
+
+      Highly Explosive'
+    sprite: {fileID: 21300000, guid: ba7886e06353a6d4393c5543aea8c8bd, type: 3}
+    IsFuel: 0
+    BurningTemperature: 2
+    Price: 10
+    Attributes:
+    - attribute: 7
+      value: 4
+    stateOfMatter: 2
+  OtherItems:
+  - Name: Fire Breath Recipe
+    Description: Requires highly flameable and explosive items. You also need high
+      temperature to mix all elements, and don't forget to add something Liquid!
+    sprite: {fileID: 21300058, guid: 7810966f0f690954c87305933cabf2b0, type: 3}
+    IsFuel: 0
+    BurningTemperature: 0
+    Price: 0
   recipes:
   - ItemName: Fire Breath
+    ItemCount: 1
     Attributes:
     - attribute: 3
       value: 4
@@ -3031,9 +3153,10 @@ MonoBehaviour:
     StatesOfMatter:
     - stateOfMatter: 2
       amount: 1
-    Potions: []
+    Items: []
     FuelTemperature: 3
   - ItemName: Ice Spikes
+    ItemCount: 1
     Attributes:
     - attribute: 6
       value: 4
@@ -3042,47 +3165,125 @@ MonoBehaviour:
     StatesOfMatter:
     - stateOfMatter: 0
       amount: 2
-    Potions: []
+    Items: []
+    FuelTemperature: 2
+  - ItemName: Napalm
+    ItemCount: 1
+    Attributes:
+    - attribute: 3
+      value: 4
+    - attribute: 7
+      value: 2
+    StatesOfMatter:
+    - stateOfMatter: 0
+      amount: 2
+    Items: []
+    FuelTemperature: 3
+  - ItemName: Cleanse Potion
+    ItemCount: 1
+    Attributes:
+    - attribute: 0
+      value: 4
+    - attribute: 2
+      value: 2
+    StatesOfMatter:
+    - stateOfMatter: 1
+      amount: 1
+    Items: []
+    FuelTemperature: 2
+  - ItemName: Speed Potion
+    ItemCount: 1
+    Attributes:
+    - attribute: 8
+      value: 2
+    - attribute: 2
+      value: 2
+    StatesOfMatter:
+    - stateOfMatter: 2
+      amount: 1
+    - stateOfMatter: 1
+      amount: 1
+    Items: []
+    FuelTemperature: 2
+  - ItemName: Acid Potion
+    ItemCount: 1
+    Attributes:
+    - attribute: 1
+      value: 4
+    StatesOfMatter:
+    - stateOfMatter: 2
+      amount: 2
+    Items: []
+    FuelTemperature: 2
+  - ItemName: Health Potion
+    ItemCount: 1
+    Attributes:
+    - attribute: 0
+      value: 2
+    - attribute: 8
+      value: 2
+    - attribute: 2
+      value: 2
+    StatesOfMatter:
+    - stateOfMatter: 1
+      amount: 2
+    Items: []
+    FuelTemperature: 3
+  - ItemName: Explosive
+    ItemCount: 1
+    Attributes:
+    - attribute: 7
+      value: 6
+    - attribute: 3
+      value: 2
+    StatesOfMatter:
+    - stateOfMatter: 1
+      amount: 1
+    - stateOfMatter: 2
+      amount: 2
+    Items: []
+    FuelTemperature: 3
+  - ItemName: Dust
+    ItemCount: 1
+    Attributes: []
+    StatesOfMatter: []
+    Items:
+    - Wood
+    FuelTemperature: 2
+  - ItemName: Glass Shard
+    ItemCount: 5
+    Attributes: []
+    StatesOfMatter: []
+    Items:
+    - Glass
+    FuelTemperature: 2
+  - ItemName: Ice Shard
+    ItemCount: 5
+    Attributes: []
+    StatesOfMatter: []
+    Items:
+    - Ice Core
     FuelTemperature: 2
   interactions:
   - PotionName: 
     interactions:
     - PotionName: 
       script: {fileID: 0}
-  PlayerPotions:
-  - PotionName: Fire Breath
-    count: 100
-  - PotionName: Napalm
+  PlayerItems:
+  - Name: Fire Breath
+    count: 40
+  - Name: Napalm
+    count: 10
+  - Name: Ice Spikes
+    count: 40
+  - Name: Wood
+    count: 40
+  - Name: Ice Core
     count: 3
-  - PotionName: Cleanse Potion
-    count: 100
-  - PotionName: Ice Spikes
-    count: 100
-  - PotionName: Speed Potion
-    count: 100
-  - PotionName: Health Potion
-    count: 100
-  - PotionName: Acid Potion
-    count: 10
-  - PotionName: Explosive
-    count: 10
-  PlayerResources:
-  - ResourceName: Wood
-    count: 8
-  - ResourceName: Dead Mans Ashes
-    count: 10
-  - ResourceName: Oil
-    count: 20
-  - ResourceName: Ice Core
+  - Name: Fire Breath Recipe
     count: 3
-  - ResourceName: Gunpowder
-    count: 15
-  - ResourceName: Acid pouches
-    count: 70
-  - ResourceName: Glass
-    count: 20
-  - ResourceName: Water
-    count: 35
+  - Name: Explosive
+    count: 18
   QuickPotions:
   - Name: 
     Description: 
@@ -3870,8 +4071,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 2328317393581697338, guid: 146496718105e694c898ec557cc11538, type: 3}
-  PotionListUI: {fileID: 7561315469164132527}
-  ResourceListUI: {fileID: 8351802818119787180}
+  uis:
+  - ItemType: 1
+    ListUI: {fileID: 7561315469164132527}
+  - ItemType: 2
+    ListUI: {fileID: 8351802818119787180}
+  - ItemType: 0
+    ListUI: {fileID: 7561315469164132527}
 --- !u!222 &5596680410276768679
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5420,7 +5626,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6466093924464373194
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5546,7 +5752,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3969450144262015234
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5648,7 +5854,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5237425705199317596}
   m_HandleRect: {fileID: 471837985818011145}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -5750,6 +5956,7 @@ MonoBehaviour:
     IsFuel: 0
     BurningTemperature: 0
     Price: 0
+  ItemCount: 0
 --- !u!61 &1707350819919050387
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6112,168 +6319,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Index: 1
---- !u!1 &6303246265553965586
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1808085547606786420}
-  - component: {fileID: 5689634006550400629}
-  - component: {fileID: 4879914997650496695}
-  - component: {fileID: 181992359672840149}
-  m_Layer: 0
-  m_Name: MusicPlayer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1808085547606786420
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6303246265553965586}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 10.165188}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2281891327876583458}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5689634006550400629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6303246265553965586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 946ad8629a080154988a3434df048cf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlaySound: {fileID: 4879914997650496695}
-  MenuMusic: {fileID: 8300000, guid: d3278976658383649afc9f4deb5fbd22, type: 3}
-  Level1: {fileID: 8300000, guid: 1ba33b693d561c34798c609d495eb2db, type: 3}
-  Boss1: {fileID: 0}
-  destroy: 0
---- !u!82 &4879914997650496695
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6303246265553965586}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 3182989571091198245, guid: 1ffdc11b9efce9542b36f32f5be4a5ea, type: 2}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 1
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!114 &181992359672840149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6303246265553965586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2796bab7eb0003246ba94cc4dcccfe7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: 1ffdc11b9efce9542b36f32f5be4a5ea, type: 2}
-  musicSlider: {fileID: 4395992434505403182}
-  sfxSlider: {fileID: 1626829792183576120}
 --- !u!1 &6333097267855827773
 GameObject:
   m_ObjectHideFlags: 0
@@ -6493,7 +6538,7 @@ RectTransform:
   m_Father: {fileID: 7365413204415407323}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6795,7 +6840,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000029563904, y: 0}
+  m_AnchoredPosition: {x: -0.000029563904, y: -0.000091552734}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1382443910206394568
@@ -6840,7 +6885,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &59060729188217420
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6942,8 +6987,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2191002585983365788}
   m_HandleRect: {fileID: 9161738107700801902}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0.51017374
+  m_Size: 0.9874999
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

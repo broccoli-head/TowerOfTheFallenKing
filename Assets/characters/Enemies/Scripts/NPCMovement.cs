@@ -73,7 +73,7 @@ public class NPCMovement : MonoBehaviour, Controller
 
     void FixedUpdate()
     {
-        if(enemy.FreezeTime <= 0)
+        if (enemy.FreezeTime <= 0)
         {
             try
             {

@@ -8,8 +8,7 @@ public class ItemsUI : MonoBehaviour
 {
 
     public ItemUIPrefab prefab;
-    public GameObject PotionListUI;
-    public GameObject ResourceListUI;
+    [SerializeField] private List<UI> uis;
 
 
     void Start()
@@ -19,40 +18,54 @@ public class ItemsUI : MonoBehaviour
 
     public void RefreshItemsList()
     {
-        // Niszczy wszystkie obiekty potek i zasobow w ui
-        foreach (Transform item in PotionListUI.transform.GetComponentInChildren<Transform>())
+        // Niszczy wszystkie obiekty itemow w ui
+        foreach (UI ui in uis)
         {
-            Destroy(item.gameObject);
-        }
-        foreach (Transform item in ResourceListUI.transform.GetComponentInChildren<Transform>())
-        {
-            Destroy(item.gameObject);
+            foreach (Transform item in ui.ListUI.transform.GetComponentInChildren<Transform>())
+            {
+                Destroy(item.gameObject);
+            }
         }
 
 
         try
         {
-            // Tworzy nowe obiekty potek w ui
-            foreach (var item in Inventory.Instance.PlayerPotions)
+            
+            foreach (UI ui in uis)
             {
-                GameObject potionUI = Instantiate(prefab.gameObject, PotionListUI.transform);
-                Potion potion = Inventory.Instance.FindPotionByName(item.PotionName);
-                potionUI.GetComponent<ItemUIPrefab>().SetItem(potion);
+                foreach (var item in Inventory.Instance.PlayerItems)
+                {
+                    // sprawdzamy czy item istnieje
+                    Item i = Inventory.Instance.FindItemByName(item.Name);
+                    if (i != null)
+                    {
+                        // jeœli typ itemu odpowiada typowi listy, tworzy dla niego nowy obiekt w ui
+                        if(i.type == ui.ItemType)
+                        {
+                            GameObject potionUI = Instantiate(prefab.gameObject, ui.ListUI.transform);
+                            potionUI.GetComponent<ItemUIPrefab>().SetItem(i);
+                        }
+                    }
+                    else
+                    {
+                        //Debug.Log($"item: {item.Name} nie istnieje");
+                    }
+
+                }
             }
 
-            // Tworzy nowe obiekty zasobow w ui
-            foreach (var item in Inventory.Instance.PlayerResources)
-            {
-                GameObject ResourceUI = Instantiate(prefab.gameObject, ResourceListUI.transform);
-                Resource resource = Inventory.Instance.FindResourceByName(item.ResourceName);
-                if(resource != null)
-                    ResourceUI.GetComponent<ItemUIPrefab>().SetItem(resource);
-            }
         }
         catch (Exception e)
         {
 
         }
 
+    }
+
+    [System.Serializable]
+    private class UI
+    {
+        public Item.ItemType ItemType;
+        public GameObject ListUI;
     }
 }

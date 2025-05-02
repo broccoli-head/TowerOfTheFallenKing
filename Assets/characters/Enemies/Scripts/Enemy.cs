@@ -81,6 +81,7 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
 
     private SpriteRenderer spriteRenderer;
     private Color spriteColor;
+    private bool isRed = false;
 
 
     private void Start()
@@ -187,59 +188,64 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
     public void Damage(float damage, Potion.DamageType DamageType, Potion.DamagePlace DamagePlace, bool EnemyOnly)
     {
         DamageTaken = true;
-        if ( (!Flying || DamagePlace == Potion.DamagePlace.Zone)  &&  DamageType != Potion.DamageType.None)
+        if (this.isActiveAndEnabled)
         {
-            if (cleanse)
+            if ((!Flying || DamagePlace == Potion.DamagePlace.Zone) && DamageType != Potion.DamageType.None)
             {
-                cleanse = false;
-                return;
-            }             
-            foreach(var Modificator in DamageModificators)
-            {
-                if(DamageType == Modificator.DamageType)
+                if (cleanse)
                 {
-                    damage *= (Modificator.modificator / 100f);
-                    Damage(damage);
-                    StartCoroutine(Flash());
-                    break;
+                    cleanse = false;
+                    return;
                 }
+                foreach (var Modificator in DamageModificators)
+                {
+                    if (DamageType == Modificator.DamageType)
+                    {
+                        damage *= (Modificator.modificator / 100f);
+                        Damage(damage);
+                        StartCoroutine(Flash());
+                        break;
+                    }
+                }
+
             }
-            
-        }
+        } 
     }
 
     // Odpowiada za otrzymywanie Damage przez dluzszy okres w wyniku np. podpalenia
     public void Damage(float DPS, float Time, Potion.DamageType DamageType, Potion.DamagePlace DamagePlace, GameObject EffectObject, bool EnemyOnly)
     {
         DamageTaken = true;
-        if (!Flying || DamagePlace == Potion.DamagePlace.Zone)
+        if (this.isActiveAndEnabled)
         {
-            if (cleanse)
+            if (!Flying || DamagePlace == Potion.DamagePlace.Zone)
             {
-                cleanse = false;
-                return;
-            }
-            foreach (var Modificator in DamageModificators)
-            {
-                if (DamageType == Modificator.DamageType)
+                if (cleanse)
                 {
-                    DPS *= (Modificator.modificator / 100f);
-                    damage += DPS;
-                    StartCoroutine(Flash());
-                    break;
+                    cleanse = false;
+                    return;
                 }
+                foreach (var Modificator in DamageModificators)
+                {
+                    if (DamageType == Modificator.DamageType)
+                    {
+                        DPS *= (Modificator.modificator / 100f);
+                        damage += DPS;
+                        break;
+                    }
+                }
+                EffectObject = Instantiate(EffectObject, transform);
+                effects.Add(EffectObject);
+                StartCoroutine(EndOnLeaveDamage(EffectObject, Time, DPS));
             }
-            EffectObject = Instantiate(EffectObject,transform);
-            effects.Add(EffectObject);
-            StartCoroutine(EndOnLeaveDamage(EffectObject,Time,DPS));
-        }        
+        } 
     }
 
     // Odpowiada za jednorazowe otrzymanie Damage, bez parametrow - np. do sztyletu
     public void Damage(float Damage)
     {
         DamageTaken = true;
-        if (isExposed) {
+        if (isExposed && this.isActiveAndEnabled) {
             // zmienia damage na (100 + Exposition)% aktualnych obrazen 
             Damage *= 1 + (Exposition / 100f);
         }
@@ -307,11 +313,18 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
 
     public IEnumerator EndOnLeaveDamage(GameObject EffectObject,float time,float damage)
     {
+        spriteRenderer.color = new Color(1f, 0.6f, 0.6f);
+        isRed = true;
+
         yield return new WaitForSeconds(time - 1f);
         //play animation
+
         yield return new WaitForSeconds(1);
         this.damage -= damage;
         Destroy(EffectObject);
+
+        spriteRenderer.color = spriteColor;
+        isRed = false;
         yield break;
     }
 
@@ -333,13 +346,17 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
     }
 
     public IEnumerator Flash()
-    {       
+    {
+        if (isRed) yield break; //jesli juz jest czerwony to nie zmieniaj koloru
+
         //pobiera obecny kolor, najczesciej jest to #ffffff a nastepnie zmienia na czerwony
         spriteRenderer.color = new Color(1f, 0.6f, 0.6f);
-        
+        isRed = true;
+
         //po 0.5s powraca poprzedni kolor
         yield return new WaitForSeconds(0.3f);
         spriteRenderer.color = spriteColor;
+        isRed = false;
     }
 
     private IEnumerator Die()

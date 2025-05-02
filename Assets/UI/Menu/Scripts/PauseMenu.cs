@@ -5,11 +5,12 @@ public class PauseMenu : Menu
     [SerializeField] private GameObject menuUI;
     [SerializeField] private GameObject canvas;
     [SerializeField] private GameObject inventory;
-
+    CommlinkOpener commlinkOpener;
     private bool isPaused = false;
 
     void Update()
     {
+        commlinkOpener = FindAnyObjectByType<CommlinkOpener>();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
@@ -22,7 +23,13 @@ public class PauseMenu : Menu
     public void PauseGame()
     {
         canvas.SetActive(false);
-        inventory.SetActive(false);
+
+        if (commlinkOpener.IsOpen)
+        {
+            commlinkOpener.ToggleCommlink();
+        }
+
+        
         menuUI.SetActive(true);
 
         //zatrzymuje gre

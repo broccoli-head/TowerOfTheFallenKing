@@ -32,11 +32,7 @@ public class ItemUIPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         this.item = item;
         image.sprite = item.GetSprite();
         count.font = Inventory.Instance.font;
-
-        if (item.type == Item.ItemType.Potion)
-            count.text = Inventory.Instance.FindPlayerPotionByName(item.Name).count.ToString();
-        else
-            count.text = Inventory.Instance.FindPlayerResourceByName(item.Name).count.ToString();
+        count.text = Inventory.Instance.FindPlayerItemByName(item.Name).count.ToString();
         
     }
 

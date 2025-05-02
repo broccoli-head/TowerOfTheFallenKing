@@ -11,6 +11,7 @@ public class CraftingResult : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     Color color;
     public Item result;
     Crafting crafting;
+    [HideInInspector] public int ItemCount;
 
     void Start()
     {
