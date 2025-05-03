@@ -287,7 +287,7 @@ public class Level
 
             SceneTransition sceneTransition = GameObject.FindObjectOfType<SceneTransition>();
             if (sceneTransition != null)
-                sceneTransition.StartCoroutine(sceneTransition.SwitchScenes(name));
+                sceneTransition.StartCoroutine(sceneTransition.SwitchScenes(name, ComingFromRoom));
             else
                 SceneManager.LoadScene(name);
         }

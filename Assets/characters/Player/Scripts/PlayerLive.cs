@@ -79,11 +79,14 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
 
         if (HitPoints <= 0)
         {
+            GameObject musicPlayer = FindObjectOfType<MusicPlayer>().gameObject;
+            if (musicPlayer != null)
+                Destroy(musicPlayer);
+
             // laduje scene (np. ekran smierci), gdy punkty zycia osiagna 0.
             Level.CurrentlyOnRoom = "Default";
             LevelLoader.CleanedRooms.Clear();
-            SceneManager.LoadScene(0); 
-
+            SceneManager.LoadScene(0);
         }
 
         if(NoDamageTakenTimer >= HealthRegenerationDelay && HitPoints < StartHP)

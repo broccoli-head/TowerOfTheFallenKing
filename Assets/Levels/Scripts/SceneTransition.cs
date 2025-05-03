@@ -6,21 +6,32 @@ using System.Collections;
 public class SceneTransition : MonoBehaviour
 {
     public Image fadeImage;
-    public float fadeDuration = 0.05f;
+    public float fadeDuration;
+    private AudioSource audioSource;
+
+    public AudioClip menuTransition;
+    public AudioClip sceneTransition;
 
 
-    public void Start()
+    void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = menuTransition;
         DontDestroyOnLoad(this);
     }
 
-    public IEnumerator SwitchScenes(string sceneName)
+    public IEnumerator SwitchScenes(string sceneName, string comingFrom)
     {
+        if (comingFrom == "Default")
+            audioSource.PlayOneShot(audioSource.clip);
+        else
+            audioSource.PlayOneShot(sceneTransition);
+
         //zmienia ekran na czarny
         yield return StartCoroutine(Fade(0f, 1f));
 
-        //czeka 0.05 sekundy
-        yield return new WaitForSeconds(0.05f);
+        //czeka 0.1 sekundy
+        yield return new WaitForSeconds(0.1f);
 
         //³aduje now¹ scenê
         SceneManager.LoadScene(sceneName);
