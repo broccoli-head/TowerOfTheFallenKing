@@ -53,19 +53,10 @@ public class ChaseMovement : MonoBehaviour, Controller
         StartCoroutine(MoveToPlayer());
     }
 
-    void FixedUpdate()
-    {
-        // Jezeli przeciwnik jest "zamrozony" zmniejsza czas pozostaly do odmrozenia i przerywa wykonywanie funkcji
-        if(enemy.FreezeTime > 0)
-        {
-            enemy.FreezeTime -= Time.fixedDeltaTime;
-            if (enemy.FreezeTime < 0)
-                enemy.FreezeTime = 0;
-            return;
-        }
 
-        // Porusza przeciwnika w kierunku ustalonym w MoveToPlayer
-        rb.velocity = moveDirection * chaseSpeed;
+    void Update()
+    {
+        chaseSpeed = enemy.chaseSpeed;
 
         if (audioSource != null)
         {
@@ -83,6 +74,22 @@ public class ChaseMovement : MonoBehaviour, Controller
                 audioSource.Stop();
             }
         }
+    }
+
+
+    void FixedUpdate()
+    {
+        // Jezeli przeciwnik jest "zamrozony" zmniejsza czas pozostaly do odmrozenia i przerywa wykonywanie funkcji
+        if(enemy.FreezeTime > 0)
+        {
+            enemy.FreezeTime -= Time.fixedDeltaTime;
+            if (enemy.FreezeTime < 0)
+                enemy.FreezeTime = 0;
+            return;
+        }
+
+        // Porusza przeciwnika w kierunku ustalonym w MoveToPlayer
+        rb.velocity = moveDirection * chaseSpeed;  
     }
 
 
@@ -172,11 +179,5 @@ public class ChaseMovement : MonoBehaviour, Controller
     {
         enemy.FreezeTime += time;
     }
-
-    private void Update()
-    {
-        chaseSpeed = enemy.chaseSpeed;
-    }
-
 
 }

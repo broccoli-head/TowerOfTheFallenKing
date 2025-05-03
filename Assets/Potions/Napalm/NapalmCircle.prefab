@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Napalm
+  circleSound: {fileID: 8300000, guid: b98ab1889b900ed4fa6e714805746bcd, type: 3}
 --- !u!70 &5890283013566108748
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -147,10 +148,10 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -4263948484800230584, guid: 1ffdc11b9efce9542b36f32f5be4a5ea, type: 2}
   m_audioClip: {fileID: 8300000, guid: b98ab1889b900ed4fa6e714805746bcd, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

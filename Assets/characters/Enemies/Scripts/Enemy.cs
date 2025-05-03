@@ -39,11 +39,6 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
     [Header("Enemy SFX")]
     public AudioClip footstepsSound;
     public AudioClip teleportationSound;
-    private AudioSource audioSource;
-
-    //potrzebne do dŸwiêku kroków:
-    private GameObject pauseMenu; 
-    private GameObject inventory;
 
 
     [Header("Drop items")]

@@ -15,23 +15,31 @@ public class PotionEffect : MonoBehaviour
     private BeamPotionEffect beamPotionEffect;
     private float ObjectSize;
 
-    private void Awake()
+    private AudioSource audioSource;
+    private GameObject pauseMenu;
+    private GameObject inventoryUI;
+
+
+    void Awake()
     {
         inventory = FindFirstObjectByType<Inventory>();
         potion = inventory.FindPotionByName(Name);
         StartCoroutine(DestroyPotion());
         ObjectSize = GetComponent<Collider2D>().bounds.size.x;
+
         if (potion.shape == Potion.Shape.Beam)
             beamPotionEffect = gameObject.AddComponent<BeamPotionEffect>();
+
         if (potion.cleanse)
-        {
-            //transform.position = GameObject.FindGameObjectWithTag("Player").transform.position;
             gameObject.AddComponent<Cleanse>();
-        }
+
+        audioSource = GetComponent<AudioSource>();
+        pauseMenu = ObjectsFinder.FindInactiveObjects("Menu");
+        inventoryUI = ObjectsFinder.FindInactiveObjects("Inventory");
     }
+
     void Start()
-    {   
-        
+    {  
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, ObjectSize/2);
         foreach (Collider2D collider in colliders)
         {
@@ -45,18 +53,16 @@ public class PotionEffect : MonoBehaviour
             var controller = ComponentHelper.GetInterfaceComponent<Controller>(collider.gameObject);
 
             //freeze
-            if(controller != null && potion.freeze)
+            if (controller != null && potion.freeze)
             {
                 controller.Disable(potion.freezeTime);
 
-                if(DmgReciver != null)
+                if (DmgReciver != null)
                 {
                     OnLeaveDamage Leave = potion.onLeaveDamage;
                     DmgReciver.Damage(Leave.Damage, Leave.Time, potion.damageType, potion.damagePlace, Leave.Effect, potion.EnemyOnly);
                 }
-               
             }
-                
 
             //Explosion
             Rigidbody2D rb;
@@ -90,6 +96,17 @@ public class PotionEffect : MonoBehaviour
                 if (interaction != null)
                     gameObject.AddComponent(interaction.GetType());
             }
+        }
+
+        if (audioSource != null)
+        {
+            //puœæ dŸwiêk potki, jeœli menu oraz inventory s¹ wy³¹czone
+            if (!pauseMenu.activeSelf && !inventoryUI.activeSelf)
+            {
+                if (!audioSource.isPlaying && audioSource.clip != null)
+                    audioSource.Play();
+            }
+            else audioSource.Stop();
         }
     }
 
