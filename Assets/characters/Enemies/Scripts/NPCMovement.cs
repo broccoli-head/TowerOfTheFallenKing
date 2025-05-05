@@ -19,9 +19,6 @@ public class NPCMovement : MonoBehaviour, Controller
 
     AudioSource audioSource;
     AudioClip footstepsSound;
-    GameObject pauseMenu;
-    GameObject inventory;
-
 
     private void Awake()
     {
@@ -34,9 +31,6 @@ public class NPCMovement : MonoBehaviour, Controller
 
         audioSource = GetComponent<AudioSource>();
         footstepsSound = enemy.footstepsSound;
-
-        pauseMenu = ObjectsFinder.FindInactiveObjects("Menu");
-        inventory = ObjectsFinder.FindInactiveObjects("Inventory");
 
         try
         {
@@ -55,7 +49,7 @@ public class NPCMovement : MonoBehaviour, Controller
         if (audioSource != null)
         {
             //puœæ dŸwiêk chodzenia, je¿eli przeciwnik siê porusza
-            if (rb.velocity.magnitude > 0.1f && !pauseMenu.activeSelf && !inventory.activeSelf)
+            if (rb.velocity.magnitude > 0.1f && CommlinkOpener.checkVisibility())
             {
                 if (!audioSource.isPlaying)
                 {

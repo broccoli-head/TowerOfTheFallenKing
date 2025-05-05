@@ -4,36 +4,46 @@ using UnityEngine;
 
 public class CleanedCheck : MonoBehaviour
 {
-    List<Enemy> Enemies;
+    public List<Enemy> Enemies;
+    public List<Spawner> Spawners;
     bool AllEnemiesKilled = false;
 
     void Start()
     {
         Enemies = new List<Enemy>(FindObjectsOfType<Enemy>());
+        Spawners = new List<Spawner>(FindObjectsOfType<Spawner>());
         if (LevelLoader.CleanedRooms.Contains(Level.CurrentlyOnRoom))
         {
             Debug.Log(Level.CurrentlyOnRoom + " is already cleaned");
             Destroy(gameObject);
         }
+        
     }
 
     void Update()
     {
         AllEnemiesKilled = true;
+        Enemies = new List<Enemy>(FindObjectsOfType<Enemy>());
+        Spawners = new List<Spawner>(FindObjectsOfType<Spawner>());
         foreach (Enemy enemy in Enemies)
         {
-            try
+            if (enemy != null)
             {
-                if (enemy?.HP > 0)
+                if (enemy.HP > 0)
                 {
                     AllEnemiesKilled = false;
                     break;
                 }
             }
-            catch
+        }
+        foreach(Spawner spawner in Spawners)
+        {
+            if (spawner != null)
             {
-                continue;
+                AllEnemiesKilled = false;
+                break;
             }
+                
         }
         if (AllEnemiesKilled)
         {
@@ -41,9 +51,7 @@ public class CleanedCheck : MonoBehaviour
             {
                 Debug.Log("Wyczyszczono " + Level.CurrentlyOnRoom);
                 LevelLoader.CleanedRooms.Add(Level.CurrentlyOnRoom);
-                Destroy(this);
             }
-
         }
     }
 }

@@ -4,9 +4,7 @@ using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
-
     [SerializeField] private AudioClip clickSound;
-
     private AudioSource audioSource;
 
     void Start()
@@ -14,15 +12,19 @@ public class Menu : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         Button[] buttons = FindObjectsOfType<Button>(true);
 
-        //dla kazdego przycisku ustawiamy listenera
-        foreach (Button button in buttons)
+        if (audioSource != null)
         {
-            button.onClick.AddListener(() =>
+            //dla kazdego przycisku ustawiamy listenera
+            foreach (Button button in buttons)
             {
-                //puszcza dŸwiêk klikniêcia
-                audioSource.PlayOneShot(clickSound);
-            });
+                button.onClick.AddListener(() =>
+                {
+                    //puszcza dŸwiêk klikniêcia
+                    audioSource.PlayOneShot(clickSound);
+                });
+            }
         }
+        
     }
 
     public void StartGame()

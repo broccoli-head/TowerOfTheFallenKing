@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Unity.VisualScripting.FullSerializer;
 
 public class LevelLoader : MonoBehaviour, Saveable
 {
@@ -18,7 +17,7 @@ public class LevelLoader : MonoBehaviour, Saveable
 
     private List<int> path = new List<int>();
     private string filePath;
-    public bool LevelChangeCoolDown = false;
+    [ReadOnly]public bool LevelChangeCoolDown = false;
 
     public static LevelLoader Instance { get; private set; }
     public static List<string> CleanedRooms = new List<string>();
@@ -54,6 +53,9 @@ public class LevelLoader : MonoBehaviour, Saveable
     {
         if (LevelChangeCoolDown)
             return;
+
+        Level.ComingFromRoom = "";
+        Level.CurrentlyOnRoom = "Default";
 
         LevelChangeCoolDown = true;
         StartCoroutine(LevelCoolDown());
@@ -284,6 +286,9 @@ public class Level
         {
             ComingFromRoom = CurrentlyOnRoom;
             CurrentlyOnRoom = name;
+
+            Debug.Log("Coming from " + ComingFromRoom);
+            Debug.Log("Now we at " + CurrentlyOnRoom);
 
             SceneTransition sceneTransition = GameObject.FindObjectOfType<SceneTransition>();
             if (sceneTransition != null)

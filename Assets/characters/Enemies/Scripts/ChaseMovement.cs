@@ -23,8 +23,6 @@ public class ChaseMovement : MonoBehaviour, Controller
 
     AudioSource audioSource;
     AudioClip footstepsSound;
-    GameObject pauseMenu;
-    GameObject inventory;
 
 
     void Start()
@@ -33,12 +31,10 @@ public class ChaseMovement : MonoBehaviour, Controller
         player = GameObject.FindGameObjectWithTag("Player");
         enemy = GetComponent<Enemy>();
         chaseSpeed = enemy.chaseSpeed;
-        AttackDistance = enemy.MeleeStats.AttackDistance;
+        AttackDistance = enemy.Range;
 
         audioSource = GetComponent<AudioSource>();
         footstepsSound = enemy.footstepsSound;
-        pauseMenu = ObjectsFinder.FindInactiveObjects("Menu");
-        inventory = ObjectsFinder.FindInactiveObjects("Inventory");
 
 
         if (player != null)
@@ -61,7 +57,7 @@ public class ChaseMovement : MonoBehaviour, Controller
         if (audioSource != null)
         {
             //puœæ dŸwiêk chodzenia, je¿eli przeciwnik siê porusza
-            if (rb.velocity.magnitude > 0.1f && !pauseMenu.activeSelf && !inventory.activeSelf)
+            if (rb.velocity.magnitude > 0.1f && CommlinkOpener.checkVisibility())
             {
                 if (!audioSource.isPlaying)
                 {

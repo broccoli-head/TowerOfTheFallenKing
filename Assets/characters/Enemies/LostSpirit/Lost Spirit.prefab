@@ -200,24 +200,18 @@ MonoBehaviour:
   - DamageType: 4
     modificator: 80
   attackMode: 2
-  MeleeStats:
-    MeleAttack: 0
-    AttackDamage: 0
-    DamageType: 0
-    AttackFrequency: 0
-    AttackDistance: 0
-    InRange: 0
-    AttackDelay: 0
-    FriendlyFire: 0
-  ProjectileStats:
-    ProjectileAttack: 1
-    Projectile: {fileID: 5345490006161787014, guid: fc5731ff3273bc442b1862af7e596216, type: 3}
-    AttackDamage: 10
-    DamageType: 1
-    AttackFrequency: 2
-    Speed: 6.5
-    LiveTime: 4.5
-    Drag: 0
+  AttackFrequency: 3
+  MeleeAttack: 0
+  Range: 0
+  SpecialMeeleAttacks: []
+  MeeleAttacks: []
+  ProjectileAttack: 1
+  SpecialProjectiles: []
+  Projectiles:
+  - {fileID: 5920484818411964583, guid: fc5731ff3273bc442b1862af7e596216, type: 3}
+  ProjectileAllAroundAttack: 0
+  SpecialAllAroundProjectiles: []
+  AllAroundProjectiles: []
   looping: 0
   speed: 0
   chaseSpeed: 0
@@ -231,10 +225,12 @@ MonoBehaviour:
   ItemPlacementMaxDistance: 1
   random: 0
   ItemCount: 0
+  AdditionalDamage: 0
   FreezeTime: 0
   FacingDirection: {x: 0, y: 0}
   Player: {fileID: 0}
   PlayerDetected: 0
+  InRange: 0
 --- !u!50 &2439262867996681890
 Rigidbody2D:
   serializedVersion: 4
@@ -350,8 +346,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 10
-  MaxDistance: 40
+  MinDistance: 20
+  MaxDistance: 60
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0

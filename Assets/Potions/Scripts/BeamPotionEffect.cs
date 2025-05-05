@@ -37,7 +37,7 @@ public class BeamPotionEffect : MonoBehaviour
             // srodek naszego obiektu plus polowa jego wielkosci zeby znalezc sie na jego krawedzi, kierunek, dlugosc promienia - w tym przypadku wielkosc naszego obiektu * 0.5
             // potrzebna zeby sprawdzic czy jest miejsce na nowy obiekt
             RaycastHit2D hit = Physics2D.Raycast( (Vector2)transform.position + (direction * size * 0.51f) , direction, size * 0.5f);
-            if (hit.collider == null || ComponentHelper.GetInterfaceComponent<ReciveDamage>(hit.collider.gameObject) != null || hit.collider.gameObject == gameObject || hit.collider.isTrigger)
+            if (hit.collider == null || Helper.GetInterfaceComponent<ReciveDamage>(hit.collider.gameObject) != null || hit.collider.gameObject == gameObject || hit.collider.isTrigger)
             {
                 Vector2 position = (Vector2)transform.position + (direction * size);
                 BeamPotionEffect newObject = Instantiate(potion.potionEffect, position, transform.rotation).GetComponent<BeamPotionEffect>();

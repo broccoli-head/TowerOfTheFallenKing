@@ -200,24 +200,21 @@ MonoBehaviour:
   - DamageType: 4
     modificator: 80
   attackMode: 1
-  MeleeStats:
-    MeleAttack: 1
-    AttackDamage: 20
+  AttackFrequency: 4
+  MeleeAttack: 1
+  Range: 2
+  SpecialMeeleAttacks: []
+  MeeleAttacks:
+  - AttackDamage: 20
     DamageType: 2
-    AttackFrequency: 4
-    AttackDistance: 2
-    InRange: 0
-    AttackDelay: 0.5
+    AttackDelay: 0.2
     FriendlyFire: 0
-  ProjectileStats:
-    ProjectileAttack: 0
-    Projectile: {fileID: 0}
-    AttackDamage: 0
-    DamageType: 0
-    AttackFrequency: 0
-    Speed: 0
-    LiveTime: 0
-    Drag: 0
+  ProjectileAttack: 0
+  SpecialProjectiles: []
+  Projectiles: []
+  ProjectileAllAroundAttack: 0
+  SpecialAllAroundProjectiles: []
+  AllAroundProjectiles: []
   looping: 1
   speed: 2
   chaseSpeed: 3
@@ -236,10 +233,12 @@ MonoBehaviour:
   ItemPlacementMaxDistance: 1
   random: 1
   ItemCount: 3
+  AdditionalDamage: 0
   FreezeTime: 0
   FacingDirection: {x: 0, y: 0}
   Player: {fileID: 0}
   PlayerDetected: 0
+  InRange: 0
 --- !u!50 &4817311547030894598
 Rigidbody2D:
   serializedVersion: 4

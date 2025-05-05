@@ -46,6 +46,9 @@ public class DestroyableEnvironment : MonoBehaviour, ReciveDamage
         }
         if(durability <= 0)
         {
+            if(this.gameObject.name == "Chest")
+                ChestSpawner.claimedChests.Add(Level.CurrentlyOnRoom);
+
             if (!itemsGiven)
             {
                 List<GameObject> obj = new List<GameObject>();

@@ -86,7 +86,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &7888784175788500371
@@ -114,24 +114,21 @@ MonoBehaviour:
   - DamageType: 4
     modificator: 80
   attackMode: 2
-  MeleeStats:
-    MeleAttack: 1
-    AttackDamage: 5
-    DamageType: 3
-    AttackFrequency: 1
-    AttackDistance: 1.2
-    InRange: 0
-    AttackDelay: 0.05
+  AttackFrequency: 1.8
+  MeleeAttack: 1
+  Range: 1
+  SpecialMeeleAttacks: []
+  MeeleAttacks:
+  - AttackDamage: 15
+    DamageType: 2
+    AttackDelay: 0
     FriendlyFire: 0
-  ProjectileStats:
-    ProjectileAttack: 0
-    Projectile: {fileID: 0}
-    AttackDamage: 0
-    DamageType: 0
-    AttackFrequency: 0
-    Speed: 0
-    LiveTime: 0
-    Drag: 0
+  ProjectileAttack: 0
+  SpecialProjectiles: []
+  Projectiles: []
+  ProjectileAllAroundAttack: 0
+  SpecialAllAroundProjectiles: []
+  AllAroundProjectiles: []
   looping: 1
   speed: 2
   chaseSpeed: 3
@@ -149,10 +146,12 @@ MonoBehaviour:
   ItemPlacementMaxDistance: 1
   random: 0
   ItemCount: 0
+  AdditionalDamage: 0
   FreezeTime: 0
   FacingDirection: {x: 0, y: 0}
   Player: {fileID: 0}
   PlayerDetected: 0
+  InRange: 0
 --- !u!50 &6037727909147769091
 Rigidbody2D:
   serializedVersion: 4

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CommlinkOpener : MonoBehaviour
 {
-    [HideInInspector] public bool IsOpen { get; private set; }
+    [HideInInspector] public static bool IsOpen;
     GameObject InGameVisible;
     GameObject InCommlinkVisible;
     Inventory inventory;
@@ -22,15 +22,14 @@ public class CommlinkOpener : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Tab)) 
+        if(!DeathScreen.isVisible && !PauseMenu.isVisible)
         {
-            ToggleCommlink();
+            if (Input.GetKeyDown(KeyCode.Tab))
+                ToggleCommlink();
+
+            if (IsOpen && Input.GetKeyDown(KeyCode.Tab))
+                FindFirstObjectByType<ItemsUI>().RefreshItemsList();
         }
-        if (IsOpen && Input.GetKeyDown(KeyCode.Tab))
-        {
-            FindFirstObjectByType<ItemsUI>().RefreshItemsList();
-        }
-            
     }
 
     public void ToggleCommlink()
@@ -44,7 +43,16 @@ public class CommlinkOpener : MonoBehaviour
             Time.timeScale = 0f;
         else
             Time.timeScale = 1f;
+
         InCommlinkVisible.SetActive(IsOpen);
         InGameVisible.SetActive(!IsOpen);
+    }
+
+    public static bool checkVisibility()
+    {
+        if (!DeathScreen.isVisible && !PauseMenu.isVisible && !IsOpen)
+            return true;
+        else
+            return false;
     }
 }

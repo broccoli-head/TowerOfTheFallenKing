@@ -22,8 +22,21 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
 
     [Header("Offensive")]
     public AttackMode attackMode;
-    public AttackHandler.MeleeStats MeleeStats;
-    public AttackHandler.ProjectileStats ProjectileStats;
+    [Min(0.01f)] public float AttackFrequency;
+    [Space(10)]
+    public bool MeleeAttack;
+    public float Range;
+    public List<AttackHandler.SpecialAttack<AttackHandler.MeleeStats>> SpecialMeeleAttacks;
+    public List<AttackHandler.MeleeStats> MeeleAttacks;
+    [Space(10)]
+    public bool ProjectileAttack;
+    public List<AttackHandler.SpecialAttack<Projectile>> SpecialProjectiles;
+    public List<Projectile> Projectiles;
+    [Space(10)]
+    public bool ProjectileAllAroundAttack;
+    public List<AttackHandler.SpecialAttack<AttackHandler.AllAroundProjectile>> SpecialAllAroundProjectiles;
+    public List<AttackHandler.AllAroundProjectile> AllAroundProjectiles;
+
 
 
     [Header("Movement")]
@@ -47,12 +60,13 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
     public bool random;
     public int ItemCount;
 
-
+    [HideInInspector] public float AdditionalDamage;
     [HideInInspector] public float FreezeTime;
     [HideInInspector] public Vector2 FacingDirection = Vector2.down;
     [HideInInspector] public GameObject Player;
     public bool IsAgresive { get; private set; } = false;
     [ReadOnly] public bool PlayerDetected = false;
+    [ReadOnly] public bool InRange = false;
 
     private List<GameObject> effects = new();
     private NPCMovement NpcMovement;
@@ -185,23 +199,27 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
         DamageTaken = true;
         if (this.isActiveAndEnabled)
         {
+            // sprawdzamy czy przeciwnik powinien otrzymaæ damage
             if ((!Flying || DamagePlace == Potion.DamagePlace.Zone) && DamageType != Potion.DamageType.None)
             {
+                // jesli mamy na sobie efekt cleanse, usuwamy go i anulujemy damage 
                 if (cleanse)
                 {
                     cleanse = false;
                     return;
                 }
+                // modyfikujemy damage - przeciwnicy mog¹ dostawac mniej/wiecej dmg w zaleznosci od jego typu
                 foreach (var Modificator in DamageModificators)
                 {
                     if (DamageType == Modificator.DamageType)
                     {
                         damage *= (Modificator.modificator / 100f);
-                        Damage(damage);
-                        StartCoroutine(Flash());
                         break;
                     }
                 }
+                //zadajemy damage
+                Damage(damage);
+                StartCoroutine(Flash());
 
             }
         } 
@@ -305,6 +323,7 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
     {
         return FreezeTime > 0;
     }
+
 
     public IEnumerator EndOnLeaveDamage(GameObject EffectObject,float time,float damage)
     {

@@ -51,32 +51,35 @@ public class Inventory : MonoBehaviour, Saveable
 
     private void Start()
     {
-        int j = 0;
-        for (int i = 0;i < QuickPotions.Length;i++)
+        if (!LoadFromFile)
         {
-            try
+            int j = 0;
+            for (int i = 0; i < QuickPotions.Length; i++)
             {
-                Potion potion = null;
-                while(potion == null)
+                try
                 {
-                    if (j >= PlayerItems.Count)
-                        break;
+                    Potion potion = null;
+                    while (potion == null)
+                    {
+                        if (j >= PlayerItems.Count)
+                            break;
 
-                    potion = FindPotionByName(PlayerItems[j].Name);
+                        potion = FindPotionByName(PlayerItems[j].Name);
 
-                    j++;
+                        j++;
+                    }
+
+                    QuickPotions[i] = potion;
+                }
+                catch (Exception e)
+                {
+                    Debug.LogException(e);
+                    break;
                 }
 
-                QuickPotions[i] = potion;
             }
-            catch(Exception e)
-            {
-                Debug.LogException(e);
-                break;
-            }
-            
+            SelectedPotion = QuickPotions[index];
         }
-        SelectedPotion = QuickPotions[index];
     }
 
     private void Update()
@@ -104,8 +107,8 @@ public class Inventory : MonoBehaviour, Saveable
             float screenScale = dpi / 96f;
             int cursorSize = Mathf.RoundToInt(64 * screenScale);  //wielkosc kursora zalezna od dpi ekranu
 
-            Texture2D cursorTexture = ComponentHelper.TextureFromSprite( SelectedItem.GetSprite() );
-            cursorTexture = ComponentHelper.ResizeTexture(cursorTexture, cursorSize, cursorSize);
+            Texture2D cursorTexture = Helper.TextureFromSprite( SelectedItem.GetSprite() );
+            cursorTexture = Helper.ResizeTexture(cursorTexture, cursorSize, cursorSize);
 
             Vector2 cursorHotSpot = new Vector2(cursorTexture.width / 2, cursorTexture.height / 2);
             Cursor.SetCursor(cursorTexture, cursorHotSpot, CursorMode.ForceSoftware);
@@ -281,7 +284,7 @@ public class Inventory : MonoBehaviour, Saveable
 
         string filePath = Application.persistentDataPath + "/Inventory.json";
 
-        Debug.Log(filePath);
+        Debug.Log("Inventory saved at " + filePath);
 
         File.WriteAllText(filePath, json);
     }

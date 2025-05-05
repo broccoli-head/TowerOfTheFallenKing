@@ -25,6 +25,11 @@ public class Door : MonoBehaviour
     bool Active = false;
     string DestinationName = "Unset";
 
+    Collider2D doorCollider;
+    SpriteRenderer spriteRenderer;
+    public Sprite openedDoor;
+    bool spriteChanged = false;
+
 
     private void Awake()
     {
@@ -47,18 +52,24 @@ public class Door : MonoBehaviour
 
 
         }
+        //else
+        //{
+        //    Debug.Log($" nie zespawnowano gracza bo {Level.ComingFromRoom} != {DestinationName} i ({type} == {Type.PrevLevel} && {NoPrevLevel} && {Level.ComingFromRoom} != Default)");
+        //}
 
 
         var rb = gameObject.AddComponent<Rigidbody2D>();
         rb.isKinematic = true;
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-        
 
         if (gameObject.TryGetComponent<Collider2D>(out var T))
-            T.isTrigger = true;
+            T.isTrigger = false;
         else
-            gameObject.AddComponent<BoxCollider2D>().isTrigger = true;
+            gameObject.AddComponent<BoxCollider2D>().isTrigger = false;
+
+        doorCollider = GetComponent<Collider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
 
@@ -69,6 +80,16 @@ public class Door : MonoBehaviour
 
     private void Update()
     {
+        if (!spriteChanged)
+        {
+            if (LevelLoader.CleanedRooms.Contains(Level.CurrentlyOnRoom) || !KillAllEnemies)
+            {
+                doorCollider.isTrigger = true;
+                spriteRenderer.sprite = openedDoor;
+                spriteChanged = true;
+            }          
+        }
+
         if (Input.GetKey(KeyCode.F))
             Active = true;
         else
@@ -80,7 +101,6 @@ public class Door : MonoBehaviour
     {
         if (Active && collision.gameObject.CompareTag("Player"))
         { 
-
             AllItemsColected = true;
             foreach (string item in RequiredItems) 
             {

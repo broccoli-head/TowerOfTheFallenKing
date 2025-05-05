@@ -9,7 +9,7 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
     public bool load = true; 
     // Aktualne punkty zycia gracza.
     public float HitPoints;
-    // czas po któoym zaczyna siê regeneracja hp
+    // czas po ktï¿½oym zaczyna siï¿½ regeneracja hp
     public float HealthRegenerationDelay = 10;
     // predkosc regeneracji hp
     public float HealthRegenerationSpeed = 5;
@@ -42,12 +42,13 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
 
     public AudioSource audioSource;
 
-
-
+    public static PlayerLive Instance;
 
 
     void Start()
     {
+        Instance = this;
+
         if (load)
             // laduje zapisany stan gracza, jesli load jest true.
             Load(); 
@@ -79,14 +80,17 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
 
         if (HitPoints <= 0)
         {
-            GameObject musicPlayer = FindObjectOfType<MusicPlayer>().gameObject;
-            if (musicPlayer != null)
-                Destroy(musicPlayer);
+            if (FindObjectOfType<MusicPlayer>())
+            {
+                GameObject musicPlayer = FindObjectOfType<MusicPlayer>().gameObject;
+                if (musicPlayer != null)
+                    Destroy(musicPlayer);
+            }
 
-            // laduje scene (np. ekran smierci), gdy punkty zycia osiagna 0.
-            Level.CurrentlyOnRoom = "Default";
+            GameObject deathScreen = ObjectsFinder.FindInactiveObjects("DeathScreen");
+            deathScreen.SetActive(true);
+
             LevelLoader.CleanedRooms.Clear();
-            SceneManager.LoadScene(0);
         }
 
         if(NoDamageTakenTimer >= HealthRegenerationDelay && HitPoints < StartHP)
@@ -103,7 +107,7 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
     public void Damage(float damage, Potion.DamageType DamageType, Potion.DamagePlace DamagePlace, bool EnemyOnly)
     {
         // Sprawdza czy powinnismy otrzymac obrazenia 
-        if (DamageType != Potion.DamageType.None && !EnemyOnly)
+        if (DamageType != Potion.DamageType.None && !EnemyOnly && this.isActiveAndEnabled)
         {
             if (!cleanse)
             {
@@ -111,7 +115,7 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
                 Damage(damage);
                 StartCoroutine(Flash());
                 
-                // Puszcza dŸwiêk obra¿eñ
+                // Puszcza dï¿½wiï¿½k obraï¿½eï¿½
                 if (!audioSource.isPlaying)
                     audioSource.PlayOneShot(audioSource.clip);
             }
@@ -128,7 +132,7 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
     // Zadaje obrazenia w oparciu o DPS, czas trwania i efekt wizualny
     public void Damage(float DPS, float Time, Potion.DamageType DamageType, Potion.DamagePlace DamagePlace, GameObject EffectObject, bool EnemyOnly)
     {
-        if (DamageType != Potion.DamageType.None && !EnemyOnly)
+        if (DamageType != Potion.DamageType.None && !EnemyOnly && this.isActiveAndEnabled)
         {
             if (!cleanse)
             {
@@ -142,7 +146,7 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
                 // Dodaje efekt do listy.
                 effects.Add(effect);
 
-                // Puszcza dŸwiêk obra¿eñ
+                // Puszcza dï¿½wiï¿½k obraï¿½eï¿½
                 if (!audioSource.isPlaying)
                     audioSource.PlayOneShot(audioSource.clip);
 
@@ -174,7 +178,7 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
             dmg *= 1 + (Exposition / 100f);
             StartCoroutine(Flash());
 
-            // Puszcza dŸwiêk obra¿eñ
+            // Puszcza dï¿½wiï¿½k obraï¿½eï¿½
             if (!audioSource.isPlaying)
                 audioSource.PlayOneShot(audioSource.clip);
         }
@@ -216,28 +220,41 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
 
     public IEnumerator Flash()
     {
-        //pobiera obecny kolor, najczesciej jest to #ffffff a nastepnie zmienia na czerwony
-        spriteRenderer.color = new Color(1f, 0.6f, 0.6f);
+        if(this.isActiveAndEnabled)
+        {
+            //pobiera obecny kolor, najczesciej jest to #ffffff a nastepnie zmienia na czerwony
+            spriteRenderer.color = new Color(1f, 0.6f, 0.6f);
 
-        //po 0.5s powraca poprzedni kolor
-        yield return new WaitForSeconds(0.3f);
-        spriteRenderer.color = spriteColor;
+            //po 0.5s powraca poprzedni kolor
+            yield return new WaitForSeconds(0.3f);
+            spriteRenderer.color = spriteColor;
+        }
     }
 
 
     // Coroutine usuwajaca efekt LeaveDamage.
     public IEnumerator endDamage(float damage, float time, GameObject effect)
     {
-        // Czeka przez czas trwania efektu.
-        yield return new WaitForSeconds(time); 
+        if (this.isActiveAndEnabled)
+        {
+            // Czeka przez czas trwania efektu.
+            yield return new WaitForSeconds(time);
 
-        // Zmniejsza obrazenia leave damageu o obrazenia zakonczonego efektu.
-        this.damage -= damage; 
+            // Zmniejsza obrazenia leave damageu o obrazenia zakonczonego efektu.
+            this.damage -= damage;
 
-        // Usuwa efekt wizualny.
-        Destroy(effect); 
+            // Usuwa efekt wizualny.
+            Destroy(effect);
 
-        yield break;
+            yield break;
+        } 
+    }
+
+    public void Heal(float HP)
+    {
+        HitPoints += HP;
+        if (HitPoints > StartHP)
+            HitPoints = StartHP;
     }
 
 

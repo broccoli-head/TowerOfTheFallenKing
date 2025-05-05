@@ -30,6 +30,9 @@ public class Potion : Item
     //zmienne ustalajace jak ma dzialac efekt
     [Header("Additional")]
     public bool cleanse;
+    public bool Heal;
+    public float HealAmount;
+    public bool DestroyAfterHeal;
 
     [Space(10)]
     public bool freeze;

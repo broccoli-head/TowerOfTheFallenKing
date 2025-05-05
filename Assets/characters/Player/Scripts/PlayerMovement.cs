@@ -31,21 +31,12 @@ public class PlayerMovement : MonoBehaviour, Controller, ReciveSpeedChange
     public AudioClip footstepsSound;
     public AudioClip dashSound;
 
-    private GameObject pauseMenu;
-    private GameObject inventory;
-
     Rigidbody2D rb;
-    GameObject cam;
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
-        pauseMenu = ObjectsFinder.FindInactiveObjects("Menu");
-        inventory = ObjectsFinder.FindInactiveObjects("Inventory");
-
-        //cam = Camera.main.gameObject;
     }
 
     public void Disable(float time)
@@ -68,7 +59,7 @@ public class PlayerMovement : MonoBehaviour, Controller, ReciveSpeedChange
                 rb.velocity = direction * MovementSpeed;
 
                 //puœæ tylko je¿eli postaæ siê porusza oraz menu i ekwipunek s¹ wy³¹czone
-                if (direction.magnitude > 0.1f && !pauseMenu.activeSelf && !inventory.activeSelf)
+                if (direction.magnitude > 0.1f && CommlinkOpener.checkVisibility())
                 {
                     if (!audioSource.isPlaying)
                     {

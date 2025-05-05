@@ -148,7 +148,7 @@ MonoBehaviour:
     AttackDamage: 20
     DamageType: 2
     AttackFrequency: 3
-    AttackDistance: 5
+    AttackDistance: 4
     InRange: 0
     AttackDelay: 1
     FriendlyFire: 0
@@ -204,4 +204,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4

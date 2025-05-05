@@ -14,10 +14,7 @@ public class PotionEffect : MonoBehaviour
     private Inventory inventory;
     private BeamPotionEffect beamPotionEffect;
     private float ObjectSize;
-
     private AudioSource audioSource;
-    private GameObject pauseMenu;
-    private GameObject inventoryUI;
 
 
     void Awake()
@@ -34,8 +31,6 @@ public class PotionEffect : MonoBehaviour
             gameObject.AddComponent<Cleanse>();
 
         audioSource = GetComponent<AudioSource>();
-        pauseMenu = ObjectsFinder.FindInactiveObjects("Menu");
-        inventoryUI = ObjectsFinder.FindInactiveObjects("Inventory");
     }
 
     void Start()
@@ -44,13 +39,13 @@ public class PotionEffect : MonoBehaviour
         foreach (Collider2D collider in colliders)
         {
             //On contact damage
-            var DmgReciver = ComponentHelper.GetInterfaceComponent<ReciveDamage>(collider.gameObject);
+            var DmgReciver = Helper.GetInterfaceComponent<ReciveDamage>(collider.gameObject);
             if (DmgReciver != null)
             {
                 DmgReciver.Damage(potion.OnContactDamage, potion.damageType, potion.damagePlace, potion.EnemyOnly);
             }
 
-            var controller = ComponentHelper.GetInterfaceComponent<Controller>(collider.gameObject);
+            var controller = Helper.GetInterfaceComponent<Controller>(collider.gameObject);
 
             //freeze
             if (controller != null && potion.freeze)
@@ -101,7 +96,7 @@ public class PotionEffect : MonoBehaviour
         if (audioSource != null)
         {
             //puœæ dŸwiêk potki, jeœli menu oraz inventory s¹ wy³¹czone
-            if (!pauseMenu.activeSelf && !inventoryUI.activeSelf)
+            if (CommlinkOpener.checkVisibility())
             {
                 if (!audioSource.isPlaying && audioSource.clip != null)
                     audioSource.Play();
@@ -116,13 +111,13 @@ public class PotionEffect : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, ObjectSize / 2);
         foreach (Collider2D collider in colliders)
         {
-            ReciveDamage target = ComponentHelper.GetInterfaceComponent<ReciveDamage>(collider.gameObject);
+            ReciveDamage target = Helper.GetInterfaceComponent<ReciveDamage>(collider.gameObject);
             if (target != null)
             {
                 target.Damage(potion.Damage * Time.fixedDeltaTime, potion.damageType, potion.damagePlace, potion.EnemyOnly);
             }
 
-            ReciveSpeedChange speedTarget = ComponentHelper.GetInterfaceComponent<ReciveSpeedChange>(collider.gameObject);
+            ReciveSpeedChange speedTarget = Helper.GetInterfaceComponent<ReciveSpeedChange>(collider.gameObject);
             if (potion.speedChange && speedTarget != null)
             {
                 speedTarget.ChangeSpeed(potion.speedMultiplier);
@@ -133,13 +128,13 @@ public class PotionEffect : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        var target = ComponentHelper.GetInterfaceComponent<ReciveDamage>(collision.gameObject);
+        var target = Helper.GetInterfaceComponent<ReciveDamage>(collision.gameObject);
         if (target != null)
         {
             // naklada speedChange - przeciwnik moze poruszac sie szybciej lub wolniej przez pewien czas
             if (potion.speedChange)
             {
-                ReciveSpeedChange speedTarget = ComponentHelper.GetInterfaceComponent<ReciveSpeedChange>(collision.gameObject);
+                ReciveSpeedChange speedTarget = Helper.GetInterfaceComponent<ReciveSpeedChange>(collision.gameObject);
                 speedTarget.ChangeSpeedOnExit(potion.speedTime);
             }
             
