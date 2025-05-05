@@ -8,7 +8,7 @@ public class SaveManager
 {
     public static void Save()
     {
-        List<Saveable> saveable = ComponentHelper.FindObjectsOfInterface<Saveable>();
+        List<Saveable> saveable = Helper.FindObjectsOfInterface<Saveable>();
         foreach (Saveable obj in saveable) 
         {
             obj.Save();

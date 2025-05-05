@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1726512213730368781}
   - component: {fileID: 7077580610666375519}
+  - component: {fileID: -6806257364982423111}
   - component: {fileID: 6705441318634465280}
   m_Layer: 0
   m_Name: Gate
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 4e1b94895677074419873cdef31918ed, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -85,6 +86,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-6806257364982423111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6114575788476521912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 556e036e45eaa574791906c107e8d21e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  index: 0
+  KillAllEnemies: 0
+  RequiredItems: []
+  openedDoor: {fileID: 21300000, guid: 5a1061fa1e79d5f42bfb3ade790acaf6, type: 3}
 --- !u!61 &6705441318634465280
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -114,15 +132,15 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.4375, y: 2}
-    newSize: {x: 0.46, y: 0.64}
+    oldSize: {x: 2.5625, y: 2.625}
+    newSize: {x: 1.4375, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0

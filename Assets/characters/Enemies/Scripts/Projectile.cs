@@ -7,7 +7,11 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
 
-    public AttackHandler.ProjectileStats stats;
+    public float AttackDamage;
+    public Potion.DamageType DamageType;
+    public float Speed;
+    public float LiveTime;
+    public float Drag;
 
     private void Start()
     {
@@ -18,8 +22,8 @@ public class Projectile : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            ReciveDamage target = ComponentHelper.GetInterfaceComponent<ReciveDamage>(other.gameObject);
-            target.Damage(stats.AttackDamage,stats.DamageType,Potion.DamagePlace.Zone,false);
+            ReciveDamage target = Helper.GetInterfaceComponent<ReciveDamage>(other.gameObject);
+            target.Damage(AttackDamage,DamageType,Potion.DamagePlace.Zone,false);
             Destroy(this.gameObject);
 
         }
@@ -28,7 +32,7 @@ public class Projectile : MonoBehaviour
 
     protected virtual IEnumerator die()
     {
-        yield return new WaitForSeconds(stats.LiveTime);
+        yield return new WaitForSeconds(LiveTime);
         Destroy(this.gameObject);
         yield break;
     }

@@ -1,6 +1,8 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using System.Threading;
 using UnityEngine;
 
 [RequireComponent(typeof(Enemy))]
@@ -9,32 +11,9 @@ public class AttackHandler : MonoBehaviour
 
     Enemy enemy;
     bool AttackReady = true;
+    bool SpecialAttackReady = true;
 
-    [System.Serializable]
-    public struct MeleeStats 
-    {
-        public bool MeleAttack;
-        public float AttackDamage;
-        public Potion.DamageType DamageType;
-        public float AttackFrequency;
-        public float AttackDistance;
-        [ReadOnly] public bool InRange;
-        public float AttackDelay;
-        public bool FriendlyFire;
-    }
 
-    [System.Serializable]
-    public struct ProjectileStats 
-    {
-        public bool ProjectileAttack;
-        public GameObject Projectile;
-        public float AttackDamage;
-        public Potion.DamageType DamageType;
-        public float AttackFrequency;
-        public float Speed;
-        public float LiveTime;
-        public float Drag;
-    }
 
 
     void Start()
@@ -45,21 +24,141 @@ public class AttackHandler : MonoBehaviour
 
     void Update()
     {
+
+        // sprawdzanie czy przeciwnik powinien i czy mo¿e zaatakowac gracza
         if (enemy.IsAgresive && AttackReady)
         {
 
             bool attacked = false;
-            if(enemy.MeleeStats.MeleAttack && enemy.MeleeStats.InRange)
+            
+            // Gdy gracz jest w zasiêgu przeciwnika i przeciwnik ma Melee attack - u¿ywa go
+            if(enemy.MeleeAttack && enemy.InRange)
             {
-                StartCoroutine(MeleeAttack());
-                attacked = true;
+                // jeœli przeciwnik dysponuje specjalnym melee attack - u¿ywa go
+                if (SpecialAttackReady && enemy.SpecialMeeleAttacks.Count > 0)
+                {
+
+                    //losujemy atak z listy
+                    int i = Random.Range(0, enemy.SpecialMeeleAttacks.Count);
+                    var attack = enemy.SpecialMeeleAttacks[i];
+
+                    StartCoroutine(MeleeAttack(attack.Attack));
+                    StartCoroutine(SpecialAttackCooldown(attack.Cooldown));
+
+                    attacked = true;
+                }
+                // jesli przeciwnik nie ma specjalnego ataku - atakuje zwyk³ym
+                else 
+                {
+                    int i = Random.Range(0, enemy.MeeleAttacks.Count);
+                    var attack = enemy.MeeleAttacks[i];
+
+                    StartCoroutine(MeleeAttack(attack));
+
+                    attacked = true;
+                }
             }
-            else if (enemy.ProjectileStats.ProjectileAttack)
+            // gdy nie uzywamy melee, przeciwnik probuje wykonac atak z dystansu
+            else
             {
-                Vector2 direction = (enemy.Player.transform.position - transform.position).normalized;
-                StartCoroutine(ProjectileAttack(direction));
-                attacked = true;
+                bool SpecialAllAroundAttack = false;
+                bool SpecialAttack = false;
+
+                bool AllAroundAttack = false;
+                bool Attack = false;
+
+                // jeœli mamy obydwa ataki za pomoc¹ projectile, wybieramy ktore bêd¹ uzyte
+                if (enemy.ProjectileAllAroundAttack && enemy.ProjectileAttack)
+                {
+                    // jesli jedna z list jest pusta wybieramy druga, jesli nie wybieramy losowo
+                    if (enemy.SpecialAllAroundProjectiles.Count == 0)
+                        SpecialAttack = true;
+                    else if (enemy.SpecialProjectiles.Count == 0)
+                        SpecialAllAroundAttack = true;
+                    else
+                    {
+                        bool rand = Random.value < 0.5;
+                        SpecialAttack = rand;
+                        SpecialAllAroundAttack = !rand;
+                    }
+
+                    // jesli jedna z list jest pusta wybieramy druga, jesli nie wybieramy losowo
+                    if (enemy.AllAroundProjectiles.Count == 0)
+                        Attack = true;
+                    else if (enemy.Projectiles.Count == 0)
+                        AllAroundAttack = true;
+                    else
+                    {
+                        bool rand = Random.value < 0.5;
+                        Attack = rand;
+                        AllAroundAttack = !rand;
+                    }
+                }
+                else if (enemy.ProjectileAttack) 
+                {
+                    SpecialAttack = true;
+                    Attack = true;
+                }else if (enemy.ProjectileAllAroundAttack)
+                {
+                    SpecialAllAroundAttack = true;
+                    AllAroundAttack = true;
+                }
+
+
+                if (SpecialAllAroundAttack && !attacked && enemy.SpecialAllAroundProjectiles.Count > 0)
+                {
+                    //losujemy atak z listy
+                    int i = Random.Range(0, enemy.SpecialAllAroundProjectiles.Count);
+                    var attack = enemy.SpecialAllAroundProjectiles[i];
+
+                    int count = Random.Range(attack.Attack.MinProjectileCount, attack.Attack.MaxProjectileCount);
+
+                    AllAroundProjectileAttack(attack.Attack.projectile, count);
+                    
+                    StartCoroutine(SpecialAttackCooldown(attack.Cooldown));
+                    attacked = true;
+                }
+                else if (SpecialAttack && !attacked && enemy.SpecialProjectiles.Count > 0)
+                {
+                    //losujemy atak z listy
+                    int i = Random.Range(0, enemy.SpecialProjectiles.Count);
+                    var attack = enemy.SpecialProjectiles[i];
+                    Vector2 direction = (enemy.Player.transform.position - transform.position).normalized;
+
+                    StartCoroutine(ProjectileAttack(attack.Attack, direction));
+                    StartCoroutine(SpecialAttackCooldown(attack.Cooldown));
+
+                    attacked = true;
+                }
+                else if (AllAroundAttack && !attacked && enemy.AllAroundProjectiles.Count > 0)
+                {
+                    //losujemy atak z listy
+                    int i = Random.Range(0, enemy.AllAroundProjectiles.Count);
+                    var attack = enemy.AllAroundProjectiles[i];
+
+                    int count = Random.Range(attack.MinProjectileCount, attack.MaxProjectileCount);
+
+                    AllAroundProjectileAttack(attack.projectile, count);
+                    attacked = true;
+                }
+                else if (Attack && !attacked && enemy.Projectiles.Count > 0)
+                {
+                    //losujemy atak z listy
+                    int i = Random.Range(0, enemy.Projectiles.Count);
+                    var attack = enemy.Projectiles[i];
+                    Vector2 direction = (enemy.Player.transform.position - transform.position).normalized;
+
+                    StartCoroutine(ProjectileAttack(attack, direction));
+
+                    attacked = true;
+                }
+
+
             }
+
+            // jeœli zosta³ wykonany jakikolwiek atak, ustawiamy cooldown
+            if(attacked)
+                StartCoroutine(AttackCooldown(enemy.AttackFrequency));
 
 
             if (attacked && enemy.Teleportation)
@@ -75,84 +174,140 @@ public class AttackHandler : MonoBehaviour
 
             
         }
-;
+
     }
 
 
-    public IEnumerator MeleeAttack()
+    public IEnumerator MeleeAttack(MeleeStats stats)
     {
-
-        AttackReady = false;
         //opoznienie ataku
-        yield return new WaitForSeconds(enemy.MeleeStats.AttackDelay);
+        yield return new WaitForSeconds(stats.AttackDelay);
 
         //zadawanie obrazen
-        Collider2D[] Attacked = Physics2D.OverlapCircleAll(transform.position, enemy.MeleeStats.AttackDistance + (GetComponent<Collider2D>().bounds.size.y / 2));
+        Collider2D[] Attacked = Physics2D.OverlapCircleAll(transform.position, enemy.Range + (GetComponent<Collider2D>().bounds.size.y / 2));
         foreach (Collider2D obj in Attacked)
         {
             //przeciwnik nie atakuje samego siebie
             if (obj.gameObject == gameObject) continue;
 
             // jesli frendly fire jest wylaczony pomija innych przeciwnikow
-            if (!enemy.MeleeStats.FriendlyFire)
+            if (!stats.FriendlyFire)
                 if (obj.TryGetComponent<Enemy>(out Enemy en))
                     continue;
 
             //proboje pobrac component implemetujacy ReciveDamage jesli go znajdzie zadaje obrazenia
-            var target = ComponentHelper.GetInterfaceComponent<ReciveDamage>(obj.gameObject);
+            var target = Helper.GetInterfaceComponent<ReciveDamage>(obj.gameObject);
             if (target != null)
             {
-                target.Damage(enemy.MeleeStats.AttackDamage, enemy.MeleeStats.DamageType, Potion.DamagePlace.Zone, false);
+                target.Damage(stats.AttackDamage + enemy.AdditionalDamage, stats.DamageType, Potion.DamagePlace.Zone, false);
             }
         }
 
-        // nastepny atak moze byc wykonany dopiero po pewnym czasie
-        yield return new WaitForSeconds(enemy.MeleeStats.AttackFrequency);
-        AttackReady = true;
         yield break;
     }
 
     
-    public IEnumerator ProjectileAttack(Vector2 direction)
+    public IEnumerator ProjectileAttack(Projectile projectile, Vector2 direction)
     {
-        AttackReady = false;
-
-        // Spawnuje obiekt na scenie
-        GameObject projectile = Instantiate(enemy.ProjectileStats.Projectile,transform.position,Quaternion.identity);
-
         if (projectile == null)
             yield return -1;
 
+        // Spawnuje obiekt na scenie
+        GameObject obj = Instantiate(projectile.gameObject,transform.position,Quaternion.identity);
+
+        SetUpProjectile(obj);
+
+
+        // Wystrzeliwuje pocisk w okreœlonym kierunku
+        Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
+        rb.AddForce( direction * projectile.Speed,ForceMode2D.Impulse);
         
+        yield break;
+    }
+
+    public void AllAroundProjectileAttack(Projectile prefab, int ProjectileCount)
+    {
+        float step = 360 / ProjectileCount;
+
+        for(int i = 0; i < ProjectileCount; i++)
+        {
+            Vector2 direction = Helper.RotateVector(Vector2.up, step * i);
+            StartCoroutine(
+                ProjectileAttack(prefab,direction)
+            );
+        }
+
+        return;
+    }
+
+
+    void SetUpProjectile(GameObject projectile)
+    {
+        Projectile stats = projectile.GetComponent<Projectile>();
+        stats.AttackDamage += enemy.AdditionalDamage;
+
         //Ustawia wszystkie komponenty potrzebne do dzia³ania Projectile
         Rigidbody2D rb;
-        if(!projectile.TryGetComponent<Rigidbody2D>(out rb))
+        if (!projectile.TryGetComponent<Rigidbody2D>(out rb))
             rb = projectile.AddComponent<Rigidbody2D>();
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-        rb.drag = enemy.ProjectileStats.Drag / 10;
+        rb.drag = stats.Drag / 10;
 
         Collider2D collider;
-        if(!projectile.TryGetComponent<Collider2D>(out collider))
+        if (!projectile.TryGetComponent<Collider2D>(out collider))
             collider = projectile.AddComponent<CircleCollider2D>();
         collider.isTrigger = true;
 
         SpriteRenderer spriteRenderer;
-        if(!projectile.TryGetComponent<SpriteRenderer>(out spriteRenderer))
-            spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
+        if (!projectile.TryGetComponent<SpriteRenderer>(out spriteRenderer))
+            spriteRenderer = projectile.AddComponent<SpriteRenderer>();
         spriteRenderer.sortingOrder = 6;
-
-        projectile.AddComponent<Projectile>().stats = enemy.ProjectileStats;
-
-
-        // Wystrzeliwuje pocisk w okreœlonym kierunku
-        rb.AddForce( direction * enemy.ProjectileStats.Speed,ForceMode2D.Impulse);
+    }
 
 
-        // Po okreœlonym czasie umo¿liwia wykonanie kolejnego ataku i przerywa coroutine
-        yield return new WaitForSeconds(enemy.ProjectileStats.AttackFrequency);
+    public IEnumerator AttackCooldown(float cooldown)
+    {
+        AttackReady = false;
+        yield return new WaitForSeconds(cooldown);
         AttackReady = true;
         yield break;
     }
+
+    public IEnumerator SpecialAttackCooldown(float cooldown)
+    {
+        SpecialAttackReady = false;
+        yield return new WaitForSeconds(cooldown);
+        SpecialAttackReady = true;
+        yield break;
+    }
+
+
+    [System.Serializable]
+    public class MeleeStats
+    {
+        public float AttackDamage;
+        public Potion.DamageType DamageType;
+        public float AttackDelay;
+        public bool FriendlyFire;
+    }
+
+
+    [System.Serializable]
+    public class AllAroundProjectile
+    {
+        public Projectile projectile;
+        public int MinProjectileCount;
+        public int MaxProjectileCount;
+    }
+
+    [System.Serializable]
+    public class SpecialAttack<T> 
+    {
+        public float Cooldown;
+        public T Attack;
+    }
+
+
 
 }

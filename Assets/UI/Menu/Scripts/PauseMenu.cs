@@ -3,17 +3,22 @@ using UnityEngine;
 public class PauseMenu : Menu
 {
     [SerializeField] private GameObject menuUI;
-    [SerializeField] private GameObject canvas;
-    [SerializeField] private GameObject inventory;
-    CommlinkOpener commlinkOpener;
-    private bool isPaused = false;
+    [SerializeField] private GameObject inGameVisible;
+
+    private CommlinkOpener commlinkOpener;
+    public static bool isVisible = false;
+
+
+    void Awake()
+    {
+        commlinkOpener = FindAnyObjectByType<CommlinkOpener>();
+    }
 
     void Update()
     {
-        commlinkOpener = FindAnyObjectByType<CommlinkOpener>();
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !DeathScreen.isVisible)
         {
-            if (isPaused)
+            if (isVisible)
                 ResumeGame();
             else
                 PauseGame();
@@ -22,36 +27,24 @@ public class PauseMenu : Menu
 
     public void PauseGame()
     {
-        canvas.SetActive(false);
-
-        if (commlinkOpener.IsOpen)
-        {
+        if (CommlinkOpener.IsOpen)
             commlinkOpener.ToggleCommlink();
-        }
 
-        
+        inGameVisible.SetActive(false);
         menuUI.SetActive(true);
 
         //zatrzymuje gre
         Time.timeScale = 0f;
-        isPaused = true;
+        isVisible = true;
     }
 
     public void ResumeGame()
     {
-        canvas.SetActive(true);
         menuUI.SetActive(false);
-
-        //trawersujemy po dzieciach canvasa
-        foreach (Transform child in canvas.transform)
-        {
-            //w³¹czamy wszystko, poza inventory
-            if (child.gameObject != inventory)
-                child.gameObject.SetActive(true);
-        }
+        inGameVisible.SetActive(true);
 
         //w³¹cza z powrotem grê
         Time.timeScale = 1f;
-        isPaused = false;
+        isVisible = false;
     }
 }

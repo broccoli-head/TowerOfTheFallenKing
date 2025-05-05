@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Menu
   - Inventory
+  - DeathScreen
+  - Death Screen
   layers:
   - Default
   - TransparentFX

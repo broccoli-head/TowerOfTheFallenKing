@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4e1b94895677074419873cdef31918ed, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,3 +101,4 @@ MonoBehaviour:
   index: 0
   KillAllEnemies: 0
   RequiredItems: []
+  openedDoor: {fileID: 21300000, guid: 5a1061fa1e79d5f42bfb3ade790acaf6, type: 3}

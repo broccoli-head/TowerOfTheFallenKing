@@ -13,8 +13,8 @@ public class SpawnerProjectile : Projectile
     {
         if (other.CompareTag("Player"))
         {
-            ReciveDamage target = ComponentHelper.GetInterfaceComponent<ReciveDamage>(other.gameObject);
-            target.Damage(stats.AttackDamage, stats.DamageType, Potion.DamagePlace.Zone, false);
+            ReciveDamage target = Helper.GetInterfaceComponent<ReciveDamage>(other.gameObject);
+            target.Damage(AttackDamage, DamageType, Potion.DamagePlace.Zone, false);
 
             if(HitSpawnObject != null)
                 Instantiate(HitSpawnObject, transform.position, Quaternion.identity);
@@ -34,7 +34,7 @@ public class SpawnerProjectile : Projectile
 
     protected override IEnumerator die()
     {
-        yield return new WaitForSeconds(stats.LiveTime);
+        yield return new WaitForSeconds(LiveTime);
 
         if(SpawnObject != null)
             Instantiate(SpawnObject,transform.position, Quaternion.identity);

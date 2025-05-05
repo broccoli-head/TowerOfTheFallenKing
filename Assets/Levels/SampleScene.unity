@@ -12452,6 +12452,7 @@ MonoBehaviour:
   index: 0
   KillAllEnemies: 0
   RequiredItems: []
+  openedDoor: {fileID: 0}
 --- !u!1 &214077307
 GameObject:
   m_ObjectHideFlags: 0
@@ -14554,15 +14555,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2281891327876583458, guid: 681417c73f8af904d9dc86929df03c88, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -897.3638
+      value: -895.2721
       objectReference: {fileID: 0}
     - target: {fileID: 2281891327876583458, guid: 681417c73f8af904d9dc86929df03c88, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -539.2531
+      value: -541.00806
       objectReference: {fileID: 0}
     - target: {fileID: 2281891327876583458, guid: 681417c73f8af904d9dc86929df03c88, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -86.95659
+      value: -11.331657
       objectReference: {fileID: 0}
     - target: {fileID: 2357464120816452353, guid: 681417c73f8af904d9dc86929df03c88, type: 3}
       propertyPath: m_AnchorMax.x
@@ -16701,7 +16702,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.4375, y: 2}
+    oldSize: {x: 2.5625, y: 2.625}
     newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -16727,6 +16728,7 @@ MonoBehaviour:
   KillAllEnemies: 1
   RequiredItems:
   - FirePotion
+  openedDoor: {fileID: 0}
 --- !u!4 &1119432411
 Transform:
   m_ObjectHideFlags: 0
@@ -19351,11 +19353,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7204328943455741477, guid: 59ac259eb3fceba4493bd259565ded06, type: 3}
-      insertIndex: -1
+      insertIndex: 3
       addedObject: {fileID: 1624407480}
-    - targetCorrespondingSourceObject: {fileID: 7204328943455741477, guid: 59ac259eb3fceba4493bd259565ded06, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1624407481}
   m_SourcePrefab: {fileID: 100100000, guid: 59ac259eb3fceba4493bd259565ded06, type: 3}
 --- !u!1 &1624407479 stripped
 GameObject:
@@ -19385,102 +19384,6 @@ MonoBehaviour:
   random: 1
   ItemCount: 10
   destroySound: {fileID: 8300000, guid: eba75b9e2b683424997d369e855b1868, type: 3}
---- !u!82 &1624407481
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1624407479}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -4263948484800230584, guid: 1ffdc11b9efce9542b36f32f5be4a5ea, type: 2}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &1661664209
 GameObject:
   m_ObjectHideFlags: 0
@@ -20591,6 +20494,7 @@ MonoBehaviour:
   index: 0
   KillAllEnemies: 0
   RequiredItems: []
+  openedDoor: {fileID: 0}
 --- !u!4 &1852235545
 Transform:
   m_ObjectHideFlags: 0

@@ -17,6 +17,13 @@ public class PotionObject : MonoBehaviour
     {
         inventory = GameObject.FindFirstObjectByType<Inventory>();
         potion = inventory.FindPotionByName(Name);
+
+        if (potion.Heal)
+        {
+            PlayerLive.Instance.Heal(potion.HealAmount);
+            if (potion.DestroyAfterHeal)
+                Destroy(gameObject);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

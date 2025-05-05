@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9023708093284587265}
   - component: {fileID: 6998874028494875091}
   - component: {fileID: 4612747434188992964}
+  - component: {fileID: -1846026873524173992}
   m_Layer: 0
   m_Name: GrzybProjectile1
   m_TagString: Untagged
@@ -115,7 +116,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -133,14 +134,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b3b45775da026a4198171106f3b85df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats:
-    ProjectileAttack: 0
-    Projectile: {fileID: 0}
-    AttackDamage: 0
-    DamageType: 0
-    AttackFrequency: 0
-    Speed: 0
-    LiveTime: 0
-    Drag: 0
-  SpawnObject: {fileID: 0}
-  HitSpawnObject: {fileID: 0}
+  AttackDamage: 10
+  DamageType: 2
+  Speed: 8
+  LiveTime: 6
+  Drag: 0
+  SpawnObject: {fileID: 8994545958918269061, guid: f654ef409bd0edd4a813d483dcf858eb, type: 3}
+  HitSpawnObject: {fileID: 7550760526275561133, guid: 618fb53aa9fdf6d42bf23e77263c0aba, type: 3}
+--- !u!50 &-1846026873524173992
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5683267168042931062}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

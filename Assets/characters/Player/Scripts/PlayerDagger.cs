@@ -63,7 +63,7 @@ public class PlayerDagger : MonoBehaviour
     {
         if (!daggerOverloaded)
         {
-            if (Input.GetMouseButton(1))
+            if (Input.GetMouseButton(1) && CommlinkOpener.checkVisibility())
             {
                 if (!circleVisible)
                 {
@@ -126,7 +126,7 @@ public class PlayerDagger : MonoBehaviour
 
     public void TriggerEnter(Collider2D collision)
     {
-        Enemy target = ComponentHelper.GetInterfaceComponent<Enemy>(collision.gameObject);
+        Enemy target = Helper.GetInterfaceComponent<Enemy>(collision.gameObject);
 
         //sztyletowanie obiektów z DestroyableEnvironment
         if (target == null)

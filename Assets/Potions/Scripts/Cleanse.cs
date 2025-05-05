@@ -8,7 +8,7 @@ public class Cleanse : MonoBehaviour
     {
         foreach(var item in Physics2D.OverlapCircleAll(transform.position, GetComponent<Collider2D>().bounds.size.x))
         {
-            var CleanseRevicer = ComponentHelper.GetInterfaceComponent<ReciveDamage>(item.gameObject);
+            var CleanseRevicer = Helper.GetInterfaceComponent<ReciveDamage>(item.gameObject);
             if (CleanseRevicer != null)
                 CleanseRevicer.AddCleanse();
             item.TryGetComponent<PotionEffect>(out var potionEffect);
