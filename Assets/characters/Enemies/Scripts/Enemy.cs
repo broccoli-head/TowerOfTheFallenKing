@@ -121,7 +121,7 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
         Player = GameObject.FindGameObjectWithTag("Player");
 
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteColor = spriteRenderer.color;
+        spriteColor = spriteRenderer.color;     //pobiera obecny kolor, najczesciej jest to #ffffff
     }
 
     private void Update()
@@ -138,16 +138,17 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
         }
             
 
-
         //Sprawdzanie czy przeciwnik powinien atakowaæ gracza
         if (attackMode == AttackMode.Always)
             IsAgresive = true;
+
         else if (attackMode == AttackMode.OnSpot)
         {
             if (PlayerDetected)
                 IsAgresive = true;
             else IsAgresive = false;
         }
+
         else if(attackMode == AttackMode.OnDamage)
         {
             if (PlayerDetected && DamageTaken)
@@ -158,6 +159,7 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
         //Ustawienie sposobu poruszania przeciwnika (gonienie / patrolowanie)
         if(Chase != null)
             Chase.enabled = IsAgresive;
+
         if(NpcMovement != null) 
             NpcMovement.enabled = !IsAgresive;
 
@@ -220,7 +222,6 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
                 //zadajemy damage
                 Damage(damage);
                 StartCoroutine(Flash());
-
             }
         } 
     }
@@ -325,7 +326,7 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
     }
 
 
-    public IEnumerator EndOnLeaveDamage(GameObject EffectObject,float time,float damage)
+    public IEnumerator EndOnLeaveDamage(GameObject EffectObject, float time, float damage)
     {
         spriteRenderer.color = new Color(1f, 0.6f, 0.6f);
         isRed = true;
@@ -363,13 +364,16 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
     {
         if (isRed) yield break; //jesli juz jest czerwony to nie zmieniaj koloru
 
-        //pobiera obecny kolor, najczesciej jest to #ffffff a nastepnie zmienia na czerwony
+        //zmienia kolor sprita na czerwony
         spriteRenderer.color = new Color(1f, 0.6f, 0.6f);
         isRed = true;
 
-        //po 0.5s powraca poprzedni kolor
+        //po 0.3s powraca poprzedni kolor
         yield return new WaitForSeconds(0.3f);
         spriteRenderer.color = spriteColor;
+
+        //czeka 0.3s przed kolejnym zmienieniem koloru
+        yield return new WaitForSeconds(0.3f);
         isRed = false;
     }
 
@@ -416,6 +420,7 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
 
         yield break;
     }
+
 
     public enum EnemyType
     {

@@ -19,23 +19,24 @@ public class ItemDescriptionUI : MonoBehaviour
         if(inventory.PointedItem != null)
         {
             tmp.text = inventory.PointedItem.Name + "<br>";
-            tmp.text += inventory.PointedItem.Description;
+            tmp.text += inventory.PointedItem.Description + "<br>";
 
-            //skomentowane tymczasowo
 
-            //if (inventory.PointedItem.GetAttributes().Count > 0) {
-            //    tmp.text += "<br>→ Attributes:";
-            //    foreach(var attr in inventory.PointedItem.GetAttributes())
+            //if (inventory.PointedItem.GetAttributes().Count > 0)
+            //{
+            //    tmp.text += "→ Attributes:<br>";
+            //    foreach (var attr in inventory.PointedItem.GetAttributes())
             //    {
-            //        tmp.text += $"<br>  ● {attr.attribute.ToString()} ({attr.value})";
+            //        tmp.text += $"  ● {attr.attribute.ToString()} ({attr.value}) <br>";
             //    }
             //}
 
             //if (inventory.PointedItem.IsFuel)
             //{
-            //    tmp.text += $"<br>→ Combustion temperature: {inventory.PointedItem.BurningTemperature.ToString()}";
+            //    tmp.text += "Item can be used as fuel<br>";
+            //    tmp.text += $"→ Combustion temperature: {inventory.PointedItem.BurningTemperature.ToString()} <br>";
             //}
-            
+
         }
         else
         {

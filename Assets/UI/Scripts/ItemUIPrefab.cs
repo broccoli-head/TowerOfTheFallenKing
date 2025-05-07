@@ -44,7 +44,7 @@ public class ItemUIPrefab : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        Inventory.Instance.PointedItem = null;
+        //Inventory.Instance.PointedItem = null;
     }
     /////////////////////////////////////////////////////////////////////////////////////////
 

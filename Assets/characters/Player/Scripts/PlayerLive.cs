@@ -37,11 +37,13 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
     // Flaga mowiaca, czy gracz jest pod wplywem efektu "cleanse".
     private bool cleanse = false;
 
+    // Flaga mówiąca, czy gracz jest czerwony
+    private bool isRed = false;
+
     private SpriteRenderer spriteRenderer;
     private Color spriteColor;
 
     public AudioSource audioSource;
-
     public static PlayerLive Instance;
 
 
@@ -60,7 +62,7 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
         exposed = new ExposedEffect(this);
 
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteColor = spriteRenderer.color;
+        spriteColor = spriteRenderer.color; //pobiera obecny kolor, najczesciej jest to #ffffff 
     }
 
 
@@ -146,7 +148,7 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
                 // Dodaje efekt do listy.
                 effects.Add(effect);
 
-                // Puszcza d�wi�k obra�e�
+                // Puszcza dźwięk obrażeń
                 if (!audioSource.isPlaying)
                     audioSource.PlayOneShot(audioSource.clip);
 
@@ -222,12 +224,19 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
     {
         if(this.isActiveAndEnabled)
         {
-            //pobiera obecny kolor, najczesciej jest to #ffffff a nastepnie zmienia na czerwony
-            spriteRenderer.color = new Color(1f, 0.6f, 0.6f);
+            if (isRed) yield break; //jesli juz jest czerwony to nie zmieniaj koloru
 
-            //po 0.5s powraca poprzedni kolor
+            //zmienia kolor sprita na czerwony
+            spriteRenderer.color = new Color(1f, 0.6f, 0.6f);
+            isRed = true;
+
+            //po 0.3s powraca poprzedni kolor
             yield return new WaitForSeconds(0.3f);
             spriteRenderer.color = spriteColor;
+
+            //czeka 0.3s przed kolejnym zmienieniem koloru
+            yield return new WaitForSeconds(0.3f);
+            isRed = false;
         }
     }
 
@@ -237,9 +246,10 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
     {
         if (this.isActiveAndEnabled)
         {
+            StartCoroutine(Flash());
+
             // Czeka przez czas trwania efektu.
             yield return new WaitForSeconds(time);
-
             // Zmniejsza obrazenia leave damageu o obrazenia zakonczonego efektu.
             this.damage -= damage;
 
@@ -374,7 +384,5 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
         }
 
     }
-
-
 
 }

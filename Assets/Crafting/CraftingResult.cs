@@ -18,7 +18,7 @@ public class CraftingResult : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         inventory = Inventory.Instance;
         img = GetComponent<Image>(); 
         color = img.color;
-        crafting = FindAnyObjectByType<Crafting>();
+        crafting = Crafting.Instance;
     }
 
     public void SetItem(Item result)
@@ -44,7 +44,7 @@ public class CraftingResult : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        inventory.PointedItem = null;
+        //inventory.PointedItem = null;
     }
 
     public void OnPointerDown(PointerEventData eventData)

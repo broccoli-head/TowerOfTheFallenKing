@@ -56,6 +56,7 @@ public class LevelLoader : MonoBehaviour, Saveable
 
         Level.ComingFromRoom = "";
         Level.CurrentlyOnRoom = "Default";
+        CleanedRooms.Clear();
 
         LevelChangeCoolDown = true;
         StartCoroutine(LevelCoolDown());

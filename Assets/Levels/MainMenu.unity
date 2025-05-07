@@ -911,7 +911,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Tower Of The Fallen King
 
-    v0.3 beta release'
+    v0.4 beta release'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 34317e8bae1812243a78fc1934086d47, type: 2}
   m_sharedMaterial: {fileID: -5266927897383730933, guid: 34317e8bae1812243a78fc1934086d47, type: 2}
@@ -1077,7 +1077,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shakeStrength: 15
-  shakeSpeed: 1
+  shakeSpeed: 0.7
 --- !u!1 &652608274
 GameObject:
   m_ObjectHideFlags: 0

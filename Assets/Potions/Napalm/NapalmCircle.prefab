@@ -101,7 +101,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Napalm
-  circleSound: {fileID: 8300000, guid: b98ab1889b900ed4fa6e714805746bcd, type: 3}
 --- !u!70 &5890283013566108748
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -134,8 +133,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.006463162, y: -0.16143486}
-  m_Size: {x: 0.35629046, y: 0.29939204}
+  m_Offset: {x: -0.0011953124, y: -0.0060300236}
+  m_Size: {x: 1.3677468, y: 0.6102037}
   m_Direction: 1
 --- !u!82 &1007855334921356695
 AudioSource:

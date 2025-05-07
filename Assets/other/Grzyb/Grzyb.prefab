@@ -143,24 +143,21 @@ MonoBehaviour:
   Flying: 0
   DamageModificators: []
   attackMode: 0
-  MeleeStats:
-    MeleAttack: 1
-    AttackDamage: 20
+  AttackFrequency: 0
+  MeleeAttack: 0
+  Range: 0
+  SpecialMeeleAttacks: []
+  MeeleAttacks:
+  - AttackDamage: 20
     DamageType: 2
-    AttackFrequency: 3
-    AttackDistance: 4
-    InRange: 0
-    AttackDelay: 1
+    AttackDelay: 1.2
     FriendlyFire: 0
-  ProjectileStats:
-    ProjectileAttack: 1
-    Projectile: {fileID: 5683267168042931062, guid: af8682a9c1164084faef84a1a9ddc4ff, type: 3}
-    AttackDamage: 10
-    DamageType: 1
-    AttackFrequency: 5
-    Speed: 8
-    LiveTime: 5
-    Drag: 0
+  ProjectileAttack: 0
+  SpecialProjectiles: []
+  Projectiles: []
+  ProjectileAllAroundAttack: 0
+  SpecialAllAroundProjectiles: []
+  AllAroundProjectiles: []
   looping: 0
   speed: 0
   chaseSpeed: 1
@@ -174,10 +171,12 @@ MonoBehaviour:
   ItemPlacementMaxDistance: 1
   random: 0
   ItemCount: 0
+  AdditionalDamage: 0
   FreezeTime: 0
   FacingDirection: {x: 0, y: -1}
   Player: {fileID: 0}
   PlayerDetected: 0
+  InRange: 0
 --- !u!50 &3230776819080342175
 Rigidbody2D:
   serializedVersion: 4
