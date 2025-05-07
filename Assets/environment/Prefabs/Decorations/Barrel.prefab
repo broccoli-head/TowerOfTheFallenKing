@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a60933dead3677d41bb84a9fa30f1691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  durability: 0
+  durability: 15
   ExcludeBiologicalDamage: 0
   Items:
   - wood

@@ -8,18 +8,21 @@ using UnityEngine;
 [RequireComponent(typeof(Enemy))]
 public class AttackHandler : MonoBehaviour
 {
-
     Enemy enemy;
     bool AttackReady = true;
     bool SpecialAttackReady = true;
 
-
+    private SpriteRenderer spriteRenderer;
+    private bool flippedDuringAttack = false;
+    private bool originalFlipX = false;
 
 
     void Start()
     {
         enemy = GetComponent<Enemy>();
         AttackReady = true;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
     }
 
     void Update()
@@ -157,8 +160,34 @@ public class AttackHandler : MonoBehaviour
             }
 
             // jeœli zosta³ wykonany jakikolwiek atak, ustawiamy cooldown
-            if(attacked)
+            if (attacked)
+            {
+                if (spriteRenderer != null && enemy.Player != null)
+                {
+                    //obraca w strone gracza
+                    originalFlipX = spriteRenderer.flipX;
+                    Vector2 toPlayer = enemy.Player.transform.position - transform.position;
+
+                    if (toPlayer.x < 0)
+                        spriteRenderer.flipX = true;
+                    else
+                        spriteRenderer.flipX = false;
+
+                    flippedDuringAttack = true;
+                }
+
+                if (TryGetComponent<Animator>(out var anim))
+                {
+                    try
+                    {
+                        anim.SetTrigger("Attack");
+                    }
+                    catch {}
+                }
+
                 StartCoroutine(AttackCooldown(enemy.AttackFrequency));
+                StartCoroutine(FlipAfterAttack());
+            }
 
 
             if (attacked && enemy.Teleportation)
@@ -170,11 +199,8 @@ public class AttackHandler : MonoBehaviour
                         movement.Teleport();
                 }
                     
-            }
-
-            
+            }  
         }
-
     }
 
 
@@ -281,6 +307,19 @@ public class AttackHandler : MonoBehaviour
         SpecialAttackReady = true;
         yield break;
     }
+
+    private IEnumerator FlipAfterAttack()
+    {
+        //czeka a¿ animacja bicia siê zakoñczy
+        yield return new WaitForSeconds(0.4f);
+
+        if (flippedDuringAttack && spriteRenderer != null)
+        {
+            spriteRenderer.flipX = originalFlipX;
+            flippedDuringAttack = false;
+        }
+    }
+
 
 
     [System.Serializable]

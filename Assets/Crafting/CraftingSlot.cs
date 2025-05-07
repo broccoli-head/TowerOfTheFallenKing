@@ -36,7 +36,6 @@ public class CraftingSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHan
             item = inventory.SelectedItem;
 
             IsSet = true;
-            BurningTemperature = item.BurningTemperature;
 
             inventory.RemovePlayerItem(item.Name);
                 
@@ -46,9 +45,14 @@ public class CraftingSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHan
 
             inventory.SelectedItem = null;
             inventory.RefreshPlayerInventory();
+            Crafting.Instance.CheckCrafting();
         }
         else
+        {
             reset();
+            Crafting.Instance.CheckCrafting();
+        }
+            
     }
 
 
@@ -112,7 +116,6 @@ public class CraftingSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHan
         IsSet = false;
         img.sprite = null;
         item = null;
-        BurningTemperature = Item.temperature.Normal;
         img.color = new Color(1,1,1,0f);
     }
 
@@ -125,11 +128,12 @@ public class CraftingSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHan
     /// Ustawianie Potki wskazywanej przez gracza w UI, uzywane przez ItemDescriptionUI.cs
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Inventory.Instance.PointedItem = item;
+        if(item != null)
+            Inventory.Instance.PointedItem = item;
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        Inventory.Instance.PointedItem = null;
+        //Inventory.Instance.PointedItem = null;
     }
     /////////////////////////////////////////////////////////////////////////////////////////
 }

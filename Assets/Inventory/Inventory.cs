@@ -102,16 +102,24 @@ public class Inventory : MonoBehaviour, Saveable
             Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         else
         {
-            float dpi = Screen.dpi;
-            if (dpi == 0) dpi = 96f;    //jezeli nie mozna odczytac dpi ustawiamy 96
-            float screenScale = dpi / 96f;
-            int cursorSize = Mathf.RoundToInt(64 * screenScale);  //wielkosc kursora zalezna od dpi ekranu
+            try
+            {
+                float dpi = Screen.dpi;
+                if (dpi == 0) dpi = 96f;    //jezeli nie mozna odczytac dpi ustawiamy 96
+                float screenScale = dpi / 96f;
+                int cursorSize = Mathf.RoundToInt(64 * screenScale);  //wielkosc kursora zalezna od dpi ekranu
 
-            Texture2D cursorTexture = Helper.TextureFromSprite( SelectedItem.GetSprite() );
-            cursorTexture = Helper.ResizeTexture(cursorTexture, cursorSize, cursorSize);
+                Texture2D cursorTexture = Helper.TextureFromSprite(SelectedItem.GetSprite());
+                cursorTexture = Helper.ResizeTexture(cursorTexture, cursorSize, cursorSize);
 
-            Vector2 cursorHotSpot = new Vector2(cursorTexture.width / 2, cursorTexture.height / 2);
-            Cursor.SetCursor(cursorTexture, cursorHotSpot, CursorMode.ForceSoftware);
+                Vector2 cursorHotSpot = new Vector2(cursorTexture.width / 2, cursorTexture.height / 2);
+                Cursor.SetCursor(cursorTexture, cursorHotSpot, CursorMode.ForceSoftware);
+            }
+            catch
+            {
+                Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+            }
+            
         }
         
     }
