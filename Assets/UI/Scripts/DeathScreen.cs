@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class DeathScreen : MonoBehaviour
 {
     public TextMeshProUGUI deathTitle;
+    public TextMeshProUGUI statistics;
     public GameObject background;
     public GameObject inGameVisible;
     private string fullText;
@@ -22,6 +23,8 @@ public class DeathScreen : MonoBehaviour
     public float zoomDuration;
 
     public static bool isVisible = false;
+    public static int killsCount = 0;
+    private static int deathCount = 0;
 
 
     void Start()
@@ -29,6 +32,7 @@ public class DeathScreen : MonoBehaviour
         Time.timeScale = 0f;
         isVisible = true;
         fullText = deathTitle.text;
+        deathCount++;
         StartCoroutine(Zoom());
     }
 
@@ -61,6 +65,9 @@ public class DeathScreen : MonoBehaviour
         }
 
         inGameVisible.SetActive(false);
+
+        statistics.text = "Kills: " + killsCount.ToString() + "\nDeaths: " + deathCount.ToString();
+        statistics.gameObject.SetActive(true);
         background.gameObject.SetActive(true);
 
         //wyjscie
@@ -97,6 +104,7 @@ public class DeathScreen : MonoBehaviour
 
     public void ContinueGame()
     {
+        killsCount = 0;
         Time.timeScale = 1f;
         LevelLoader.Instance.StartGame();
         isVisible = false;

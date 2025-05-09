@@ -366,7 +366,7 @@ MonoBehaviour:
     - Room3
     - Room4
     NextLevels: []
-  FinalLevel: MainMenu
+  FinalLevel: GrzybSecretRoom
   LevelChangeCoolDown: 0
 --- !u!4 &88453675
 Transform:
@@ -911,7 +911,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Tower Of The Fallen King
 
-    v0.4 beta release'
+    v0.6 beta release'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 34317e8bae1812243a78fc1934086d47, type: 2}
   m_sharedMaterial: {fileID: -5266927897383730933, guid: 34317e8bae1812243a78fc1934086d47, type: 2}

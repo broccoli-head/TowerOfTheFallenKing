@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class LevelLoader : MonoBehaviour, Saveable
 {
@@ -58,6 +59,9 @@ public class LevelLoader : MonoBehaviour, Saveable
         Level.CurrentlyOnRoom = "Default";
         CleanedRooms.Clear();
 
+        // w pierwszym pokoju nie ³adujemy ekwipunku gracza
+        Inventory.LoadFromFile = false;
+
         LevelChangeCoolDown = true;
         StartCoroutine(LevelCoolDown());
         ActualLevel = LevelZero;
@@ -76,7 +80,7 @@ public class LevelLoader : MonoBehaviour, Saveable
         // przechodzi po sciezce leveli i laduje ostatni level
         foreach (int i in path) {
             // jesli index w sciezce jest prawidlowy ustawia level do zaladowania na nastepny level
-            if (levelToLoad.NextLevels != null && i < levelToLoad.NextLevels.Length && i >= 0)
+            if (levelToLoad.NextLevels != null && i < levelToLoad.NextLevels.Count && i >= 0)
                 levelToLoad = levelToLoad.NextLevels[i];
 
             // jesli zapisany index jest nieprawidlowy
@@ -100,12 +104,13 @@ public class LevelLoader : MonoBehaviour, Saveable
             return;
 
         // jesli nie ma nastepnych leveli
-        if (ActualLevel.NextLevels == null || ActualLevel.NextLevels.Length == 0)
+        if (ActualLevel.NextLevels == null || ActualLevel.NextLevels.Count == 0)
         {
             // tworzenie obiektu klasy level dla koncowego levelu
             Level lvl = new Level();
             lvl.LevelName = FinalLevel;
             lvl.SetPreviousLevel(ActualLevel);
+            ActualLevel.NextLevels.Add(lvl);
 
             // zmiana aktualnego levelu na koncowy level i jego ladowanie
             ActualLevel = lvl;
@@ -114,7 +119,7 @@ public class LevelLoader : MonoBehaviour, Saveable
         }
 
         // jesli index jest nieprawidlowy ustawia go na 0
-        if (i < 0 || i >= ActualLevel.NextLevels.Length)
+        if (i < 0 || i >= ActualLevel.NextLevels.Count)
             i = 0;
 
         // dodawanie levelu do path
@@ -261,7 +266,7 @@ public class Level
 
     public string[] SideLevels = { };
 
-    public Level[] NextLevels = { };
+    public List<Level> NextLevels = new();
 
     public static string ComingFromRoom = "";
     public static string CurrentlyOnRoom = "Default";

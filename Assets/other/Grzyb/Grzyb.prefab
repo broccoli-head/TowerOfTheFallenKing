@@ -138,12 +138,12 @@ MonoBehaviour:
   FieldOfViev: 200
   VievDistance: 20
   MemoryTime: 40
-  HP: 1500
+  HP: 1000
   Type: 4
   Flying: 0
   DamageModificators: []
   attackMode: 0
-  AttackFrequency: 0
+  AttackFrequency: 2
   MeleeAttack: 0
   Range: 0
   SpecialMeeleAttacks: []
@@ -152,12 +152,20 @@ MonoBehaviour:
     DamageType: 2
     AttackDelay: 1.2
     FriendlyFire: 0
-  ProjectileAttack: 0
+  ProjectileAttack: 1
   SpecialProjectiles: []
-  Projectiles: []
-  ProjectileAllAroundAttack: 0
+  Projectiles:
+  - {fileID: 4612747434188992964, guid: af8682a9c1164084faef84a1a9ddc4ff, type: 3}
+  - {fileID: 1197115028552917249, guid: 115d9de6b16defa4eb966087ec3b5360, type: 3}
+  ProjectileAllAroundAttack: 1
   SpecialAllAroundProjectiles: []
-  AllAroundProjectiles: []
+  AllAroundProjectiles:
+  - projectile: {fileID: 1197115028552917249, guid: 115d9de6b16defa4eb966087ec3b5360, type: 3}
+    MinProjectileCount: 4
+    MaxProjectileCount: 8
+  - projectile: {fileID: 6451824929049366364, guid: fbd5c073f42deeb4fbee1b7ab2b75e73, type: 3}
+    MinProjectileCount: 25
+    MaxProjectileCount: 40
   looping: 0
   speed: 0
   chaseSpeed: 1

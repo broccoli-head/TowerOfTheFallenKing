@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 
 public class Inventory : MonoBehaviour, Saveable 
 {
-    public bool LoadFromFile;
+    
     public TMP_FontAsset font;
 
     [Header("Dostepne w grze")]
@@ -32,6 +33,8 @@ public class Inventory : MonoBehaviour, Saveable
 
 
     public static Inventory Instance { get; private set; }
+    public static bool LoadFromFile;
+
 
     private void Awake()
     {
@@ -45,14 +48,21 @@ public class Inventory : MonoBehaviour, Saveable
         else
             Instance = this;
 
+        
+        // ladujemy inventory z pliku
         if (LoadFromFile)
             Load();
+
     }
 
     private void Start()
     {
         if (!LoadFromFile)
         {
+            // jeœli nie ³adowaliœmy inventory z pliku, zrobimy to w nastêpnym pokoju
+            LoadFromFile = true;
+
+            // wype³niamy quick potions
             int j = 0;
             for (int i = 0; i < QuickPotions.Length; i++)
             {
@@ -78,6 +88,7 @@ public class Inventory : MonoBehaviour, Saveable
                 }
 
             }
+            
             SelectedPotion = QuickPotions[index];
         }
     }
@@ -315,6 +326,7 @@ public class Inventory : MonoBehaviour, Saveable
             SelectedPotion = loadedInventory.SelectedPotion;
             SelectedItem = loadedInventory.SelectedItem;
             PointedItem = loadedInventory.PointedItem;
+            index = loadedInventory.index;
 
             Debug.Log("Inventory zaladowano z pliku.");
         }

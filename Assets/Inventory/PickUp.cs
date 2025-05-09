@@ -17,6 +17,14 @@ public class PickUp : MonoBehaviour
     {
         inventory = Inventory.Instance;
         item = inventory.FindItemByName(ItemName);
+
+        if (item == null)
+        {
+            Debug.Log(ItemName + " is not existing item!");
+            Destroy(gameObject);
+            return;
+        }
+
         spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
         spriteRenderer.sortingOrder = 2;
         spriteRenderer.sprite = item.GetSprite();
@@ -25,8 +33,8 @@ public class PickUp : MonoBehaviour
 
         Vector3 originalSize = spriteRenderer.bounds.size;
         transform.localScale = new Vector3(
-            size / originalSize.x,
-            size / originalSize.y
+            size / Mathf.Max(originalSize.x, 0.01f),
+            size / Mathf.Max(originalSize.y, 0.01f)
         );
     }
 
