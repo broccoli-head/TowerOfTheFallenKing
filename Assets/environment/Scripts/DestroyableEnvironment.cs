@@ -11,12 +11,9 @@ public class DestroyableEnvironment : MonoBehaviour, ReciveDamage
     public float durability;
     public bool ExcludeBiologicalDamage;
 
-    public string[] Items;
+    public List<DropItem> Items;
     public float ItemPlacementMaxDistance = 1f;
 
-    [Header("Randomize")]
-    public bool random;
-    public int ItemCount;
     private bool itemsGiven = false;
 
     [Header("Audio")]
@@ -28,6 +25,9 @@ public class DestroyableEnvironment : MonoBehaviour, ReciveDamage
 
     void Start()
     {
+        if(durability ==  0f)
+            durability = 0.01f;
+
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -52,24 +52,18 @@ public class DestroyableEnvironment : MonoBehaviour, ReciveDamage
             if (!itemsGiven)
             {
                 List<GameObject> obj = new List<GameObject>();
-                // Okreslona liczba losowych itemow z listy
-                if (random)
+
+                //Losuje itemy z listy
+                foreach (var item in Items)
                 {
-                    for (int i = 0; i < ItemCount; i++)
-                    {
-                        string item = Items[Random.Range(0, Items.Length)];
-                        obj.Add(PickUp.Object(item));
-                    }
-                }
-                // Wszystkie elementy z listy
-                else
-                {
-                    foreach (var item in Items)
-                    {
-                        obj.Add(PickUp.Object(item));
-                    }
+                    int rand = Random.Range(0, 100);
+
+                    if(item.Chance >= rand)
+                        obj.Add(PickUp.Object(item.Name));
                 }
 
+
+                // Rozrzuca wybrane itemy
                 for (int i = 0; i < obj.Count; i++)
                 {
                     float angle = Random.Range(0f, Mathf.PI * 2);
@@ -77,11 +71,11 @@ public class DestroyableEnvironment : MonoBehaviour, ReciveDamage
                     float distance = Random.Range(0f, ItemPlacementMaxDistance);
 
                     Vector2 position = new Vector2(
-                        transform.position.x + distance * Mathf.Cos(angle),
-                        transform.position.y + distance * Mathf.Sin(angle)
+                        transform.position.x + (distance * Mathf.Cos(angle)),
+                        transform.position.y + (distance * Mathf.Sin(angle))
                     );
 
-                    Instantiate(obj[i], position, Quaternion.identity);
+                    obj[i].transform.position = position;
                 }
 
                 itemsGiven = true;
@@ -145,5 +139,13 @@ public class DestroyableEnvironment : MonoBehaviour, ReciveDamage
             Destroy(damage.Effect);
         }
         OnLeaveDamage.Clear();
+    }
+
+
+    [System.Serializable]
+    public class DropItem
+    {
+        public string Name;
+        [Range(0,100)] public int Chance;
     }
 }

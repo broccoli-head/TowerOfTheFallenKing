@@ -202,7 +202,7 @@ MonoBehaviour:
   attackMode: 1
   AttackFrequency: 4
   MeleeAttack: 1
-  Range: 2
+  Range: 1.2
   SpecialMeeleAttacks: []
   MeeleAttacks:
   - AttackDamage: 20
@@ -229,12 +229,12 @@ MonoBehaviour:
   footstepsSound: {fileID: 8300000, guid: 507cda847fc34584ba7f47fe648d3895, type: 3}
   teleportationSound: {fileID: 0}
   Items:
-  - Wood
+  - Name: Combustive Vials
+    Chance: 100
+  - Name: Combustive Vials
+    Chance: 50
   ItemPlacementMaxDistance: 1
-  random: 1
-  ItemCount: 3
   AdditionalDamage: 0
-  FreezeTime: 0
   FacingDirection: {x: 0, y: 0}
   Player: {fileID: 0}
   PlayerDetected: 0

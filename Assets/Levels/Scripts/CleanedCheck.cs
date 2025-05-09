@@ -51,6 +51,7 @@ public class CleanedCheck : MonoBehaviour
             {
                 Debug.Log("Wyczyszczono " + Level.CurrentlyOnRoom);
                 LevelLoader.CleanedRooms.Add(Level.CurrentlyOnRoom);
+                Destroy(this);
             }
         }
     }

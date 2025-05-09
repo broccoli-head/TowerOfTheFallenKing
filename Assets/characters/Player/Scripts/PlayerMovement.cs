@@ -31,12 +31,14 @@ public class PlayerMovement : MonoBehaviour, Controller, ReciveSpeedChange
     public AudioClip footstepsSound;
     public AudioClip dashSound;
 
-    Rigidbody2D rb;
+    private Rigidbody2D rb;
+    private Animator anim;
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     public void Disable(float time)
@@ -77,6 +79,9 @@ public class PlayerMovement : MonoBehaviour, Controller, ReciveSpeedChange
             //dashowanie postaci
             if ( DashEnabled && Input.GetKeyDown(KeyCode.Space) )
             {
+                //animacja dashowania
+                anim.SetTrigger("Dash");
+
                 //dodanie si³y do dashowania
                 rb.AddForce(direction * DashForce,ForceMode2D.Impulse);
                 DashEnabled = false;

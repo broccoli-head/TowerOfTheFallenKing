@@ -138,8 +138,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   load: 0
   HitPoints: 100
-  HealthRegenerationDelay: 10
-  HealthRegenerationSpeed: 5
+  HealthRegenerationDelay: 12
+  HealthRegenerationSpeed: 4
   NoDamageTakenTimer: 0
   StartHP: 0
   audioSource: {fileID: 6248302729922715812}
@@ -223,8 +223,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36445b446117e314ebb56c94e71a31e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementSpeed: 5.5
-  DashForce: 5
+  MovementSpeed: 4.8
+  DashForce: 6
   DashCooldownTime: 2.5
   DashEnabled: 1
   audioSource: {fileID: 78727669202003924}
@@ -1160,6 +1160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 18
+  cooldown: 0.25
 --- !u!1 &5865619556024516608
 GameObject:
   m_ObjectHideFlags: 0

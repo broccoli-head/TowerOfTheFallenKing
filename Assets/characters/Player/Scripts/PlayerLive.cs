@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
 {
@@ -46,6 +46,8 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
     public AudioSource audioSource;
     public static PlayerLive Instance;
 
+    private Aim aimCircle;
+
 
     void Start()
     {
@@ -61,6 +63,7 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
         // Tworzy nowa instancje do obslugi ExposedEffect.
         exposed = new ExposedEffect(this);
 
+        aimCircle = GetComponentInChildren<Aim>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteColor = spriteRenderer.color; //pobiera obecny kolor, najczesciej jest to #ffffff 
     }
@@ -78,16 +81,25 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
 
         // Stosuje obrazenia w czasie (DPS).
         if(damage > 0)
-            Damage(damage * Time.deltaTime); 
+        {
+            Damage(damage * Time.deltaTime);
+        }
+            
 
         if (HitPoints <= 0)
         {
             if (FindObjectOfType<MusicPlayer>())
             {
                 GameObject musicPlayer = FindObjectOfType<MusicPlayer>().gameObject;
+
                 if (musicPlayer != null)
                     Destroy(musicPlayer);
             }
+
+            if (audioSource != null)
+                Destroy(audioSource);
+
+            aimCircle.gameObject.SetActive(false);
 
             GameObject deathScreen = ObjectsFinder.FindInactiveObjects("DeathScreen");
             deathScreen.SetActive(true);
@@ -115,11 +127,6 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
             {
                 // Jesli gracz nie uzyl "cleanse", zadaje obrazenia.
                 Damage(damage);
-                StartCoroutine(Flash());
-                
-                // Puszcza d�wi�k obra�e�
-                if (!audioSource.isPlaying)
-                    audioSource.PlayOneShot(audioSource.clip);
             }
             else
             {
@@ -140,7 +147,6 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
             {
                 // Dodaje DPS do otrzymywanych obrazen.
                 damage += DPS;
-                StartCoroutine(Flash());
 
                 // Spawnuje efekt wizualny.
                 var effect = Instantiate(EffectObject, transform);
@@ -148,14 +154,11 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
                 // Dodaje efekt do listy.
                 effects.Add(effect);
 
-                // Puszcza dźwięk obrażeń
-                if (!audioSource.isPlaying)
-                    audioSource.PlayOneShot(audioSource.clip);
-
                 try
                 {
                     // Uruchamia Coroutine do usuniecia efektu po czasie.
-                    StartCoroutine(endDamage(DPS, Time, effect));
+                    if(this.gameObject.activeInHierarchy)
+                        StartCoroutine(endDamage(DPS, Time, effect));
                 }
                 catch
                 {
@@ -178,15 +181,18 @@ public class PlayerLive : MonoBehaviour, ReciveDamage, Saveable
         {
             // Zwieksza obrazenia, jesli gracz jest "wyeksponowany".
             dmg *= 1 + (Exposition / 100f);
-            StartCoroutine(Flash());
 
-            // Puszcza d�wi�k obra�e�
-            if (!audioSource.isPlaying)
-                audioSource.PlayOneShot(audioSource.clip);
         }
+        // Puszcza dzwiek obrazen
+        if(audioSource != null)
+            if (!audioSource.isPlaying && CommlinkOpener.checkVisibility())
+                audioSource.PlayOneShot(audioSource.clip);
+
         NoDamageTakenTimer = 0;
+
         // Odejmowanie obrazen od punktow zycia.
-        HitPoints -= dmg; 
+        HitPoints -= dmg;
+        StartCoroutine(Flash());
     }
 
 

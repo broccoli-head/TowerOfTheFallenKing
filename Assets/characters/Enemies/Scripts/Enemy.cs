@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Collider2D))]
@@ -55,13 +56,20 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
 
 
     [Header("Drop items")]
-    public string[] Items;
+    public List<DestroyableEnvironment.DropItem> Items;
     public float ItemPlacementMaxDistance = 1f;
-    public bool random;
-    public int ItemCount;
 
     [HideInInspector] public float AdditionalDamage;
-    [HideInInspector] public float FreezeTime;
+    [HideInInspector]
+    public float FreezeTime
+    {
+        get { return freezeTime; }
+        set
+        {
+            freezeTime = Mathf.Min(value, 10f);
+        }
+    }
+
     [HideInInspector] public Vector2 FacingDirection = Vector2.down;
     [HideInInspector] public GameObject Player;
     public bool IsAgresive { get; private set; } = false;
@@ -91,7 +99,7 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
     private SpriteRenderer spriteRenderer;
     private Color spriteColor;
     private bool isRed = false;
-
+    private float freezeTime;
 
     private void Start()
     {
@@ -382,24 +390,18 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
         /* Wyrzucanie itemow po smierci */
         {
             List<GameObject> obj = new List<GameObject>();
-            // Okreslona liczba losowych itemow z listy
-            if (random)
+
+            //Losuje itemy z listy
+            foreach (var item in Items)
             {
-                for (int i = 0; i < ItemCount; i++)
-                {
-                    string item = Items[Random.Range(0, Items.Length)];
-                    obj.Add(PickUp.Object(item));
-                }
-            }
-            // Wszystkie elementy z listy
-            else
-            {
-                foreach (var item in Items)
-                {
-                    obj.Add(PickUp.Object(item));
-                }
+                int rand = Random.Range(0, 100);
+
+                if (item.Chance >= rand)
+                    obj.Add(PickUp.Object(item.Name));
             }
 
+
+            // Rozrzuca wybrane itemy
             for (int i = 0; i < obj.Count; i++)
             {
                 float angle = Random.Range(0f, Mathf.PI * 2);
@@ -407,15 +409,15 @@ public class Enemy : MonoBehaviour, ReciveDamage, ReciveSpeedChange
                 float distance = Random.Range(0f, ItemPlacementMaxDistance);
 
                 Vector2 position = new Vector2(
-                    transform.position.x + distance * Mathf.Cos(angle),
-                    transform.position.y + distance * Mathf.Sin(angle)
+                    transform.position.x + (distance * Mathf.Cos(angle)),
+                    transform.position.y + (distance * Mathf.Sin(angle))
                 );
 
-                Instantiate(obj[i], position, Quaternion.identity);
+                obj[i].transform.position = position;
             }
         }
 
-
+        DeathScreen.killsCount++;
         Destroy(gameObject);
 
         yield break;

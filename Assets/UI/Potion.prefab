@@ -39,7 +39,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 5, y: 0}
-  m_SizeDelta: {x: 80, y: 80}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2607927066528975226
 CanvasRenderer:
@@ -62,15 +62,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 0.54509807}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.47058824}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 0}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -91,34 +91,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57bb97b9aa0a81449879f44566566397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  potion:
+  item:
     Name: 
-    description: 
-    Damage: 0
-    OnContactDamage: 0
-    damageType: 0
-    damagePlace: 0
-    EnemyOnly: 0
-    potion: {fileID: 0}
-    potionEffect: {fileID: 0}
+    Description: 
     sprite: {fileID: 0}
-    Time: 0
-    cleanse: 0
-    freze: 0
-    freezeTime: 0
-    shape: 0
-    BeamLength: 0
-    BeamSpawnTime: 0
-    explosion:
-      IsExplosive: 0
-      Force: 0
-      Effect: {fileID: 0}
-      EffectTime: 0
-    onLeaveDamage:
-      HaveOnLeaveDamage: 0
-      Damage: 0
-      Time: 0
-      Effect: {fileID: 0}
+    IsFuel: 0
+    BurningTemperature: 0
+    Price: 0
 --- !u!61 &2281399122597004663
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -198,8 +177,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 80, y: 80}
+  m_AnchoredPosition: {x: 0, y: 5}
+  m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3092578556405810411
 CanvasRenderer:
@@ -229,7 +208,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 4927946130546037276, guid: 234ac5994eba3364db58a97dda7c83a9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 70540400fb70169409dd52623bf338d2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -273,8 +252,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 60, y: 25}
+  m_AnchoredPosition: {x: 7.2, y: -5.3}
+  m_SizeDelta: {x: 58.9171, y: 27.4524}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &5687557306297788633
 CanvasRenderer:
@@ -304,10 +283,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 100
+  m_text: 10
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 34317e8bae1812243a78fc1934086d47, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 8849f49637b749f47ac947cd90d27a9a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -331,14 +310,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -367,7 +346,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0.7669678, y: 0, z: 0, w: 4.3392944}
+  m_margin: {x: -0.20555878, y: 0, z: 0.23008919, w: 0.31594086}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

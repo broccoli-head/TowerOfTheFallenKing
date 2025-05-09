@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Throw : MonoBehaviour
 {
     public float force;
+    public float cooldown = 0.25f;
+
     public static bool CanThrow = true;
+
     float offset;
     GameObject potion;
     GameObject Aim;
@@ -34,6 +38,7 @@ public class Throw : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Mouse0) && CanThrow && Time.timeScale > 0)
             {
+                StartCoroutine(PotionThrowCooldown(cooldown));
                 GameObject newPotion = Instantiate(potion, transform.position, Quaternion.identity);
                 newPotion.GetComponent<Collider2D>().excludeLayers = 6;
                 direction = (Aim.transform.position - transform.parent.position).normalized;
@@ -54,5 +59,13 @@ public class Throw : MonoBehaviour
                 inventory.ValidatePotions();
             }
         }
+    }
+
+    public IEnumerator PotionThrowCooldown(float cooldown)
+    {
+        CanThrow = false;
+        yield return new WaitForSeconds(cooldown);
+        CanThrow = true;
+        yield break;
     }
 }

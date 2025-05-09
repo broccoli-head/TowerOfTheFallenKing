@@ -136,7 +136,7 @@ public class Door : MonoBehaviour
     {
         if (type == Type.NextLevel)
         {
-            if (levelLoader.ActualLevel.NextLevels.Length > index)
+            if (levelLoader.ActualLevel.NextLevels.Count > index)
             {
                 DestinationName = levelLoader.ActualLevel.NextLevels[index].LevelName;
             }

@@ -29,7 +29,7 @@ public class AttackHandler : MonoBehaviour
     {
 
         // sprawdzanie czy przeciwnik powinien i czy mo¿e zaatakowac gracza
-        if (enemy.IsAgresive && AttackReady)
+        if (enemy.IsAgresive && AttackReady && !enemy.IsFreezed())
         {
 
             bool attacked = false;
@@ -108,7 +108,7 @@ public class AttackHandler : MonoBehaviour
                 }
 
 
-                if (SpecialAllAroundAttack && !attacked && enemy.SpecialAllAroundProjectiles.Count > 0)
+                if (SpecialAllAroundAttack && !attacked && enemy.SpecialAllAroundProjectiles.Count > 0 && SpecialAttackReady)
                 {
                     //losujemy atak z listy
                     int i = Random.Range(0, enemy.SpecialAllAroundProjectiles.Count);
@@ -121,7 +121,7 @@ public class AttackHandler : MonoBehaviour
                     StartCoroutine(SpecialAttackCooldown(attack.Cooldown));
                     attacked = true;
                 }
-                else if (SpecialAttack && !attacked && enemy.SpecialProjectiles.Count > 0)
+                else if (SpecialAttack && !attacked && enemy.SpecialProjectiles.Count > 0 && SpecialAttackReady)
                 {
                     //losujemy atak z listy
                     int i = Random.Range(0, enemy.SpecialProjectiles.Count);
