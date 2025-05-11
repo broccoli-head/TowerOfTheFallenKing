@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4171286334528670700}
   - component: {fileID: 7667881948061322971}
-  - component: {fileID: 1113364816220070446}
   - component: {fileID: 3697620010420413723}
   - component: {fileID: 6069987656620667435}
   - component: {fileID: 4693124941540188013}
+  - component: {fileID: 3680403865907407643}
   m_Layer: 0
   m_Name: Chest
   m_TagString: Untagged
@@ -51,29 +51,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnAfterClearing: 0
   appearSound: {fileID: 8300000, guid: 17a716936d711ea42ae8cb5f2861ec85, type: 3}
---- !u!114 &1113364816220070446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7204328943455741477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a60933dead3677d41bb84a9fa30f1691, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  durability: 10
-  ExcludeBiologicalDamage: 0
-  Items:
-  - Napalm
-  - Fire Breath
-  - Wood
-  - Speed Potion
-  ItemPlacementMaxDistance: 1
-  random: 1
-  ItemCount: 10
-  destroySound: {fileID: 8300000, guid: eba75b9e2b683424997d369e855b1868, type: 3}
 --- !u!212 &3697620010420413723
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -267,6 +244,89 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3680403865907407643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7204328943455741477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a60933dead3677d41bb84a9fa30f1691, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  durability: 15
+  ExcludeBiologicalDamage: 0
+  Items:
+  - Name: Oil
+    Chance: 15
+  - Name: Oil
+    Chance: 15
+  - Name: Oil
+    Chance: 15
+  - Name: Oil
+    Chance: 15
+  - Name: Oil
+    Chance: 15
+  - Name: Water
+    Chance: 15
+  - Name: Water
+    Chance: 15
+  - Name: Water
+    Chance: 15
+  - Name: Water
+    Chance: 15
+  - Name: Water
+    Chance: 15
+  - Name: Water
+    Chance: 15
+  - Name: Wood
+    Chance: 15
+  - Name: Wood
+    Chance: 15
+  - Name: Wood
+    Chance: 15
+  - Name: Wood
+    Chance: 15
+  - Name: Wood
+    Chance: 15
+  - Name: Gunpowder
+    Chance: 15
+  - Name: Gunpowder
+    Chance: 15
+  - Name: Gunpowder
+    Chance: 15
+  - Name: Gunpowder
+    Chance: 15
+  - Name: Gunpowder
+    Chance: 15
+  - Name: Spark Root
+    Chance: 15
+  - Name: Spark Root
+    Chance: 15
+  - Name: Spark Root
+    Chance: 15
+  - Name: Spark Root
+    Chance: 15
+  - Name: Spark Root
+    Chance: 15
+  - Name: Glass
+    Chance: 15
+  - Name: Glass
+    Chance: 15
+  - Name: Glass
+    Chance: 15
+  - Name: Glass
+    Chance: 15
+  - Name: Glass
+    Chance: 15
+  - Name: Combustive Vials
+    Chance: 5
+  - Name: Combustive Vials
+    Chance: 5
+  ItemPlacementMaxDistance: 1
+  destroySound: {fileID: 0}
 --- !u!1001 &1626791530382918974
 PrefabInstance:
   m_ObjectHideFlags: 0

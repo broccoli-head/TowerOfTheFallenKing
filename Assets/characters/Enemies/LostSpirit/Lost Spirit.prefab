@@ -221,12 +221,17 @@ MonoBehaviour:
   TeleportAfterAttackChance: 30
   footstepsSound: {fileID: 0}
   teleportationSound: {fileID: 8300000, guid: ecca8afd4c9fa26469d3b114d0ae8c00, type: 3}
-  Items: []
+  Items:
+  - Name: Ice Core
+    Chance: 100
+  - Name: Ice Core
+    Chance: 5
+  - Name: Glass
+    Chance: 30
+  - Name: Glass
+    Chance: 30
   ItemPlacementMaxDistance: 1
-  random: 0
-  ItemCount: 0
   AdditionalDamage: 0
-  FreezeTime: 0
   FacingDirection: {x: 0, y: 0}
   Player: {fileID: 0}
   PlayerDetected: 0

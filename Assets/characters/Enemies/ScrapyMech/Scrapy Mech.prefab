@@ -230,9 +230,17 @@ MonoBehaviour:
   teleportationSound: {fileID: 0}
   Items:
   - Name: Combustive Vials
-    Chance: 100
+    Chance: 50
   - Name: Combustive Vials
     Chance: 50
+  - Name: Gunpowder
+    Chance: 100
+  - Name: Gunpowder
+    Chance: 75
+  - Name: Gunpowder
+    Chance: 75
+  - Name: Gunpowder
+    Chance: 75
   ItemPlacementMaxDistance: 1
   AdditionalDamage: 0
   FacingDirection: {x: 0, y: 0}

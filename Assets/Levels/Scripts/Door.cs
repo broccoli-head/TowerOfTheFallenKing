@@ -40,7 +40,7 @@ public class Door : MonoBehaviour
 
         // jesli nazwa pokoju z ktorego przyszedl gracz to nazwa pokoju do ktorego prowadza drzwi
         // lub nasz obiekt prowadzi do poprzedniego levelu ktory nie istnieje, spawnuje obiekt gracza
-        if (Level.ComingFromRoom == DestinationName || (type == Type.PrevLevel && NoPrevLevel && Level.ComingFromRoom == "Default"))
+        if (Level.ComingFromRoom == DestinationName || (type == Type.PrevLevel && NoPrevLevel && Level.ComingFromRoom == "Default") || (type == Type.PrevLevel && Level.ComingFromSideLevel))
         {
             var Player = Instantiate(levelLoader.PlayerPrefab, transform.position, Quaternion.identity);
 

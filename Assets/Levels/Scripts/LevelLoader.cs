@@ -124,7 +124,17 @@ public class LevelLoader : MonoBehaviour, Saveable
 
         // dodawanie levelu do path
         path.Add(i);
-        
+
+        if (Level.OnSideLevel)
+        {
+            Level.ComingFromSideLevel = true;
+            Level.ComingFromSideLevelName = Level.CurrentlyOnRoom;
+        }   
+        else
+            Level.ComingFromSideLevel = false;
+
+        Level.OnSideLevel = false;
+
         // Ustawianie aktualnego levelu na nastepny level
         ActualLevel = ActualLevel.NextLevels[i];
         // ladowanie nastepnego levelu
@@ -150,7 +160,11 @@ public class LevelLoader : MonoBehaviour, Saveable
 
             // ustawia aktualny level na poprzedni i laduje poprzedni level
             ActualLevel = ActualLevel.PreviousLevel;
-            Level.Load(ActualLevel.LevelName);
+
+            if(Level.ComingFromSideLevel)
+                Level.Load(Level.ComingFromSideLevelName);
+            else
+                Level.Load(ActualLevel.LevelName);
 
             //Zapobiega zbyt szybkiej zmianie leveli
             LevelChangeCoolDown = true;
@@ -177,6 +191,7 @@ public class LevelLoader : MonoBehaviour, Saveable
         
         // Laduje poboczny level
         Level.Load(ActualLevel.SideLevels[i]);
+        Level.OnSideLevel = true;
 
         //Zapobiega zbyt szybkiej zmianie leveli
         LevelChangeCoolDown = true;
@@ -190,6 +205,8 @@ public class LevelLoader : MonoBehaviour, Saveable
 
         // Laduje glowny level
         Level.Load(ActualLevel.LevelName);
+        Level.OnSideLevel = false;
+        Level.ComingFromSideLevel = false;
 
         //Zapobiega zbyt szybkiej zmianie leveli
         LevelChangeCoolDown = true;
@@ -270,6 +287,9 @@ public class Level
 
     public static string ComingFromRoom = "";
     public static string CurrentlyOnRoom = "Default";
+    public static bool OnSideLevel = false;
+    public static bool ComingFromSideLevel = false;
+    public static string ComingFromSideLevelName = "";
 
 
     // Ustawia Poprzedni level na podany level i poprzedni level w nastepnych levelach na ten level
@@ -288,6 +308,7 @@ public class Level
         Debug.Log("£aduje " + name);
         // Zapisuje przed zaladowaniem levelu
         SaveManager.Save();
+
         try
         {
             ComingFromRoom = CurrentlyOnRoom;
@@ -295,6 +316,8 @@ public class Level
 
             Debug.Log("Coming from " + ComingFromRoom);
             Debug.Log("Now we at " + CurrentlyOnRoom);
+            
+            DiscordRP.ChangeActivity();
 
             SceneTransition sceneTransition = GameObject.FindObjectOfType<SceneTransition>();
             if (sceneTransition != null)

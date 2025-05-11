@@ -22,6 +22,9 @@ public class DestroyableEnvironment : MonoBehaviour, ReciveDamage
 
     List<OnLeaveDamage> OnLeaveDamage = new List<OnLeaveDamage>();
 
+    private Collider2D itemCollider;
+    private SpriteRenderer itemSpriteRenderer;
+    private SpriteRenderer shadowSpriteRenderer;
 
     void Start()
     {
@@ -29,6 +32,11 @@ public class DestroyableEnvironment : MonoBehaviour, ReciveDamage
             durability = 0.01f;
 
         audioSource = GetComponent<AudioSource>();
+        itemCollider = GetComponent<Collider2D>();
+        itemSpriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (transform.childCount > 0)
+            shadowSpriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -83,12 +91,15 @@ public class DestroyableEnvironment : MonoBehaviour, ReciveDamage
 
             //puszcza dźwiek niszczenia obiektu
             if(audioSource != null)
-                if (!audioSource.isPlaying)
+                if (!audioSource.isPlaying && CommlinkOpener.checkVisibility())
                     audioSource.PlayOneShot(destroySound);
 
             //ukrywa obiekt na czas trwania dźwięku
-            GetComponent<Collider2D>().enabled = false;
-            GetComponent<SpriteRenderer>().enabled = false;
+            itemCollider.enabled = false;
+            itemSpriteRenderer.enabled = false;
+            
+            if (shadowSpriteRenderer != null)
+                shadowSpriteRenderer.enabled = false;
             
             //usuwa obiekt po skonczeniu dzwieku
             if(destroySound != null)

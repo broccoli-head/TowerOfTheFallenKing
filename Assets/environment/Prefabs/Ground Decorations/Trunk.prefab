@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7633943877582266225}
   - component: {fileID: 5839962439354225649}
   - component: {fileID: 7405603901830657076}
+  - component: {fileID: -3957289060215374280}
   m_Layer: 0
   m_Name: Trunk
   m_TagString: Untagged
@@ -140,6 +141,37 @@ PolygonCollider2D:
       - {x: 0.4084969, y: -0.12724687}
       - {x: 0.37874478, y: 0.10715391}
   m_UseDelaunayMesh: 0
+--- !u!114 &-3957289060215374280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8580035529137066865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a60933dead3677d41bb84a9fa30f1691, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  durability: 25
+  ExcludeBiologicalDamage: 0
+  Items:
+  - Name: Dust
+    Chance: 20
+  - Name: Dust
+    Chance: 20
+  - Name: Dust
+    Chance: 20
+  - Name: Dust
+    Chance: 20
+  - Name: Dust
+    Chance: 20
+  - Name: Wood
+    Chance: 20
+  - Name: Wood
+    Chance: 20
+  ItemPlacementMaxDistance: 1
+  destroySound: {fileID: 0}
 --- !u!1001 &3778004648682643031
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -142,12 +142,17 @@ MonoBehaviour:
   TeleportAfterAttackChance: 0
   footstepsSound: {fileID: 0}
   teleportationSound: {fileID: 0}
-  Items: []
+  Items:
+  - Name: Acid Pouches
+    Chance: 50
+  - Name: Acid Pouches
+    Chance: 50
+  - Name: Acid Pouches
+    Chance: 50
+  - Name: Acid Pouches
+    Chance: 50
   ItemPlacementMaxDistance: 1
-  random: 0
-  ItemCount: 0
   AdditionalDamage: 0
-  FreezeTime: 0
   FacingDirection: {x: 0, y: 0}
   Player: {fileID: 0}
   PlayerDetected: 0

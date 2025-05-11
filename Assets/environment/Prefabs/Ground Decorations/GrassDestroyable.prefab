@@ -102,7 +102,15 @@ MonoBehaviour:
   ExcludeBiologicalDamage: 0
   Items:
   - Name: Strains of dry grass
-    Chance: 75
+    Chance: 10
+  - Name: Strains of dry grass
+    Chance: 10
+  - Name: Strains of dry grass
+    Chance: 10
+  - Name: Strains of dry grass
+    Chance: 10
+  - Name: Strains of dry grass
+    Chance: 10
   ItemPlacementMaxDistance: 1
   destroySound: {fileID: 0}
 --- !u!61 &1234758196588961699

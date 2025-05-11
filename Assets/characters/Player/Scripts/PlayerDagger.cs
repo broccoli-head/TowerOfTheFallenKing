@@ -133,17 +133,20 @@ public class PlayerDagger : MonoBehaviour
         {
             if (collision.TryGetComponent<DestroyableEnvironment>(out var env))
             {
+                daggerCounter++;
                 anim.SetTrigger("Attack");
 
-                if (daggerCounter != daggerCombo)
+                if (daggerCounter < daggerCombo)
                 {
                     env.Damage(daggerDamage);
-                    audioSource.PlayOneShot(stabSound);
+                    if (CommlinkOpener.checkVisibility())
+                        audioSource.PlayOneShot(stabSound);
                 }
                 else
                 {
                     env.Damage(daggerDamage * 2);
-                    audioSource.PlayOneShot(swingSound);
+                    if (CommlinkOpener.checkVisibility())
+                        audioSource.PlayOneShot(swingSound);
 
                     daggerTimer = daggerCooldown;
                     daggerOverloaded = true;
@@ -165,17 +168,19 @@ public class PlayerDagger : MonoBehaviour
 
                 anim.SetTrigger("Attack");
 
-                if (daggerCounter != daggerCombo)
+                if (daggerCounter < daggerCombo)
                 {
                     target.Damage(daggerDamage);
                     target.ApplyKnockback(knockbackDirection, knockbackForce, knockbackDuration, freezeDuration);
-                    audioSource.PlayOneShot(stabSound);
+                    if (CommlinkOpener.checkVisibility())
+                        audioSource.PlayOneShot(stabSound);
                 }
                 else
                 {
                     target.Damage(daggerDamage * 2);
                     target.ApplyKnockback(knockbackDirection, knockbackForce * 3, knockbackDuration, freezeDuration);
-                    audioSource.PlayOneShot(swingSound);
+                    if (CommlinkOpener.checkVisibility())
+                        audioSource.PlayOneShot(swingSound);
 
                     daggerTimer = daggerCooldown;
                     daggerOverloaded = true;

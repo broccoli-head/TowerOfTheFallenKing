@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour, Controller, ReciveSpeedChange
     public AudioSource audioSource;
     public AudioClip footstepsSound;
     public AudioClip dashSound;
+    public AudioClip potionBreakSound;
 
     private Rigidbody2D rb;
     private Animator anim;

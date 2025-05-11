@@ -19,6 +19,7 @@ public class Crafting : MonoBehaviour
     public AudioClip craftingSound;
     private bool soundPlayed = false;
 
+    public Recipe provided;
 
     public static Crafting Instance;
 
@@ -74,7 +75,7 @@ public class Crafting : MonoBehaviour
             }
         }
 
-        Recipe provided = new Recipe(items, temperature);
+        provided = new Recipe(items, temperature);
 
         foreach (var recipe in Inventory.Instance.recipes)
         {

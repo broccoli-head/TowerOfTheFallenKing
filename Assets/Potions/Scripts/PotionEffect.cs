@@ -15,6 +15,7 @@ public class PotionEffect : MonoBehaviour
     private BeamPotionEffect beamPotionEffect;
     private float ObjectSize;
     private AudioSource audioSource;
+    private AudioClip potionBreakSound;
 
 
     void Awake()
@@ -33,8 +34,15 @@ public class PotionEffect : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
+
     void Start()
-    {  
+    {
+        potionBreakSound = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().potionBreakSound;
+
+        if (audioSource != null && potion.Name != "Explosive" && CommlinkOpener.checkVisibility())
+            audioSource.PlayOneShot(potionBreakSound);
+
+
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, ObjectSize/2);
         foreach (Collider2D collider in colliders)
         {

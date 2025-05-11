@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7468359596040794049}
   - component: {fileID: 1941910670537264323}
   - component: {fileID: 5885137979001817755}
+  - component: {fileID: 48916486088916481}
   m_Layer: 0
   m_Name: SmallBush
   m_TagString: Untagged
@@ -140,6 +141,23 @@ PolygonCollider2D:
       - {x: 0.34760505, y: 0.049559593}
       - {x: 0.18581384, y: 0.0629828}
   m_UseDelaunayMesh: 0
+--- !u!114 &48916486088916481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7256168095365597629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a60933dead3677d41bb84a9fa30f1691, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  durability: 0
+  ExcludeBiologicalDamage: 0
+  Items: []
+  ItemPlacementMaxDistance: 1
+  destroySound: {fileID: 0}
 --- !u!1001 &5288560895112070880
 PrefabInstance:
   m_ObjectHideFlags: 0
