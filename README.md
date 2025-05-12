@@ -1,5 +1,5 @@
 # 🎮 About a game
-### 🎥 ![Trailer Link](https://youtu.be/A-X3zWoT3AM?si=XZYnuX3s6lwkn0NC) 🎥
+### 🎥 [Trailer Link](https://youtu.be/A-X3zWoT3AM?si=XZYnuX3s6lwkn0NC) 🎥
 
 **Tower of the Fallen King** is a 2D roguelike game where the player controls an alchemist battling through waves of enemies. You will encounter several different opponent types throughout the various floors of levels.
 
