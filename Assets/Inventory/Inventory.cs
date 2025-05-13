@@ -94,6 +94,21 @@ public class Inventory : MonoBehaviour, Saveable
 
     private void Update()
     {
+
+        // na bierzaco usuwa z inventory gracza itemy ktore nie istnieja
+        List<PlayerItem> NotValid = new();
+        foreach(var item in PlayerItems)
+        {
+            if(FindItemByName(item.Name) == null)
+            {
+                NotValid.Add(item);
+            }
+        }
+        foreach (var item in NotValid)
+        {
+            PlayerItems.Remove(item);
+        }
+
         ValidatePotions();
         //przelaczanie pomiedzy QuickPotions
         if(Input.GetKeyDown(KeyCode.E))

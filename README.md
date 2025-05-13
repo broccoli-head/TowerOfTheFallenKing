@@ -1,6 +1,10 @@
-# 🎮 About a game
-### 🎥 [Trailer Link](https://youtu.be/A-X3zWoT3AM?si=XZYnuX3s6lwkn0NC) 🎥
+# 🔗 Useful links
 
+### 🎥 [>> Trailer Link <<](https://youtu.be/A-X3zWoT3AM?si=XZYnuX3s6lwkn0NC) 🎥
+### 🕹️ [>> Itch.io Link <<](https://kettle-games.itch.io/tower-of-the-fallen-king) 🕹️
+<br>
+
+# 🎮 About a game
 **Tower of the Fallen King** is a 2D roguelike game where the player controls an alchemist battling through waves of enemies. You will encounter several different opponent types throughout the various floors of levels.
 
 

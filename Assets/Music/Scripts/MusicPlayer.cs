@@ -19,8 +19,28 @@ public class MusicPlayer : MonoBehaviour
             return;
         }
 
-        int randomIndex = Random.Range(0, soundTracks.Length);
-        PlaySound.clip = soundTracks[randomIndex];
+        PlaySound.clip = soundTracks[0];
         PlaySound.Play();
+    }
+
+    void Update()
+    {
+        if (Level.CurrentlyOnRoom == "Mushroom Boss Fight")
+        {
+            PlaySound.clip = soundTracks[1];
+            if (!PlaySound.isPlaying)
+            {
+                PlaySound.Play();
+            }
+        }
+
+        else
+        {
+            PlaySound.clip = soundTracks[0];
+            if (!PlaySound.isPlaying)
+            {
+                PlaySound.Play();
+            }
+        }
     }
 }

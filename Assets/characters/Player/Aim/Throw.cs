@@ -16,12 +16,10 @@ public class Throw : MonoBehaviour
     Rigidbody2D rb;
     Vector2 direction;
     BeamPotionEffect BPE;
-    Inventory inventory;
 
     void Start()
     {
         Aim = FindObjectOfType<Aim>().gameObject;
-        inventory = FindObjectOfType<Inventory>();
         offset = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>().bounds.size.y * 0.8f;
     }
 
@@ -30,11 +28,11 @@ public class Throw : MonoBehaviour
         //Przesuwa pozycje z ktorej wyrzucana jest potka tak zeby nie wchodzila w kolizje z graczem
         transform.localPosition = new Vector3(offset,0,0);
 
-        if(inventory.SelectedPotion != null) {
+        if(Inventory.Instance.SelectedPotion != null) {
 
 
-            potion = inventory.SelectedPotion.potion == null ?
-                inventory.SelectedPotion.potionEffect.gameObject : inventory.SelectedPotion.potion.gameObject;
+            potion = Inventory.Instance.SelectedPotion.potion == null ?
+                Inventory.Instance.SelectedPotion.potionEffect.gameObject : Inventory.Instance.SelectedPotion.potion.gameObject;
 
             if (Input.GetKeyDown(KeyCode.Mouse0) && CanThrow && Time.timeScale > 0)
             {
@@ -55,8 +53,8 @@ public class Throw : MonoBehaviour
                     BPE.direction = direction;
                 }    
                 newPotion.transform.parent = null;
-                inventory.RemovePlayerItem(inventory.SelectedPotion.Name);
-                inventory.ValidatePotions();
+                Inventory.Instance.RemovePlayerItem(Inventory.Instance.SelectedPotion.Name);
+                Inventory.Instance.ValidatePotions();
             }
         }
     }

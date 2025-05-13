@@ -22,7 +22,7 @@ public class SceneTransition : MonoBehaviour
 
     public IEnumerator SwitchScenes(string sceneName, string comingFrom)
     {
-        if (comingFrom == "Default")
+        if (comingFrom == "Main Menu")
             audioSource.PlayOneShot(audioSource.clip);
         else
             audioSource.PlayOneShot(sceneTransition);

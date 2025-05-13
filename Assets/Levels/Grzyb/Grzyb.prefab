@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 7719544486395892528}
   - component: {fileID: 8634689340077814819}
   - component: {fileID: 3230776819080342175}
+  - component: {fileID: 1735928264889704751}
+  - component: {fileID: 7362332301474571540}
   m_Layer: 0
   m_Name: Grzyb
   m_TagString: Untagged
@@ -177,10 +179,7 @@ MonoBehaviour:
   teleportationSound: {fileID: 0}
   Items: []
   ItemPlacementMaxDistance: 1
-  random: 0
-  ItemCount: 0
   AdditionalDamage: 0
-  FreezeTime: 0
   FacingDirection: {x: 0, y: -1}
   Player: {fileID: 0}
   PlayerDetected: 0
@@ -212,3 +211,38 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!95 &1735928264889704751
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5916240963865378621}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3e8a8c9d32ee9514d9d377b69f6493a9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7362332301474571540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5916240963865378621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdedf82559f3e3745a4456af76972ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 0}
+  rb: {fileID: 0}

@@ -56,7 +56,7 @@ public class LevelLoader : MonoBehaviour, Saveable
             return;
 
         Level.ComingFromRoom = "";
-        Level.CurrentlyOnRoom = "Default";
+        Level.CurrentlyOnRoom = "Main Menu";
         CleanedRooms.Clear();
 
         // w pierwszym pokoju nie ³adujemy ekwipunku gracza
@@ -286,7 +286,7 @@ public class Level
     public List<Level> NextLevels = new();
 
     public static string ComingFromRoom = "";
-    public static string CurrentlyOnRoom = "Default";
+    public static string CurrentlyOnRoom = "Main Menu";
     public static bool OnSideLevel = false;
     public static bool ComingFromSideLevel = false;
     public static string ComingFromSideLevelName = "";
